@@ -14,3 +14,5 @@ The text in the white paper (not including the WordPress logo or trademark) is l
 We’d really love to encourage and help share translations of the white paper to the global WordPress community. If you have a translation to contribute, please add it to the WordPress GitHub repo so others can benefit, too. Pull requests welcome!
 
 To translate the white paper, please create a sub-directory of the project under Working Translations, giving it the correct ISO639 code (for example, pt for Portuguese), and submit a pull request. Once the translation has reached a release / first full translation, we'll move it to its own subdirectory at the top level, and subsequent updates will happen in that location. 
+
+New to GitHub? Community member Japh <a href="https://www.youtube.com/watch?v=Y_QwaMy0gWo">created this screencast video</a> to show you how to get started with translating the white paper. 
