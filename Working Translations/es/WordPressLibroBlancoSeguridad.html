@@ -6,23 +6,23 @@
 
 <img src="//s.w.org/about/images/logos/wordpress-logo-stacked-rgb.png" class="aligncenter" />
 
-<h2>Overview</h2>
+<h2>Visi&oacute;n de conjunto</h2>
 
-<p>This document is an analysis and explanation of the WordPress core software development and its related security processes, as well as an examination of the inherent security built directly into the software. Decision makers evaluating WordPress as a content management system or web application framework should use this document in their analysis and decision-making, and for developers to refer to it to familiarize themselves with the security components and best practices of the software.</p>
+<p>Este documento es un an&aacute;lisis y y explicaci&oacute;n del desarrollo de software del core de WordPress y susprocesos de seguridad relacionados, al igual que un examen de la seguridad  inherente  construida directamente en el software. Las personas que toman decisi&oacute;n y que evaluan WordPress como un sistema de gesti&oacute;n de contenidos o como un marco de aplicaciones web deber&iacute;an usar este documento en su an&aacute;lisis y toma de decisi&oacute;n, y para los desarrolladores deber&iacute;an referirse al mismo para familiarizarse con los componentes de seguridad y las mejores pr&aacute;cticas de software.</p>
 
-<p>The information in this document is up-to-date for the latest stable release of the software, WordPress 4.1 at time of publication, but should be considered relevant also to the most recent versions of the software as backwards compatibility is a strong focus for the WordPress development team. Specific security measures and changes will be noted as they have been added to the core software in specific releases. It is strongly encouraged to always be running the latest stable version of WordPress to ensure the most secure experience possible.</p>
-<h2>Executive Summary</h2>
-<p>WordPress is a dynamic open-source content management system which is used to power millions of websites, web applications, and blogs. It currently powers more than 23% of the top 10 million websites on the Internet. WordPress' usability, extensibility, and mature development community make it a popular and secure choice for websites of all sizes.</p>
+<p>La informaci&oacute;n de este documento est&aacute; actualizada para la &uacute;ltima versi&oacute;n estable del software, WordPress 4.1 en el momento de su publicaci&oacute;n, pero deber&iacute;a  ser considerado relevante tambi&eacute;n para las versiones m&aacute;s recientes del software ya que la compatibilidad con versiones anteriores es un enfoque fuerte en el equipo sw desarrollo de WordPress. Medidas de seguridad espec&iacute;ficas y otros cambios se anotar&aacute;n a medida que se a&nacute;adan al core del software en versiones espec&iacute;ficas. Se recomienda encarecidamente que siempre se ejecute la &uacute;ltima versi&oacute;n estable de WordPress para asegurarse de tener la experiencia m&aacute;s segura posible.</p>
+<h2>Sumario Ejecutivo</h2>
+<p>WordPress es un sistema de gesti&oacute;n de contenidos din&aacute;mico de fuentes abiertas que se usa para hacer funcionar millones de sitios web, aplicaciones web y blogs. En la actualidad es usado por m&aacute;s del 23% de 10 millones de sitios web en Internet. La usabilidad, extensibilidad y la madurez de la comunidad de desarrollo hace que sea una elecci&oacute;n popular y segura para sitios web de todos los tama&nacute;os.</p>
 
-<p>Since its inception in 2003, WordPress has undergone continual hardening so its core software can address and mitigate common security threats, including the Top 10 list identified by The Open Web Application Security Project (OWASP) as common security vulnerabilities, which are discussed in this document.</p>
+<p>Desde su concepci&oacute;n de 2003, WordPress ha sufrido continuos cambios para endurecerlo de manera que su core pueda gestionar y mititgar las amenazas de seguridad m&aacute;s comunes, incluyendo la lista del Top 10 identificado por El Proyecto de Seguridad para Aplicaciones Web Abiertas (OWASP) como las vulnerabilidades de seguridad m&aacute;s frecuentes, que se discuten en el presente documento.</p>
 
-<p>The WordPress Security Team, in collaboration with the WordPress Core Leadership Team and backed by the WordPress global community, works to identify and resolve security issues in the core software available for distribution and installation at WordPress.org, as well as recommending and documenting security best practices for third-party plugin and theme authors.</p>
+<p>El equipo de seguridad de WordPress, en colaboraci&oacute;n con el equipo lider del Core de WordPress y respaldados por la comunidad global de WordPress, trabaja para identificar y resolver incidencias de seguridad en el core de software disponible para la distribuci&oacute;n  e  instalaci&oacute;n en WordPress.org, y tambi&eacute;n para recomendar y documentar las mejores pr&aacute;cticas en seguridad para plugins de terceras partes y para autores de temas de terceros.</p>
 
 <p>Site developers and administrators should pay particular attention to the correct use of core APIs and underlying server configuration which have been the source of common vulnerabilities, as well as ensuring all users employ strong passwords to access WordPress.</p>
 <h2>An Overview of WordPress</h2>
 <p>WordPress is a free and open source content management system (CMS). It is the most widely-used CMS software in the world and it powers more than 23% of the top 10 million websites<sup id="ref1"><a href="#footnote1">1</a></a></sup>, giving it an estimated 60% market share of all sites using a CMS.</p>
 
-<p>WordPress is licensed under the General Public License (GPLv2 or later) which provides four core freedoms, and can be considered as the WordPress "bill of rights":</p>
+<p>WordPress is licensed under the General  Public License (GPLv2 or later) which provides four core freedoms, and can be considered as the WordPress "bill of rights":</p>
 <ol>
 	<li>The freedom to run the program, for any purpose.</li>
 	<li>The freedom to study how the program works, and change it to make it do what you wish.</li>
