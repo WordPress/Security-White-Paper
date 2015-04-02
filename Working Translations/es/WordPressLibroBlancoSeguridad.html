@@ -6,59 +6,59 @@
 
 <img src="//s.w.org/about/images/logos/wordpress-logo-stacked-rgb.png" class="aligncenter" />
 
-<h2>Overview</h2>
+<h2>Visi&oacute;n de conjunto</h2>
 
-<p>This document is an analysis and explanation of the WordPress core software development and its related security processes, as well as an examination of the inherent security built directly into the software. Decision makers evaluating WordPress as a content management system or web application framework should use this document in their analysis and decision-making, and for developers to refer to it to familiarize themselves with the security components and best practices of the software.</p>
+<p>Este documento es un an&aacute;lisis y y explicaci&oacute;n del desarrollo de software del core de WordPress y susprocesos de seguridad relacionados, al igual que un examen de la seguridad  inherente  construida directamente en el software. Las personas que toman decisi&oacute;n y que evaluan WordPress como un sistema de gesti&oacute;n de contenidos o como un marco de aplicaciones web deber&iacute;an usar este documento en su an&aacute;lisis y toma de decisi&oacute;n, y para los desarrolladores deber&iacute;an referirse al mismo para familiarizarse con los componentes de seguridad y las mejores pr&aacute;cticas de software.</p>
 
-<p>The information in this document is up-to-date for the latest stable release of the software, WordPress 4.1 at time of publication, but should be considered relevant also to the most recent versions of the software as backwards compatibility is a strong focus for the WordPress development team. Specific security measures and changes will be noted as they have been added to the core software in specific releases. It is strongly encouraged to always be running the latest stable version of WordPress to ensure the most secure experience possible.</p>
-<h2>Executive Summary</h2>
-<p>WordPress is a dynamic open-source content management system which is used to power millions of websites, web applications, and blogs. It currently powers more than 23% of the top 10 million websites on the Internet. WordPress' usability, extensibility, and mature development community make it a popular and secure choice for websites of all sizes.</p>
+<p>La informaci&oacute;n de este documento est&aacute; actualizada para la &uacute;ltima versi&oacute;n estable del software, WordPress 4.1 en el momento de su publicaci&oacute;n, pero deber&iacute;a  ser considerado relevante tambi&eacute;n para las versiones m&aacute;s recientes del software ya que la compatibilidad con versiones anteriores es un enfoque fuerte en el equipo sw desarrollo de WordPress. Medidas de seguridad espec&iacute;ficas y otros cambios se anotar&aacute;n a medida que se a&nacute;adan al core del software en versiones espec&iacute;ficas. Se recomienda encarecidamente que siempre se ejecute la &uacute;ltima versi&oacute;n estable de WordPress para asegurarse de tener la experiencia m&aacute;s segura posible.</p>
+<h2>Sumario Ejecutivo</h2>
+<p>WordPress es un sistema de gesti&oacute;n de contenidos din&aacute;mico de fuentes abiertas que se usa para hacer funcionar millones de sitios web, aplicaciones web y blogs. En la actualidad es usado por m&aacute;s del 23% de 10 millones de sitios web en Internet. La usabilidad, extensibilidad y la madurez de la comunidad de desarrollo hace que sea una elecci&oacute;n popular y segura para sitios web de todos los tama&nacute;os.</p>
 
-<p>Since its inception in 2003, WordPress has undergone continual hardening so its core software can address and mitigate common security threats, including the Top 10 list identified by The Open Web Application Security Project (OWASP) as common security vulnerabilities, which are discussed in this document.</p>
+<p>Desde su concepci&oacute;n de 2003, WordPress ha sufrido continuos cambios para endurecerlo de manera que su core pueda gestionar y mititgar las amenazas de seguridad m&aacute;s comunes, incluyendo la lista del Top 10 identificado por El Proyecto de Seguridad para Aplicaciones Web Abiertas (OWASP) como las vulnerabilidades de seguridad m&aacute;s frecuentes, que se discuten en el presente documento.</p>
 
-<p>The WordPress Security Team, in collaboration with the WordPress Core Leadership Team and backed by the WordPress global community, works to identify and resolve security issues in the core software available for distribution and installation at WordPress.org, as well as recommending and documenting security best practices for third-party plugin and theme authors.</p>
+<p>El equipo de seguridad de WordPress, en colaboraci&oacute;n con el equipo lider del Core de WordPress y respaldados por la comunidad global de WordPress, trabaja para identificar y resolver incidencias de seguridad en el core de software disponible para la distribuci&oacute;n  e  instalaci&oacute;n en WordPress.org, y tambi&eacute;n para recomendar y documentar las mejores pr&aacute;cticas en seguridad para plugins de terceras partes y para autores de temas de terceros.</p>
 
-<p>Site developers and administrators should pay particular attention to the correct use of core APIs and underlying server configuration which have been the source of common vulnerabilities, as well as ensuring all users employ strong passwords to access WordPress.</p>
-<h2>An Overview of WordPress</h2>
-<p>WordPress is a free and open source content management system (CMS). It is the most widely-used CMS software in the world and it powers more than 23% of the top 10 million websites<sup id="ref1"><a href="#footnote1">1</a></a></sup>, giving it an estimated 60% market share of all sites using a CMS.</p>
+<p>Los desarrolladores de sitios web y los administradores deber&iacute;an prestar especial atenci&oacute;n al uso correcto de las APIs del core y la configuraci&oacute;n del servidor que han sido la fuente de vulnerabilidades frecuentes, y tambi&eacute;n deben asegurarse que todos los usuarios emplean claves fuertes para acceder a WordPress.</p>
+<h2>Una visi&oacute;n general de WordPress</h2>
+<p>WordPress es un sistema de gesti&oacute; de contenidos de fuentes abiertas y gratuito (CMS). Es el CMS m&acute;s extensamente usado en el mundo y funciona en m&acute; del 23% de los 10 millones de sitios web m&aacute;s vistos<sup id="ref1"><a href="#footnote1">1</a></a></sup>, ofreciendo una cuota de mercado estimada del 60% de todos los sitios que usan un CMS.</p>
 
-<p>WordPress is licensed under the General Public License (GPLv2 or later) which provides four core freedoms, and can be considered as the WordPress "bill of rights":</p>
+<p>WordPress est&aacute; bajo la Licencia Publica General (GPLv2 o posterior) que proporciona 4 libertades fundamentales, y que puede considerarse como la "carta de derechos" de WordPress</p>
 <ol>
-	<li>The freedom to run the program, for any purpose.</li>
-	<li>The freedom to study how the program works, and change it to make it do what you wish.</li>
-	<li>The freedom to redistribute.</li>
-	<li>The freedom to distribute copies of your modified versions to others.</li>
+	<li>La libertad de ejecutar el programa, para cualquier prop&oacute;sito.</li>
+	<li>La libertad de estudiar como funciona el programa, y cambiarlo para que haga lo que tu deseas.</li>
+	<li>La libertad de redistribuirlo.</li>
+	<li>La libertad de distribuir copias de tus versiones modificadas a otros.</li>
 </ol>
-<h3>The WordPress Core Leadership Team</h3>
-<p>The WordPress project is a meritocracy, run by a core leadership team, and led by its co-creator and lead developer, Matt Mullenweg. The team governs all aspects of the project, including core development, WordPress.org, and community initiatives.</p>
+<h3>El equipo lider del core de WordPress</h3>
+<p>El proyecto WordPress es una meritocracia, The WordPress project is a meritocracy, dirigido por un equipo lider central, y conducido por su co-creador y desarrollador principal, Matt Mullenweg. El equipo gobierna todos los aspectos del proyecto, incluyendo el desarrollo del core, WordPress.org, y las iniciativas de la comunidad.</p>
 
-<p>The Core Leadership Team consists of Matt Mullenweg, five lead developers, and more than a dozen core developers with permanent commit access. These developers have final authority on technical decisions, and lead architecture discussions and implementation efforts.</p>
+<p>El equipo que lidera el Core est&aacute; formado por Matt Mullenweg, 5 desarrolladores lider, y m&aacute;s de una docena de desarrolladores del core con acceso permanente a commit. Estos desarrolladores tienen autoridad final en decisiones t&eacute;cnicas, y conducen las discusiones t&eacute;cnicas y los esfuerzos de implementaci&oacute;n.</p>
 
-<p>WordPress has a number of contributing developers. Some of these are former or current committers, and some are likely future committers. These contributing developers are trusted and veteran contributors to WordPress who have earned a great deal of respect among their peers. As needed, WordPress also has guest committers, individuals who are granted commit access, sometimes for a specific component, on a temporary or trial basis.</p>
+<p>WordPress tiene un n&uacute;mero de desarrolladores contribuyendo. Algunos de estos son antiguos o actuales commiters, y algunos son probablemente futuros commiters. Estos desarrolladores que contribuyen son contribuidores veteranos y de confianza de WordPress que se han ganado un gran respeto entre sus homologos. Seg&uacute; necesidades, WordPress tiene committers invitados, que son individuos a los que se concede acceso para commit, en algunas ocasiones para componentes espec&iacute;ficos o con criterios temporales o de prueba.</p>
 
-<p>The core and contributing developers primarily guide WordPress development. Every version, hundreds of developers contribute code to WordPress. These core contributors are volunteers who contribute to the core codebase in some way.</p>
-<h3>The WordPress Release Cycle</h3>
-<p>Each WordPress release cycle is led by one or more of the core WordPress developers. A release cycle usually lasts around 4 months from the initial scoping meeting to launch of the version.</p>
+<p>Los desarrolladores del core y los contribuidores gu&iacute;an de manera principal el desarrollo. En cada versi&oacute;n, cientos de desarrolladores contribuyen al c&oacute;digo de WordPress. Estos contribuidores del core son voluntarios que contribuyen al c&oacute;digo fuente base de alguna manera.</p>
+<h3>El ciclo de liberaci&oacute;n de versi&oacute;n de WordPress</h3>
+<p>Cada ciclo de liberaci&oacute;n de WordPress es conducido por uno o m&acute; desarrolladores del core de WordPress. Un ciclo de liberaci&oacute;n generalmente dura sobre los 4 meses desde la reuni&oacute;n de alcance inicial hasta el lanzamiento de la versi&oacute;n.</p>
 
-<p>A release cycle follows the following pattern<sup id="ref2"><a href="#footnote2">2</a></sup>:</p>
+<p>Un ciclo de liberaci&oacute;n sigue el siguiente patr&oacute;n<sup id="ref2"><a href="#footnote2">2</a></sup>:</p>
 <ul>
-	<li>Phase 1: Planning and securing team leads. This is done in the #core chat room on Slack. The release lead discusses features for the next release of WordPress. WordPress contributors get involved with that discussion. The release lead will identify team leads for each of the features.</li>
-	<li>Phase 2: Development work begins. Team leads assemble teams and work on their assigned features. Regular chats are scheduled to ensure the development keeps moving forward.</li>
-	<li>Phase 3: Beta. Betas are released, and beta-testers are asked to start reporting bugs. No more commits for new enhancements or feature requests are carried out from this phase on. Third-party plugin and theme authors are encouraged to test their code against the upcoming changes.</li>
-	<li>Phase 4: Release Candidate. There is a string freeze for translatable strings from this point on. Work is targeted on regressions and blockers only.</li>
-	<li>Phase 5: Launch. WordPress version is launched and made available in the WordPress Admin for updates.</li>
+	<li>Fase 1: Planificaci&oacute;n y aseguramiento de la l&iacute; del equipo. Esto se hace en la sala de chat #core en Slack. La liberaci&oacute;n discute caracter&iacute;sticas de la siguiente versi&oacute;n de WordPress. Los contribuidores de WordPress se implican con la mencionada discusi&oacute;n. Las iniciativas de la liberaci&oacute;n identificaran las iniciativas del equipo para cada una de las caracter&iacute;sticas.</li>
+	<li>Fase 2: Inicio del desarrollo. Los lideres de equipo montan equipos y trabajan en sus funciones o caracter&iacute;sticas asignadas. Se programan chats periodicos para asegurarse que el desarrollo sigue progresando.</li>
+	<li>Fase 3: Beta. Se liberan las Betas, y los a los beta-testers se les pide que empiecen a informar de fallos. No se realizan m&aacute; commits para nuevas mejoras y no se llevan a cabo solicitud de funcionalidades a partir de esta fase. A los autores de terceras partes de plugins y temas se les anima a que prueban su c&oacute;odigo contra los cambios que se est&aacute; realizando.</li>
+	<li>Fase 4: Candidato a liberaci&oacute;. Hay una cadena de congelaci&oacute; para cadenas traducibles a partir de este punto. El trabajo se centra en regresiones e incidencias bloquantes solamente.</li>
+	<li>Fase 5: Lanzamiento. Se lanza la versi&oacute;n de WordPress y se hace disponible en el administrador de  WordPress para actualizaciones.</li>
 </ul>
-<h3>Version Numbering and Security Releases</h3>
-<p>A major WordPress version is dictated by the first two sequences. For example, 3.5 is a major release, as is 3.6, 3.7, or 4.0. There isn't a "WordPress 3" or "WordPress 4" and each major release is referred to by its numbering, e.g., "WordPress 3.9."</p>
+<h3>Numeraci&oacute;n de Versiony liberaciones de seguridad</h3>
+<p>Una versi&oacute; principal de WordPress se dicta por las 2 primeras secuencias. Por ejemplo, 3.5 es una versi&oacute; principal, al igual que 3.6, 3.7, o 4.0. No hay un "WordPress 3" o "WordPress 4" y cada liberaci&ocute;n o versi&oacute;n principal es referida por su numeraci&oacute;n, i.e., "WordPress 3.9."</p>
 
-<p>Major releases may add new user features and developer APIs. Though typically in the software world, a "major" version means you can break backwards compatibility, WordPress strives to never break backwards compatibility. Backwards compatibility is one of the project's most important philosophies, with the aim of making updates much easier on users and developers alike.</p>
+<p>La liberaciones m&aacute;s importantes pueden a&nacute;adir nuevas caracter&iacute;sticas y APIs de desarrollo. Aunque lo tipico en el mundo del software, una versi&oacute;n "principal" significa que se pueda romper la compatibilidad con versiones precedentes, WordPress se esfuerza en no romper la compatiblidad con versiones previas. La compatibilidad hacia atras es una de las filosof&iacute;as m&aacute;s importante del proyecto, con el objetivo de hacer las actualizaciones m&aacute;s f&aacute;ciles para los usuarios y los desarrolladores por igual.</p>
 
-<p>A minor WordPress version is dictated by the third sequence. Version 3.5.1 is a minor release, as is 3.4.2<sup id="ref3"><a href="#footnote3">3</a></sup>. A minor release is reserved for fixing security vulnerabilities and addressing critical bugs only. Since new versions of WordPress are released so frequently &mdash; the aim is every 4-5 months for a major release, and minor releases happen as needed &mdash; there is only a need for major and minor releases.</p>
+<p>Una versi&oacute;n menor de WordPress se indica por la tercera secuencia num&eacute;rica. La versi&oacute;n 3.5.1 es una versi&oacute;n menor, al igual que la 3.4.2<sup id="ref3"><a href="#footnote3">3</a></sup>. Una versi&oacute;n menor se reserva para arreglos de vulnerabilidades de seguridad y abordar errores cr&iacute;ticos solamente. Ya que se liberan nuevas versiones de WordPress con frecuencia - el objetivo es que cada 4-5 meses haya una liberaci&oacute;n mayor, y las liberaciones menores se lleven a cabo seg&uacute;n necesidad- hay solamente necesidad de liberaciones mayores y menores.</p>
 
-<h3>Version Backwards Compatibility</h3>
-<p>The WordPress project has a strong commitment to backwards compatibility. This commitment means that themes, plugins, and custom code continues to function when WordPress core software is updated, encouraging site owners to keep their WordPress version updated to the latest secure release.</p>
-<h2>WordPress and Security</h2>
-<h3>The WordPress Security Team</h3>
+<h3>Compatibilidad con versiones precedentes</h3>
+<p>El proyecto WordPress tiene un fuerte compromiso con la compatibilidad con versiones precedentes. Este compromiso significa que los temas, plugins y el c&oacute;digo personalizado continua funcionando cuando el core de WordPress se actualiza, animando a los propietarios del sitio a mantener las versiones del WordPress actualizadas a la &uacute;ltima versi&oacute;n segura.</p>
+<h2>WordPress y la Seguridad</h2>
+<h3>El equipo de seguridad de WordPress</h3>
 <p>The WordPress Security Team is made up of approximately 25 experts including lead developers and security researchers &mdash; about half are employees of Automattic (makers of WordPress.com, the earliest and largest WordPress hosting platform on the web), and a number work in the web security field. The team consults with well-known and trusted security researchers and hosting companies<sup><a href="#footnote3">3</a></sup>.</p>
 
 <p>The WordPress Security Team often collaborates with other security teams to address issues in common dependencies, such as resolving the vulnerability in the PHP XML parser, used by the XML-RPC API that ships with WordPress, in WordPress 3.9.2<sup id="ref4"><a href="#footnote4">4</a></sup>. This vulnerability resolution was a result of a joint effort by both WordPress and Drupal security teams.</p>
