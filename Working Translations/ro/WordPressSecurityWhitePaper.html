@@ -1,5 +1,6 @@
 <html>
 <title>WordPress Security White Paper</title>
+<meta charset="utf-8">
 <body>
 
 <h1>Document alb despre securitatea WordPress</h1>
@@ -8,13 +9,13 @@
 
 <h2>Context</h2>
 
-<p>Acest document este o analiză și o explicație a dezvoltării software a nucleului WordPress și a proceselor sale de securitate asociate, precum și o examinare a securității inerent construite direct în software. Persoanele de decizie care evaluează WordPress ca sistem de gestiune de conținut sau ca un cadru de lucru (<em>framework</em>) pentru aplicații web ar trebui să folosească acest document în analizele și deciziile lor, iar pentru dezvoltatori să se refere la el pentru a se familiariza cu componentele de securitate și cu cele mai bune practici ale software-ului.</p>
+<p>Acest document este o analiză și o explicație a dezvoltării de software pentru nucleul WordPress și a proceselor sale de securitate asociate, precum și o examinare a securității inerent construită direct în software. Persoanele de decizie care evaluează WordPress ca sistem de gestiune de conținut sau ca un cadru de lucru (<em>framework</em>) pentru aplicații web ar trebui să folosească acest document în analizele și deciziile lor, iar dezvoltatorii să se refere la el pentru a se familiariza cu componentele de securitate și cu cele mai bune practici ale software-ului.</p>
 
-<p>The information in this document is up-to-date for the latest stable release of the software, WordPress 4.1 at time of publication, but should be considered relevant also to the most recent versions of the software as backwards compatibility is a strong focus for the WordPress development team. Specific security measures and changes will be noted as they have been added to the core software in specific releases. It is strongly encouraged to always be running the latest stable version of WordPress to ensure the most secure experience possible.</p>
+<p>Informațiile din acest document sunt actualizate la nivelul ultimei versiuni stabile a software-ului, WordPress 4.1 la momentul publicării, dar ar trebui să fie considerată relevantă de asemenea și pentru cele mai recent lansate versiuni ale software-ului deoarece compatibilitatea înapoi este o preocupare puternică a echipei de dezvoltatori WordPress. Măsurile speciale de securitate vor fi prezentate pe măsură ce ele au fost adăugate la nucleul software în versiunile lansate. Recomandăm cu tărie rularea întodeauna a ultimei versiuni stabile de WordPress pentru a se asigura cea mai securizată experiență posibilă.</p>
 <h2>Rezumat</h2>
-<p>WordPress is a dynamic open-source content management system which is used to power millions of websites, web applications, and blogs. It currently powers more than 23% of the top 10 million websites on the Internet. WordPress' usability, extensibility, and mature development community make it a popular and secure choice for websites of all sizes.</p>
+<p>WordPress este un dinamic sistem de gestiune de conținut <em>open-source</em> ce este utilizat pentru a susține milioane de situri web, aplicații web și bloguri. Astăzi propulsează peste 23% din primele 10 milioane de situri web din internet. Ușurința în utilizare, extensibilitatea și o matură comunitate de dezvoltatori fac din WordPress o opțiune populară și o alegere sigură pentru situri web de toate dimensiunile.</p>
 
-<p>Since its inception in 2003, WordPress has undergone continual hardening so its core software can address and mitigate common security threats, including the Top 10 list identified by The Open Web Application Security Project (OWASP) as common security vulnerabilities, which are discussed in this document.</p>
+<p>De la apariția sa în 2003, WordPress s-a întărit continuu astfel că nucleul său poate să răspundă amenințărilor obișnuite de securitate și să le trateze corespunzător, incluzând topul primelor 10 identificate de <em>The Open Web Application Security Project</em> (OWASP) ca vulnerabilități comune de securitate, ce sunt discutate în acest document.</p>
 
 <p>The WordPress Security Team, in collaboration with the WordPress Core Leadership Team and backed by the WordPress global community, works to identify and resolve security issues in the core software available for distribution and installation at WordPress.org, as well as recommending and documenting security best practices for third-party plugin and theme authors.</p>
 
