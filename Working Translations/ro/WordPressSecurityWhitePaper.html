@@ -11,27 +11,27 @@
 
 <p>Acest document este o analiză și o explicație a dezvoltării de software pentru nucleul WordPress și a proceselor sale de securitate asociate, precum și o examinare a securității inerent construită direct în software. Persoanele de decizie care evaluează WordPress ca sistem de gestiune de conținut sau ca un cadru de lucru (<em>framework</em>) pentru aplicații web ar trebui să folosească acest document în analizele și deciziile lor, iar dezvoltatorii să se refere la el pentru a se familiariza cu componentele de securitate și cu cele mai bune practici ale software-ului.</p>
 
-<p>Informațiile din acest document sunt actualizate la nivelul ultimei versiuni stabile a software-ului, WordPress 4.1 la momentul publicării, dar ar trebui să fie considerate relevante de asemenea și pentru cele mai recent lansate versiuni ale software-ului deoarece compatibilitatea înapoi este o preocupare puternică a echipei de dezvoltatori WordPress. Măsurile speciale de securitate vor fi prezentate pe măsură ce ele au fost adăugate la nucleul software în versiunile lansate. Recomandăm cu tărie rularea întodeauna a ultimei versiuni stabile de WordPress pentru a se asigura cea mai securizată experiență posibilă.</p>
+<p>Informațiile din acest document sunt actualizate la nivelul ultimei versiuni stabile a software-ului, WordPress 4.1 la momentul publicării, dar ar trebui să fie considerate relevante de asemenea și pentru cele mai recent lansate versiuni ale software-ului deoarece compatibilitatea înapoi este o preocupare puternică a echipei de dezvoltatori WordPress. Măsurile speciale de securitate vor fi prezentate pe măsură ce ele au fost adăugate la nucleul software în versiunile lansate. Recomandăm cu tărie rularea întotdeauna a ultimei versiuni stabile de WordPress pentru a se asigura cea mai securizată experiență posibilă.</p>
 <h2>Rezumat</h2>
 <p>WordPress este un dinamic sistem de gestiune de conținut <em>open-source</em> ce este utilizat pentru a susține milioane de situri web, aplicații web și bloguri. Astăzi propulsează peste 23% din primele 10 milioane de situri web din internet. Ușurința în utilizare, extensibilitatea și o matură comunitate de dezvoltatori fac din WordPress o opțiune populară și o alegere sigură pentru situri web de toate dimensiunile.</p>
 
 <p>De la apariția sa în 2003, WordPress s-a întărit continuu astfel că nucleul său poate să răspundă amenințărilor obișnuite de securitate și să le trateze corespunzător, incluzând topul primelor 10 identificate de <em>The Open Web Application Security Project</em> (OWASP) ca vulnerabilități comune de securitate, ce sunt discutate în acest document.</p>
 
-<p>The WordPress Security Team, in collaboration with the WordPress Core Leadership Team and backed by the WordPress global community, works to identify and resolve security issues in the core software available for distribution and installation at WordPress.org, as well as recommending and documenting security best practices for third-party plugin and theme authors.</p>
+<p>Echipa de securitate WordPress, în colaborare cu echipa de conducere a nucleului WordPress și sprijinită de comunitatea globală WordPress, lucrează la identificarea și soluționarea problemelor de securitate din nucleul software disponibil pentru distribuție și instalare de pe WordPress.org, precum și documentarea și recomandarea celor mai bune practici cu privire la securitate pentru autorii terți de module și teme.</p>
 
-<p>Site developers and administrators should pay particular attention to the correct use of core APIs and underlying server configuration which have been the source of common vulnerabilities, as well as ensuring all users employ strong passwords to access WordPress.</p>
+<p>Dezvoltatorii de situri și administratorii trebuie să acorde o atenție sporită utilizării corecte a API-urilor nucleului și a configurărilor serverului de dedesubt care au fost sursa vulnerabilităților obișnuite, precum și să se asigure că toți utilizatorii folosesc parole puternice pentru a accesa WordPress.</p>
 <h2>Privire de ansamblu  asupra WordPress</h2>
-<p>WordPress is a free and open source content management system (CMS). It is the most widely-used CMS software in the world and it powers more than 23% of the top 10 million websites<sup id="ref1"><a href="#footnote1">1</a></a></sup>, giving it an estimated 60% market share of all sites using a CMS.</p>
+<p>WordPresseste un sistem de gestiune de conținut (CMS <em>content management system</em>) gratuit și is <em>open source</em>. Este suftul CMS cu cea mai largă utilizare din lume și propulsează mai mult de 23% din topul primelor 10 milioane de situri web<sup id="ref1"><a href="#footnote1">1</a></a></sup>, ceea ce-i dă o cotă de piață estimată de 60% din toate siturile ce folosesc CMS-uri.</p>
 
-<p>WordPress is licensed under the General Public License (GPLv2 or later) which provides four core freedoms, and can be considered as the WordPress "bill of rights":</p>
+<p>WordPress este licențiat sub Licență publică generală (GPL - <em>General Public License</em> - v2 sau mai nouă) ce oferă patru libertăți fundamentale ce pot fi considerate "carta drepturilor" WordPress:</p>
 <ol>
-	<li>The freedom to run the program, for any purpose.</li>
-	<li>The freedom to study how the program works, and change it to make it do what you wish.</li>
-	<li>The freedom to redistribute.</li>
-	<li>The freedom to distribute copies of your modified versions to others.</li>
+	<li>Libertatea de a rula programul, în orice scop.</li>
+	<li>Libertatea de a studia cum funcționează programul și de a-l modifica să facă ceea ce dorești tu.</li>
+	<li>Libertatea de a-l redistribui.</li>
+	<li>Libertatea de a distribui altora copii ale versiunilor tale modificate.</li>
 </ol>
 <h3>Echipa de conducere a  nucleului WordPress</h3>
-<p>The WordPress project is a meritocracy, run by a core leadership team, and led by its co-creator and lead developer, Matt Mullenweg. The team governs all aspects of the project, including core development, WordPress.org, and community initiatives.</p>
+<p>Proiectul WordPress este o meritocrație, derulat de o echipă de conducere a nucleului și condusă de co-creatorul și șeful dezvoltării, Matt Mullenweg. Echipa gestionează toate aspectele proiectului, incluzând dezvoltarea nucleului, WordPress.org și inițiativele comunității.</p>
 
 <p>The Core Leadership Team consists of Matt Mullenweg, five lead developers, and more than a dozen core developers with permanent commit access. These developers have final authority on technical decisions, and lead architecture discussions and implementation efforts.</p>
 
