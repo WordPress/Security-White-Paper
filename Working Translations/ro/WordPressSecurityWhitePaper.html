@@ -113,11 +113,11 @@
 
 <h4>A2 - Autentificare defectă și gestiunea sesiunilor</h4>
 
-<p>WordPress core software manages user accounts and authentication and details such as the user ID, name, and password are managed on the server-side, as well as the authentication cookies. Passwords are protected in the database using standard salting and stretching techniques. Existing sessions are destroyed upon logout for versions of WordPress after 4.0.</p>
+<p>Nucleul suftware al WordPress gestionează conturile de utilizator și detaliile de autentificare cum ar fi ID-ul utilizatorului, numele și parola pe partea serverului, la fel ți cookie-urile de autentificare. Parolele sunt protejate în baza de date folosind tehnici standard de întindere și sărare <em>salting&stretching</em>. Sesiunile existente sunt distruse după deautentificare începând cu versiunea WordPress 4.0.</p>
 
 <h4>A3 - Scripturi inter-situri  (XSS)</h4>
 
-<p>WordPress provides a range of functions which can help ensure that user-supplied data is safe<sup id="ref10"><a href="#footnote10">10</a></sup>. Trusted users, that is administrators and editors on a single WordPress installation, and site administrators only in WordPress Multisite, can post unfiltered HTML or JavaScript as they need to, such as inside a post or page. Untrusted users and user-submitted content is filtered by default to remove dangerous entities, using the KSES library through the <code>wp_kses</code> function.</p>
+<p>WordPress asigură o gamă de funcții ce pot ajuta la punerea în siguranță a datelor furizate de utilizatori<sup id="ref10"><a href="#footnote10">10</a></sup>. Utilizatorii de încredere, administratorii sau editorii într-o instalare singulară de WordPress, sau doar administratorii de situri în WordPress Multisit, pot publica HTML sau JavaScript nefiltrat după necesități, cum ar fi în interiorul unui articol sau pagini. Ceilalți utilizatori și cunținutul trimis spre publicare sunt implicit filtrați pentru a fi înlăturate entitățile periculoase, folosind biblioteca KSES prin funcția <code>wp_kses</code>.</p>
 
 <p>As an example, the WordPress core team noticed before the release of WordPress 2.3 that the function <code>the_search_query()</code> was being misused by most theme authors, who were not escaping the function's output for use in HTML. In a very rare case of slightly breaking backward compatibility, the function's output was changed in WordPress 2.3 to be pre-escaped.</p>
 
