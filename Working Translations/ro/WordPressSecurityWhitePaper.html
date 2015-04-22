@@ -114,33 +114,57 @@
 <h4>A2 - Autentificare defectă și gestiunea sesiunilor</h4>
 
 <p>WordPress core software manages user accounts and authentication and details such as the user ID, name, and password are managed on the server-side, as well as the authentication cookies. Passwords are protected in the database using standard salting and stretching techniques. Existing sessions are destroyed upon logout for versions of WordPress after 4.0.</p>
+
 <h4>A3 - Scripturi inter-situri  (XSS)</h4>
+
 <p>WordPress provides a range of functions which can help ensure that user-supplied data is safe<sup id="ref10"><a href="#footnote10">10</a></sup>. Trusted users, that is administrators and editors on a single WordPress installation, and site administrators only in WordPress Multisite, can post unfiltered HTML or JavaScript as they need to, such as inside a post or page. Untrusted users and user-submitted content is filtered by default to remove dangerous entities, using the KSES library through the <code>wp_kses</code> function.</p>
 
 <p>As an example, the WordPress core team noticed before the release of WordPress 2.3 that the function <code>the_search_query()</code> was being misused by most theme authors, who were not escaping the function's output for use in HTML. In a very rare case of slightly breaking backward compatibility, the function's output was changed in WordPress 2.3 to be pre-escaped.</p>
+
 <h4>A4 - Referință obiect directă  nesecurizată</h4>
+
 <p>WordPress often provides direct object reference, such as unique numeric identifiers of user accounts or content available in the URL or form fields. While these identifiers disclose direct system information, WordPress' rich permissions and access control system prevent unauthorized requests.</p>
+
 <h4>A5 - Configurarea greșită a  securității</h4>
+
 <p>The majority of the WordPress security configuration operations are limited to a single authorized administrator. Default settings for WordPress are continually evaluated at the core team level, and the WordPress core team provides documentation and best practices to tighten security for server configuration for running a WordPress site<sup id="ref11"><a href="#footnote11">11</a></sup>.</p>
+
 <h4>A6 - Expunerea datelor  sensibile</h4>
+
 <p>WordPress user account passwords are salted and hashed based on the Portable PHP Password Hashing Framework<sup id="ref12"><a href="#footnote12">12</a></sup>. WordPress' permission system is used to control access to private information such an registered users' PII, commenters' email addresses, privately published content, etc. In WordPress 3.7, a password strength meter was included in the core software providing additional information to users setting their passwords and hints on increasing strength. WordPress also has an optional configuration setting for requiring HTTPS.</p>
+
 <h4>A7 - Lipsă control acces la  nivel de funcții</h4>
+
 <p>WordPress checks for proper authorization and permissions for any function level access requests prior to the action being executed. Access or visualization of administrative URLs, menus, and pages without proper authentication is tightly integrated with the authentication system to prevent access from unauthorized users.</p>
+
 <h4>A8 - Falsificare cereri  inter-situri (CSRF)</h4>
+
 <p>WordPress uses cryptographic tokens, called nonces<sup id="ref13"><a href="#footnote13">13</a></sup>, to validate intent of action requests from authorized users to protect against potential CSRF threats. WordPress provides an API for the generation of these tokens to create and verify unique and temporary tokens, and the token is limited to a specific user, a specific action, a specific object, and a specific time period, which can be added to forms and URLs as needed. Additionally, all nonces are invalidated upon logout.</p>
+
 <h4>A9 - Folosirea componentelor cu  vulnerabilități cunoscute</h4>
+
 <p>The WordPress core team closely monitors the few included libraries and frameworks WordPress integrates with for core functionality. In the past the core team has made contributions to several third-party components to make them more secure, such as the update to fix a cross-site vulnerability in TinyMCE in WordPress 3.5.2<sup id="ref14"><a href="#footnote14">14</a></sup>.</p>
 
 <p>If necessary, the core team may decide to fork or replace critical external components, such as when the SWFUpload library was officially replaced by the Plupload in 3.5.2, and a secure fork of SWFUpload was made available by the security team<sup id="ref15"><a href="#footnote15">15</a></sup> for those plugins who continued to use SWFUpload in the short-term.</p>
+
 <h4>A10 - Redirectări și trimiteri  nevalidate</h4>
+
 <p>WordPress' internal access control and authentication system will protect against attempts to direct users to unwanted destinations or automatic redirects. This functionality is also made available to plugin developers via an API, <code>wp_safe_redirect()</code><sup id="ref16"><a href="#footnote16">16</a></sup>.</p>
-<h3>Alte riscuri de  securitate și motive de îngrijorare</h3>
-<h4>Atacuri  la procesare XXE (XML  eXternal Entity)</h4>
+
+<h3>Alte riscuri de securitate și motive de îngrijorare</h3>
+
+<h4>Atacuri la procesarea XXE (<em>XML eXternal Entity</em>) entităților externe XML</h4>
+
 <p>When processing XML, WordPress disables the loading of custom XML entities to prevent both External Entity and Entity Expansion attacks. Beyond PHP's core functionality, WordPress does not provide additional secure XML processing API for plugin authors.</p>
-<h4>Atacuri SSRF (Server  Side Request Forgery)</h4>
+
+<h4>Atacuri SSRF (<em>Server Side Request Forgery</em>) Cereri falsificate către server</h4>
+
 <p>HTTP requests issued by WordPress are filtered to prevent access to loopback and private IP addresses. Additionally, access is only allowed to certain standard HTTP ports.</p>
+
 <h2>Securitatea modulelor și  temelor WordPress</h2>
+
 <h3>Tema implicită</h3>
+
 <p>WordPress requires a theme to be enabled to render content visible on the frontend. The default theme which ships with core WordPress (currently "Twenty Fifteen") has been vigorously reviewed and tested for security reasons by both the team of theme developers plus the core development team.</p>
 
 <p>The default theme can serve as a starting point for custom theme development, and site developers can create a child theme which includes some customization but falls back on the default theme for most functionality and security. The default theme can be easily removed by an administrator if not needed.</p>
@@ -154,22 +178,33 @@
 <p>Each plugin and theme has the ability to be continually developed by the plugin or theme owner, and any subsequent fixes or feature development can be uploaded to the repository and made available to users with that plugin or theme installed with a description of that change. Site administrators are notified of plugins which need to be updated via their administration dashboard.</p>
 
 <p>When a plugin vulnerability is discovered by the WordPress Security Team, they contact the plugin author and work together to fix and release a secure version of the plugin. If there is a lack of response from the plugin author or if the vulnerability is severe, the plugin/theme is pulled from the public directory, and in some cases, fixed and updated directly by the Security Team.</p>
+
 <h3>Echipa de revizuire a temelor</h3>
+
 <p>The Theme Review Team is a group of volunteers, led by key and established members of the WordPress community, who review and approve themes submitted to be included in the official WordPress Theme directory. The Theme Review Team maintains the official Theme Review Guidelines<sup id="ref19"><a href="#footnote19">19</a></sup>, the Theme Unit Test Data<sup id="ref20"><a href="#footnote20">20</a></sup>, and the Theme Check Plugin<sup id="ref21"><a href="#footnote21">21</a></sup>, and attempts to engage and educate the WordPress Theme developer community regarding development best practices. Inclusion in the group is moderated by core committers of the WordPress development team.</p>
+
 <h2>Rolul furnizorului  de găzduirie web în securitatea WordPress</h2>
+
 <p>WordPress can be installed on a multitude of platforms. Though WordPress core software provides many provisions for operating a secure web application, which were covered in this document, the configuration of the operating system and the underlying web server hosting the software is equally important to keep the WordPress applications secure.</p>
+
 <h3>O notă despre WordPress.com și securitatea WordPress</h3>
+
 <p>WordPress.com is the largest WordPress installation in the world, and is owned and managed by Automattic, Inc., which was founded by Matt Mullenweg, the WordPress project co-creator. WordPress.com runs on the core WordPress software, and has its own security processes, risks, and solutions<sup id="ref22"><a href="#footnote22">22</a></sup>. This document refers to security regarding the self-hosted, downloadable open source WordPress software available from WordPress.org and installable on any server in the world.</p>
+
 <h2>Anexă</h2>
+
 <h3>API-urile nucleu ale WordPress</h3>
-<p>The WordPress Core Application Programming Interface (API) is comprised of several individual APIs<sup id="ref23"><a href="#footnote23">23</a></sup>, each one covering the functions involved in, and use of, a given set of functionality. Together, these form the project interface which allows plugins and themes to interact with, alter, and extend WordPress core functionality safely and securely.</p>
+
+<p>WordPress Core Application Programming Interface (API) is comprised of several individual APIs<sup id="ref23"><a href="#footnote23">23</a></sup>, each one covering the functions involved in, and use of, a given set of functionality. Together, these form the project interface which allows plugins and themes to interact with, alter, and extend WordPress core functionality safely and securely.</p>
 
 <p>While each WordPress API provides best practices and standardized ways to interact with and extend WordPress core software, the following WordPress APIs are the most pertinent to enforcing and hardening WordPress security:</p>
 
 <h3>API-ul bazei de date</h3>
+
 <p>The Database API<sup id="ref24"><a href="#footnote24">24</a></sup>, added in WordPress 0.71, provides the correct method for accessing data as named values which are stored in the database layer.</p>
 
 <h3>API-ul sistemului de fișiere</h3>
+
 <p>The Filesystem API<sup id="ref25"><a href="#footnote25">25</a></sup>, added in WordPress 2.6<sup id="ref26"><a href="#footnote26">26</a></sup>, was originally created for WordPress' own automatic updates feature. The Filesystem API abstracts out the functionality needed for reading and writing local files to the filesystem to be done securely, on a variety of host types.</p>
 
 <p>It does this through the <code>WP_Filesystem_Base</code> class, and several subclasses which implement different ways of connecting to the local filesystem, depending on individual host support. Any theme or plugin that needs to write files locally should do so using the WP_Filesystem family of classes.</p>
@@ -181,11 +216,15 @@
 <h3>Permisiuni și API-ul utilizatorului curent</h3>
 
 <p>The permissions and current user API<sup id="ref29"><a href="#footnote29">29</a></sup> is a set of functions which will help verify the current user's permissions and authority to perform any task or operation being requested, and can protect further against unauthorized users accessing or performing functions beyond their permitted capabilities.</p>
+
 <h3>Licența pentru conținutul  acestui document alb</h3>
+
 <p>The text in this document (not including the WordPress logo or <a href="http://wordpressfoundation.org/trademark-policy/">trademark</a>) is licensed under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 Universal (CC0 1.0) Public Domain Dedication</a>. You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission.</p>
 
 <p><em>A special thank you to Drupal's </em><a href="http://drupalsecurityreport.org/"><em>security white paper</em></a><em>, which provided some inspiration. </em></p>
+
 <h3>Lecturi suplimentare</h3>
+
 <ul>
   <li>WordPress News <a href="https://wordpress.org/news/">https://wordpress.org/news/</a></li>
 	<li>WordPress Security releases <a href="https://wordpress.org/news/category/security/">https://wordpress.org/news/category/security/</a></li>
@@ -194,19 +233,20 @@
 
 <hr />
 
-<p><em>Creeat de </em>Sara Rosso </p>
+<p><em>Creeat de </em>Sara Rosso</p>
 
-<p><em>Contribuții din partea </em>Barry Abrahamson, Michael Adams, Jon Cave, Helen Hou-Sand&iacute; , Dion Hulse, Mo Jangda, Paul Maiorana</p>
+<p><em>Contribuții din partea </em>Barry Abrahamson, Michael Adams, Jon Cave, Helen Hou-Sand&iacute;, Dion Hulse, Mo Jangda, Paul Maiorana</p>
 
 <p><em>Versiunea 1.0 Martie 2015</em></p>
 
 <hr />
 
 <h3>Referințe</h3>
+
 <ul>
-  <li id='footnote1'><a href="#ref1">[1]</a> <a href="http://w3techs.com/">http://w3techs.com/</a>, as of March 2015</li>
+  <li id='footnote1'><a href="#ref1">[1]</a> <a href="http://w3techs.com/">http://w3techs.com/</a>, la martie 2015</li>
 	<li id='footnote2'><a href="#ref2">[2]</a> <a href="https://make.wordpress.org/core/handbook/how-the-release-cycle-works/">https://make.wordpress.org/core/handbook/how-the-release-cycle-works/</a></li>
-	<li id='footnote3'><a href="#ref3">[3]</a> Andrew Nacin, WordPress lead developer, <a href="http://vip.wordpress.com/security">http://vip.wordpress.com/security</a></li>
+	<li id='footnote3'><a href="#ref3">[3]</a> Andrew Nacin, dezvoltator șef WordPress, <a href="http://vip.wordpress.com/security">http://vip.wordpress.com/security</a></li>
 	<li id='footnote4'><a href="#ref4">[4]</a> <a href="https://wordpress.org/news/2014/08/wordpress-3-9-2/">https://wordpress.org/news/2014/08/wordpress-3-9-2/</a></li>
 	<li id='footnote5'><a href="#ref5">[5]</a> <a href="http://codex.wordpress.org/Security_FAQ">http://codex.wordpress.org/Security_FAQ</a></li>
 	<li id='footnote6'><a href="#ref6">[6]</a> <a href="https://wordpress.org/news/">https://wordpress.org/news/</a></li>
