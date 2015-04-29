@@ -85,11 +85,11 @@
 
 <h3>Riscuri, procese și istoria securității WordPress</h3>
 
-<p>Echipa de securitate WordPress crede în devoalarea responsabilă prin alertarea imediată a a echipei de securitate cu privire la orice potențială vulnerabilitate. Potențialele vulnerabilități de securitate pot fi semnalate echipei de securitate direct la adresa de email: security@wordpress.org<sup id="ref5"><a href="#footnote5">5</a></sup>. Echipa de securitate comunică între membrii săi pe o listă privată de email și lucrează pe un Trac privat dar neînchis (<em>walled-off</em>) pentru urmărirea, testarea și rezolvarea erorilor și problemelor de securitate.</p>
+<p>Echipa de securitate WordPress crede în devoalarea responsabilă prin alertarea imediată a echipei de securitate cu privire la orice potențială vulnerabilitate. Potențialele vulnerabilități de securitate pot fi semnalate echipei de securitate direct la adresa de email: security@wordpress.org<sup id="ref5"><a href="#footnote5">5</a></sup>. Echipa de securitate comunică între membrii săi pe o listă privată de email și lucrează pe un Trac privat dar neînchis (<em>walled-off</em>) pentru urmărirea, testarea și rezolvarea erorilor și problemelor de securitate.</p>
 
 <p>Fiecare raport de securitate este confirmat în momentul primirii și echipa lucrează să verifice vulnerabilitatea și să determine gravitatea ei. Dacă e confirmată, echipa de securitate face planificarea unei reparații (<em>patch</em>) ce poate fi asignată unei viitoare versiuni de WordPress sau poate fi imediat lansată o versiune de securitate, în funcție de gravitatea problemei.</p>
 
-<p>Pentru o versiune imediată de securitate, echipa de securitate va publica o recomandare pe situl de știri WordPress.org News<sup id="ref6"><a href="#footnote6">6</a></sup> anunțând lansarea și detaliind modificările. În acest mesaj persoana responsabilă de descoperire va primi o recunoaștere, încurajându-se astfel pe viitor continuarea raportărilor responsabile.</p>
+<p>Pentru o versiune imediată de securitate, echipa de securitate va publica o recomandare pe situl de știri WordPress.org <em>News</em><sup id="ref6"><a href="#footnote6">6</a></sup> anunțând lansarea și detaliind modificările. În acest mesaj persoana responsabilă de descoperire va primi o recunoaștere, încurajându-se astfel pe viitor continuarea raportărilor responsabile.</p>
 
 <p>Administratorii software-ului WordPress văd în panoul de control al siturilor lor o notificare de actualizare când o nouă versiune e disponibilă, iar mergând pe actualizarea manuală utilizatorii sunt redirectați la ecranul Despre WordPress care detaliază modificările. Dacă administratorii au validată actualizarea automată a noilor versiuni în culise, vor primi un email după ce actualizarea s-a terminat.</p>
 
@@ -117,11 +117,11 @@
 
 <h4>A3 - Scripturi inter-situri  (XSS)</h4>
 
-<p>WordPress asigură o gamă de funcții ce pot ajuta la punerea în siguranță a datelor furizate de utilizatori<sup id="ref10"><a href="#footnote10">10</a></sup>. Utilizatorii de încredere, administratorii sau editorii într-o instalare singulară de WordPress, sau doar administratorii de situri în WordPress Multisit, pot publica HTML sau JavaScript nefiltrat după necesități, cum ar fi în interiorul unui articol sau pagini. Ceilalți utilizatori și cunținutul trimis spre publicare sunt implicit filtrați pentru a fi înlăturate entitățile periculoase, folosind biblioteca KSES prin funcția <code>wp_kses</code>.</p>
+<p>WordPress asigură o gamă de funcții ce pot ajuta la punerea în siguranță a datelor furizate de utilizatori<sup id="ref10"><a href="#footnote10">10</a></sup>. Utilizatorii de încredere, administratorii sau editorii într-o instalare singulară de WordPress, sau doar administratorii de situri în WordPress Multisit, pot publica HTML sau JavaScript nefiltrat după necesități, cum ar fi în interiorul unui articol sau pagini. Ceilalți utilizatori și conținutul trimis spre publicare sunt implicit filtrați pentru a fi înlăturate entitățile periculoase, folosind biblioteca KSES prin funcția <code>wp_kses</code>.</p>
 
-<p>As an example, the WordPress core team noticed before the release of WordPress 2.3 that the function <code>the_search_query()</code> was being misused by most theme authors, who were not escaping the function's output for use in HTML. In a very rare case of slightly breaking backward compatibility, the function's output was changed in WordPress 2.3 to be pre-escaped.</p>
+<p>Ca exemplu, echipa nucleului WordPress a observat că funcția <code>the_search_query()</code> a fost folosită greșit de majoritatea autorilor de teme, care n-au filtrat pentru siguranță (<em>escaping</em>) rezultatul ei pentru a fi folosit în HTML. Într-o foarte rară rupere a compatibilității înapoi, ieșirea funcției a fost schimbată în WordPress 2.3 pentru a fi pre-filtrată (<em>pre-escaped</em>).</p>
 
-<h4>A4 - Referință obiect directă  nesecurizată</h4>
+<h4>A4 - Referință obiect directă nesecurizată</h4>
 
 <p>WordPress often provides direct object reference, such as unique numeric identifiers of user accounts or content available in the URL or form fields. While these identifiers disclose direct system information, WordPress' rich permissions and access control system prevent unauthorized requests.</p>
 
