@@ -121,23 +121,23 @@
 
 <p>Ca exemplu, echipa nucleului WordPress a observat că funcția <code>the_search_query()</code> a fost folosită greșit de majoritatea autorilor de teme, care n-au filtrat pentru siguranță (<em>escaping</em>) rezultatul ei pentru a fi folosit în HTML. Într-o foarte rară rupere a compatibilității înapoi, ieșirea funcției a fost schimbată în WordPress 2.3 pentru a fi pre-filtrată (<em>pre-escaped</em>).</p>
 
-<h4>A4 - Referință obiect directă nesecurizată</h4>
+<h4>A4 - Referință directă nesecurizată la obiect</h4>
 
-<p>WordPress often provides direct object reference, such as unique numeric identifiers of user accounts or content available in the URL or form fields. While these identifiers disclose direct system information, WordPress' rich permissions and access control system prevent unauthorized requests.</p>
+<p>WordPress furnizează destul de des referințe directe către obiecte, cum ar fi identificatori numerici unici de conturi utilizator sau conținut disponibil în URL sau câmpuri de formulare. Cu toate că acești identificatori dezvăluie informații direct din sistem, elaboratul sistem de control al accesului pe care îl are WordPress împiedică cererile neautorizate.</p>
 
-<h4>A5 - Configurarea greșită a  securității</h4>
+<h4>A5 - Configurarea greșită a securității</h4>
 
-<p>The majority of the WordPress security configuration operations are limited to a single authorized administrator. Default settings for WordPress are continually evaluated at the core team level, and the WordPress core team provides documentation and best practices to tighten security for server configuration for running a WordPress site<sup id="ref11"><a href="#footnote11">11</a></sup>.</p>
+<p>Majoritatea operațiunilor de de configurare a securității WordPress sunt limitate la un singur administrator autorizat. Setările implicite ale WordPress sunt evaluate în mod continuu la nivelul echipei nucleului, și aceasta furnizează documentații și exemple de bună practică pentru a întări securitatea configurării serverelor ce rulează situri WordPress<sup id="ref11"><a href="#footnote11">11</a></sup>.</p>
 
-<h4>A6 - Expunerea datelor  sensibile</h4>
+<h4>A6 - Expunerea datelor sensibile</h4>
 
-<p>WordPress user account passwords are salted and hashed based on the Portable PHP Password Hashing Framework<sup id="ref12"><a href="#footnote12">12</a></sup>. WordPress' permission system is used to control access to private information such an registered users' PII, commenters' email addresses, privately published content, etc. In WordPress 3.7, a password strength meter was included in the core software providing additional information to users setting their passwords and hints on increasing strength. WordPress also has an optional configuration setting for requiring HTTPS.</p>
+<p>Parolele de acces ale utilizatorilor sunt "sărate și secționate" (<em>salted and hashed</em>) pe baza cadrului de tratare a parolelor din PHP-ul portabil <em>Portable PHP Password Hashing Framework</em><sup id="ref12"><a href="#footnote12">12</a></sup>. Sistemul de permisiuni WordPress este folosit pentru a controla accesul la informații private cum ar fi cele de identificare a utilizatorilor, adrese de email ale comentatorilor, conținut publicat privat, etc. În WordPress 3.7, a fost inclus în nucleulul software un evaluator de tărie a parolei care să ofere informații suplimentare utilizatorilor care-și stabilesc parola și sfaturi pentru a o întări. WordPress are de asemenea o setare opțională de configurare pentru cerințe HTTPS.</p>
 
-<h4>A7 - Lipsă control acces la  nivel de funcții</h4>
+<h4>A7 - Lipsă de control a accesului la  nivel de funcții</h4>
 
-<p>WordPress checks for proper authorization and permissions for any function level access requests prior to the action being executed. Access or visualization of administrative URLs, menus, and pages without proper authentication is tightly integrated with the authentication system to prevent access from unauthorized users.</p>
+<p>WordPress verifică autorizarea corespunzătoare și permisiunile pentru orice cereri de acces la nivel de funcție înainte de a fi execută acțiunea. Accesul sau vizualizarea unor URL-uri administrative, meniuri și pagini, fără autentificare corespunzătoare este integrată strâns cu sistemul de autentificare pentru a preveni accesul unor utilizatori neautorizați.</p>
 
-<h4>A8 - Falsificare cereri  inter-situri (CSRF)</h4>
+<h4>A8 - Falsificare cereri inter-situri (CSRF)</h4>
 
 <p>WordPress uses cryptographic tokens, called nonces<sup id="ref13"><a href="#footnote13">13</a></sup>, to validate intent of action requests from authorized users to protect against potential CSRF threats. WordPress provides an API for the generation of these tokens to create and verify unique and temporary tokens, and the token is limited to a specific user, a specific action, a specific object, and a specific time period, which can be added to forms and URLs as needed. Additionally, all nonces are invalidated upon logout.</p>
 
