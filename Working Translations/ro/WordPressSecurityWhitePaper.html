@@ -193,29 +193,29 @@
 
 <h2>Anexă</h2>
 
-<h3>API-urile nucleu ale WordPress</h3>
+<h3>API-urile de bază ale WordPress</h3>
 
-<p>WordPress Core Application Programming Interface (API) is comprised of several individual APIs<sup id="ref23"><a href="#footnote23">23</a></sup>, each one covering the functions involved in, and use of, a given set of functionality. Together, these form the project interface which allows plugins and themes to interact with, alter, and extend WordPress core functionality safely and securely.</p>
+<p></p>Interfața de programare a softului de bază Wordpress, <em>Application Programming Interface</em> (API), constă din mai multe API-uri individuale<sup id="ref23"><a href="#footnote23">23</a></sup>, fiecare acoperind funcțiile implicate în, și folosite pentru, un set dat de funcționalități. Împreună, acestea formează interfața proiectului ce permite modulelor și temelor să interacționeze cu, să modifice, sau să extindă funcționalitatea de bază a WordPress într-un mod sigur și securizat.</p>
 
-<p>While each WordPress API provides best practices and standardized ways to interact with and extend WordPress core software, the following WordPress APIs are the most pertinent to enforcing and hardening WordPress security:</p>
+<p>În vreme ce fiecare API al WordPress oferă bune practici și căi standard de a interacționa cu și a extinde softul de bază WordPress, următoarele API-uri sunt cele mai îndreptățite de a impune și întări securitatea WordPress:</p>
 
 <h3>API-ul bazei de date</h3>
 
-<p>The Database API<sup id="ref24"><a href="#footnote24">24</a></sup>, added in WordPress 0.71, provides the correct method for accessing data as named values which are stored in the database layer.</p>
+<p>API-ul bazei de date<sup id="ref24"><a href="#footnote24">24</a></sup>, adăugat în WordPress 0.71, oferă metoda corectă de a accesa date ca valori numite ce sunt stocate la nivelul bazei de date.</p>
 
 <h3>API-ul sistemului de fișiere</h3>
 
-<p>The Filesystem API<sup id="ref25"><a href="#footnote25">25</a></sup>, added in WordPress 2.6<sup id="ref26"><a href="#footnote26">26</a></sup>, was originally created for WordPress' own automatic updates feature. The Filesystem API abstracts out the functionality needed for reading and writing local files to the filesystem to be done securely, on a variety of host types.</p>
+<p>API-ul sistemului de fișiere<sup id="ref25"><a href="#footnote25">25</a></sup>, adăugat în WordPress 2.6<sup id="ref26"><a href="#footnote26">26</a></sup>, a fost inițial creat pentru facilitatea automată de actualizare a WordPress-ului. API-ul sistemului de fișiere abstractizează funcționalitatea necesară pentru ca citirea și scrierea fișierelor locale în sistemul de fișiere să fie făcută securizat, pe o varietate de tipuri de siteme ce găzduiesc WordPress-ul.</p>
 
-<p>It does this through the <code>WP_Filesystem_Base</code> class, and several subclasses which implement different ways of connecting to the local filesystem, depending on individual host support. Any theme or plugin that needs to write files locally should do so using the WP_Filesystem family of classes.</p>
+<p>O face prin clasa <code>WP_Filesystem_Base</code>, precum și alte câteva sub-clase ce implementează diferite moduri de conectare la sistemul de fișiere, în funcție de suportul individual al sistemului gazdă. Orice temă sau modul ce are nevoie să scrie fișiere local trebuie s-o facă folosind familia de clase WP_Filesystem.</p>
 
 <h3>API-ul HTTP</h3>
 
-<p>The HTTP API<sup id="ref27"><a href="#footnote27">27</a></sup>, added in WordPress 2.7<sup id="ref28"><a href="#footnote28">28</a></sup> and extended further in WordPress 2.8, standardizes the HTTP requests for WordPress. The API handles cookies, gzip encoding and decoding, chunk decoding (if HTTP 1.1), and various other HTTP protocol implementations. The API standardizes requests, tests each method prior to sending, and, based on your server configuration, uses the appropriate method to make the request.</p>
+<p>API-ul HTTP<sup id="ref27"><a href="#footnote27">27</a></sup>, adăugat în WordPress 2.7<sup id="ref28"><a href="#footnote28">28</a></sup> și apoi extins în WordPress 2.8, standardizează cererile HTTP pentru WordPress. API-ul gestionează cookie-urile, codarea și decodarea gzip, decodarea pe bucăți, <em>chunk decoding</em> (pentru HTTP 1.1), și alte variate implementări de protocol HTTP. API-ul standardizează cererile, testează fiecare metodă înainte de trimitere, și, pe baza configurării serverului, folosește metoda corespunzătoare pentru a face o cerere.</p>
 
 <h3>Permisiuni și API-ul utilizatorului curent</h3>
 
-<p>The permissions and current user API<sup id="ref29"><a href="#footnote29">29</a></sup> is a set of functions which will help verify the current user's permissions and authority to perform any task or operation being requested, and can protect further against unauthorized users accessing or performing functions beyond their permitted capabilities.</p>
+<p>Permisiunile și API-ul utilizatorului curent<sup id="ref29"><a href="#footnote29">29</a></sup> este un set de funcții care ajută la verificarea drepturilor și autorității utilizatorului curent de a face orice sarcină sau operațiune cerută, și care pot asigura protecție și împotriva utilizatorilor neautorizați în a accesa sau executa funcții în afara capabilităților permise.</p>
 
 <h3>Licența pentru conținutul  acestui document alb</h3>
 
