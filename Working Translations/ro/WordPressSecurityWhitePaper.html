@@ -1,0 +1,278 @@
+<html>
+<title>Documentul alb al securității WordPress</title>
+<body>
+
+<h1>Documentul alb al securității WordPress</h1>
+
+<img src="//s.w.org/about/images/logos/wordpress-logo-stacked-rgb.png" class="aligncenter" />
+
+<h2>Context</h2>
+
+<p>Acest document este o analiză și o explicație a dezvoltării softului de bază WordPress și a proceselor sale de securitate asociate, precum și o examinare a securității inerent construită direct în el. Persoanele de decizie care evaluează WordPress ca sistem de gestiune de conținut sau ca un cadru de lucru (<em>framework</em>) pentru aplicații web ar trebui să folosească acest document în analizele și deciziile lor, iar dezvoltatorii să se refere la el pentru a se familiariza cu componentele de securitate și cu cele mai bune practici ale software-ului.</p>
+
+<p>Informațiile din acest document sunt actualizate la nivelul ultimei versiuni stabile a software-ului, WordPress 4.1 la momentul publicării, dar ar trebui să fie considerate relevante de asemenea și pentru cele mai recent lansate versiuni ale software-ului deoarece compatibilitatea înapoi este o preocupare puternică a echipei de dezvoltatori WordPress. Măsurile speciale de securitate vor fi prezentate pe măsură ce ele au fost adăugate la suftul de bază în versiunile lansate. Recomandăm cu tărie rularea întotdeauna a ultimei versiuni stabile de WordPress pentru a se asigura cea mai securizată experiență posibilă.</p>
+
+<h2>Rezumat</h2>
+
+<p>WordPress este un dinamic sistem de gestiune de conținut <em>open-source</em> ce este utilizat pentru a susține milioane de situri web, aplicații web și bloguri. Astăzi propulsează peste 23% din primele 10 milioane de situri web din internet. Ușurința în utilizare, extensibilitatea și o matură comunitate de dezvoltatori fac din WordPress o opțiune populară și o alegere sigură pentru situri web de toate dimensiunile.</p>
+
+<p>De la apariția sa în 2003, WordPress s-a întărit continuu astfel că nucleul său poate să răspundă amenințărilor obișnuite de securitate și să le trateze corespunzător, incluzând topul primelor 10 identificate de <em>The Open Web Application Security Project</em> (OWASP) ca vulnerabilități comune de securitate, ce sunt discutate în acest document.</p>
+
+<p>Echipa de securitate WordPress, în colaborare cu echipa de conducere a nucleului WordPress și sprijinită de comunitatea globală WordPress, lucrează la identificarea și soluționarea problemelor de securitate din softul de bază disponibil pentru distribuție și instalare de pe WordPress.org, precum și documentarea și recomandarea celor mai bune practici cu privire la securitate pentru autorii terți de module și teme.</p>
+
+<p>Dezvoltatorii de situri și administratorii trebuie să acorde o atenție sporită utilizării corecte a API-urilor de bază și a configurărilor serverului de dedesubt care au fost sursa vulnerabilităților obișnuite, precum și să se asigure că toți utilizatorii folosesc parole puternice pentru a accesa WordPress.</p>
+
+<h2>Privire de ansamblu  asupra WordPress</h2>
+
+<p>WordPress este un sistem de gestiune de conținut (CMS <em>content management system</em>) gratuit și <em>open source</em>. Este softul CMS cu cea mai largă utilizare din lume și propulsează mai mult de 23% din topul primelor 10 milioane de situri web<sup id="ref1"><a href="#footnote1">1</a></a></sup>, ceea ce-i dă o cotă de piață estimată de 60% din totalul siturilor ce folosesc CMS-uri.</p>
+
+<p>WordPress este licențiat sub Licență publică generală (GPL - <em>General Public License</em> - v2 sau mai nouă) ce oferă patru libertăți fundamentale ce pot fi considerate "carta drepturilor" WordPress:</p>
+
+<ol>
+	<li>Libertatea de a rula programul, în orice scop.</li>
+	<li>Libertatea de a studia cum funcționează programul și de a-l modifica să facă ceea ce dorești tu.</li>
+	<li>Libertatea de a-l redistribui.</li>
+	<li>Libertatea de a distribui altora cópii ale versiunilor tale modificate.</li>
+</ol>
+
+<h3>Conducerea echipei de bază WordPress</h3>
+
+<p>Proiectul WordPress este o meritocrație și este derulat de o echipă de bază și condusă de co-creatorul și șeful dezvoltării - Matt Mullenweg. Echipa gestionează toate aspectele proiectului, incluzând dezvoltarea de bază, situl WordPress.org și inițiativele comunității.</p>
+
+<p>Echipa de bază e formată din Matt Mullenweg, cinci dezvoltatori șefi și mai mult de o duzină de dezvoltatori principali cu acces permanent la surse. Acești dezvoltatori au ultimul cuvânt în deciziile tehnice și conduc discuțiile despre arhitectură și eforturile de implementare.</p>
+
+<p>WordPress are un număr de dezvoltatori contributori. Unii dintre ei sunt foști sau actuali comiteri, alții posibil viitori comiteri. Acești dezvoltatori sunt contributori veterani, persoane de încredere care și-au câștigat un mare respect printre confrații lor. Pe măsura nevoilor, WordPress a avut și comiteri invitați, persoane ce au primit acces de comit, uneori pe componente specifice, temporar sau pe o perioadă de test.</p>
+
+<p>Dezvoltatorii de bază și contributorii sunt cei care în principal ghidează dezvoltarea WordPress-ului. La fiecare versiune de WordPress contribuie la cod sute de dezvoltatori. Acești contributori de bază sunt voluntari care contribuie la baza de cod într-un fel sau altul.</p>
+
+<h3>Ciclul de lansare  WordPress</h3>
+
+<p>Fiecare ciclu de lansare este condus de unul sau mai mulți dezvoltatori de bază WordPress. Un ciclu de lansare durează de obicei 4 luni de la întâlnirea inițială de stabilire a obiectivelor până la lansarea noii versiuni.</p>
+
+<p>Un ciclu de lansare are următoarea structură<sup id="ref2"><a href="#footnote2">2</a></sup>:</p>
+
+<ul>
+	<li>Faza 1: Planificarea și stabilirea conducerii echipei. Asta se face în camera de discuții #core pe Slack. Șeful versiunii discută facilitățile următoarei versiuni de WordPress. Contributorii WordPress se implică în această discuție.  Șeful de versiune va identifica conducătorii de echipe pentru fiecare dintre facilitățile alese.</li>
+
+	<li>Faza 2: Începe munca de dezvoltare. Șefii de echipe formează echipele și lucrează la facilitățile ce le-au fost desemnate. Sunt planificate discuții regulate pentru a fi siguri că dezvoltarea merge înainte.</li>
+
+	<li>Faza 3: Beta. Sunt lansate versiunile beta de test, iar beta-testerii sunt rugați să înceapă raportarea erorilor. Din această fază nu se mai fac comituri pentru noi îmbunătățiri sau cereri de facilități. Autorii terți de module și teme sunt încurajați să își testeze propriul cod în condițiile viitoarelor modificări.</li>
+
+	<li>Faza 4: Candidat pentru lansare. Din acest punct se îngheață șirurile de tradus. Munca este orientată doar spre păstrarea compatibilităților și eliminarea blocajelor.</li>
+
+	<li>Faza 5: Lansare. Versiunea WordPress este lansată și devine disponibilă pentru actualizare în administrarea WordPress.</li>
+</ul>
+
+<h3>Numerotarea versiunilor și actualizărilor de securitate</h3>
+
+<p>O versiune majoră de WordPress este dictată de primele două numere din secvență. De exemplu 3.5 este o versiune majoră, cum sunt și 3.6, 3.7, sau 4.0. Nu există un "WordPress 3" sau "WordPress 4" și fiecare versiune majoră este numită prin numerotarea sa, de ex. "WordPress 3.9".</p>
+
+<p>Versiunile majore pot să adauge facilități noi pentru utilizator și API-uri pentru dezvoltatori. Deși e tipic în lumea softului ca o versiune "majoră" să însemne și ruperea compatibilității înapoi, WordPress se străduiește ca niciodată aceasta să nu fie ruptă. Compatibilitatea înapoi este una dintre cele mai importante filosofii ale proiectului, cu scopul de a ușura actualizarea atât pentru utilizatori cât și pentru dezvoltatori.</p>
+
+<p>O versiune minoră de WordPress este dictată de a treia cifră. Versiunea 3.5.1 este una minoră, la fel ca 3.4.2<sup id="ref3"><a href="#footnote3">3</a></sup>. O versiune minoră este rezervată pentru corectarea vulnerabilităților de securitate și rezolvarea erorilor critice. Deoarece noi versiuni de WordPress sunt lansate atât de frecvent &mdash; ținta este ca o versiune majoră să apară la fiecare 4-5 luni, iar cele minore pe măsură ce este necesar &mdash; nu este nevoie decât de versiuni majore și minore.</p>
+
+<h3>Compatibilitatea înapoi a versiunilor</h3>
+
+<p>Proiectul WordPress este dedicat cu hotărâre compatibilității înapoi. Această dedicare înseamnă și că teme, module și cod personalizat vor continua să funcționeze odată ce softul de bază Wordpress este actualizat, încurajând deținătorii siturilor să mențină actualizat WordPress-ul la ultima versiune sigură.</p>
+
+<h2>WordPress și securitatea</h2>
+
+<h3>Echipa de securitate a WordPress</h3>
+
+<p>Echipa de securitate WordPress e formată din aproximativ 25 de experți incluzând dezvoltatorii șefi și cercetătorii în securitate &mdash; aproximativ jumătate din ei angajați ai Automattic (realizatorii lui WordPress.com, prima și cea mai mare platformă de găzduire WordPress de pe web) și un număr care lucrează în domeniul securității pe web. Echipa se consultă cu cercetători de încredere renumiți și cu companii de găzduire<sup><a href="#footnote3">3</a></sup>.</p>
+
+<p>Echipa de securitate WordPress colaborează adesea cu alte echipe de securitate pentru a rezolva probleme de interdependență, cum ar fi rezolvarea vulnerabilității din parserul XML al PHP, folosit de API-ul XML-RPC livrat cu WordPress, în WordPress 3.9.2<sup id="ref4"><a href="#footnote4">4</a></sup>. Rezolvarea acestei vulnerabilități a fost rezultatul unui efort comun al echipelor de securitate ale WordPress și Drupal.</p>
+
+<h3>Riscuri, procese și istoria securității WordPress</h3>
+
+<p>Echipa de securitate WordPress crede în devoalarea responsabilă prin alertarea imediată a echipei de securitate cu privire la orice potențială vulnerabilitate. Potențialele vulnerabilități de securitate pot fi semnalate echipei de securitate direct la adresa de email: security@wordpress.org<sup id="ref5"><a href="#footnote5">5</a></sup>. Echipa de securitate comunică între membrii săi pe o listă privată de email și lucrează pe un Trac privat dar neînchis (<em>walled-off</em>) pentru urmărirea, testarea și rezolvarea erorilor și problemelor de securitate.</p>
+
+<p>Fiecare raport de securitate este confirmat în momentul primirii și echipa lucrează să verifice vulnerabilitatea și să determine gravitatea ei. Dacă e confirmată, echipa de securitate face planificarea unei reparații (<em>patch</em>) ce poate fi asignată unei viitoare versiuni de WordPress sau poate fi imediat lansată o versiune de securitate, în funcție de gravitatea problemei.</p>
+
+<p>Pentru o versiune imediată de securitate, echipa de securitate va publica o recomandare pe situl de știri WordPress.org <em>News</em><sup id="ref6"><a href="#footnote6">6</a></sup> anunțând lansarea și detaliind modificările. În acest mesaj persoana responsabilă de descoperire va primi o recunoaștere, încurajându-se astfel pe viitor continuarea raportărilor responsabile.</p>
+
+<p>Administratorii WordPress văd în panoul de control al siturilor lor o notificare de actualizare când o nouă versiune e disponibilă, iar mergând pe actualizarea manuală utilizatorii sunt redirectați la ecranul Despre WordPress care detaliază modificările. Dacă administratorii au validată actualizarea automată a noilor versiuni în culise, vor primi un email după ce actualizarea s-a terminat.</p>
+
+<h3>Actualizarea automată în culise a versiunilor de securitate</h3>
+
+<p>Începând de la versiunea 3.7, WordPress a introdus actualizarea automată în culise pentru toate versiunile minore<sup id="ref7"><a href="#footnote7">7</a></sup>, cum ar fi 3.7.1 și 3.7.2. Echipa de securitate WordPress poate identifica, repara și împinge automat îmbunătățirile de securitate pentru WordPress fără ca proprietarul sitului să trebuiască să facă ceva din partea sa, actualizarea de securitate instalându-se automat.</p>
+
+<p>Când este publicată o actualizare de securitate pentru versiunea curentă stabilă de WordPress, echipa nucleului va împinge de asemenea actualizările de securitate pentru toate versiunile ce sunt capabile de actualizare în culise (de la WordPress 3.7), astfel că aceste mai vechi dar încă recente versiuni de WordPress să primească și ele aceste îmbunătățiri de securitate.</p>
+
+<p>Proprietarii individuali de situri pot opta pentru înlăturarea actualizărilor automate în culise printr-o simplă modificare în fișierul lor de configurare, dar păstrarea acestei funcționalități este recomandată cu tărie de echipa de bază, precum și cea de a rula ultima versiune stabilă de WordPress.</p>
+
+<h3>Top 10 2013, OWASP</h3>
+
+<p>Proiectul de securitate a aplicațiilor web deschise (<em>Open Web Application Security Project</em>, OWASP) este o comunitate internet dedicată securității aplicațiilor pentru web. Lista Top10 OWASP<sup id="ref8"><a href="#footnote8">8</a></sup> se focalizează pe identificarea celor mai serioase riscuri de securitate ale aplicațiilor pentru un larg spectru de organizații. Cele din Top 10 sunt selectate și prioritizate printr-o combinație a estimărilor consensuale privind exploatarea, detectarea și impactul acestora.</p>
+
+<p>Următoarele secțiuni pun în discuție API-urile, resursele și politicile pe care WordPress le folosește pentru a întări softul de bază dar și modulele și temele terților în fața potențialelor riscuri.</p>
+
+<h4>A1 - Injecție</h4>
+
+<p> Există un set de funcții și API-uri disponibile în WordPress pentru a-i sprijini pe dezvoltatori în a se asigura că injecția de cod neautorizat nu e posibilă, și în ai ajuta să valideze și igienizeze datele. Sunt disponibile documentații și bune practici<sup id="ref9"><a href="#footnote9">9</a></sup> despre utilizarea acestor API-uri pentru a proteja, valida, sau igieniza datele de intrare sau ieșire în HTML, URL-uri, antete HTTP și la interacțiunea cu baza de date ori sistemul de fișiere. Administratorii pot în plus să restricționeze tipurile de fișiere ce pot fi încărcate via filtre.</p>
+
+<h4>A2 - Autentificare defecuoasă și gestiunea sesiunilor</h4>
+
+<p>Softul de bază WordPress gestionează conturile de utilizator și detaliile de autentificare cum ar fi ID-ul utilizatorului, numele și parola pe partea serverului, la fel și cookie-urile de autentificare. Parolele sunt protejate în baza de date folosind tehnici standard de "sărare și întindere" <em>salting&stretching</em>. Sesiunile existente sunt distruse după deautentificare începând cu versiunea WordPress 4.0.</p>
+
+<h4>A3 - Scripturi inter-situri (XSS)</h4>
+
+<p>WordPress asigură o gamă de funcții ce pot ajuta la punerea în siguranță a datelor furizate de utilizatori<sup id="ref10"><a href="#footnote10">10</a></sup>. Utilizatorii de încredere, administratorii sau editorii într-o instalare singulară de WordPress, sau doar administratorii de situri în WordPress multi-sit, pot publica HTML sau JavaScript nefiltrat după necesități, cum ar fi în interiorul unui articol sau pagini. Ceilalți utilizatori și elementele de conținut trimis spre publicare sunt implicit filtrate pentru a fi înlăturate entitățile periculoase, folosind biblioteca KSES prin funcția <code>wp_kses</code>.</p>
+
+<p>Ca exemplu, echipa nucleului WordPress a observat că funcția <code>the_search_query()</code> a fost folosită greșit de majoritatea autorilor de teme, care n-au filtrat pentru siguranță (<em>escaping</em>) rezultatul ei pentru a fi folosit în HTML. Într-o foarte rară rupere a compatibilității înapoi, ieșirea funcției a fost schimbată în WordPress 2.3 pentru a fi pre-filtrată pentru securitate (<em>pre-escaped</em>).</p>
+
+<h4>A4 - Referință directă nesecurizată la obiect</h4>
+
+<p>WordPress furnizează destul de des referințe directe către obiecte, cum ar fi identificatori numerici unici de conturi utilizator sau conținut disponibil în URL sau câmpuri de formulare. Cu toate că acești identificatori dezvăluie informații direct din sistem, elaboratul sistem de control al accesului pe care îl are WordPress împiedică cererile neautorizate.</p>
+
+<h4>A5 - Configurarea greșită a securității</h4>
+
+<p>Majoritatea operațiunilor de de configurare a securității WordPress sunt limitate la un singur administrator autorizat. Setările implicite ale WordPress sunt evaluate în mod continuu la nivelul echipei de bază, și aceasta furnizează documentații și exemple de bună practică pentru a întări securitatea configurării serverelor ce rulează situri WordPress<sup id="ref11"><a href="#footnote11">11</a></sup>.</p>
+
+<h4>A6 - Expunerea datelor sensibile</h4>
+
+<p>Parolele de acces ale utilizatorilor sunt "sărate și secționate" (<em>salted and hashed</em>) pe baza cadrului de tratare a parolelor din PHP-ul portabil <em>Portable PHP Password Hashing Framework</em><sup id="ref12"><a href="#footnote12">12</a></sup>. Sistemul de permisiuni WordPress este folosit pentru a controla accesul la informații private cum ar fi cele de identificare a utilizatorilor, adrese de email ale comentatorilor, conținut publicat privat, etc. În WordPress 3.7, a fost inclus în softul de bază un evaluator de tărie a parolei care să ofere informații suplimentare utilizatorilor care-și stabilesc parola și sfaturi pentru a o întări. WordPress are de asemenea o setare opțională de configurare pentru cerințe HTTPS.</p>
+
+<h4>A7 - Lipsă de control a accesului la  nivel de funcții</h4>
+
+<p>WordPress verifică autorizarea corespunzătoare și permisiunile pentru orice cereri de acces la nivel de funcție înainte de a fi execută acțiunea. Accesul sau vizualizarea unor URL-uri administrative, meniuri și pagini, fără autentificare corespunzătoare este integrată strâns cu sistemul de autentificare pentru a preveni accesul unor utilizatori neautorizați.</p>
+
+<h4>A8 - Falsificare cereri inter-situri (CSRF - <em>Cross Site Request Forgery</em>)</h4>
+
+<p>WordPress folosește garanți (<em>tokens</em>) criptografici, numiți nunici <em>nonces</em><sup id="ref13"><a href="#footnote13">13</a></sup>, pentru a valida intenția unor cereri de acțiuni din partea unor utilizatori autorizați pentru a asigura protecția împotriva potențialelor amenințări CSRF. WordPress oferă un API pentru generarea acestor garanți pentru crearea și verificarea temporară a unicității acestora, ei fiind limitați la un anumit utilizator, o acțiune specifică, un obiect specific, o perioadă specifică de timp și care pot fi adăugați unor formulare și URL-uri după nevoie. În plus, toți nunicii sunt invalidați la deautentificare.</p>
+
+<h4>A9 - Folosirea componentelor cu vulnerabilități cunoscute</h4>
+
+<p>Echipa de bază WordPress monitorizează îndeaproape cele câteva biblioteci incluse și cadre de lucru (<em>frameworks</em>) integrate în WordPress pentru funcționalitățile de bază. În trecut echipa de bază a contribuit la mai multe terțe componente pentru a le face mai sigure, cum a fost și actualizarea pentru repararea unei vulnerabilități inter-sit în TinyMCE în WordPress 3.5.2<sup id="ref14"><a href="#footnote14">14</a></sup>.</p>
+
+<p>Dacă e nevoie, echipa de bază poate decide să ramifice (<em>fork</em>) sau să înlocuiască componente externe critice, cum s-a întâmplat când a fost înlocuită oficial biblioteca <em>SWPUpload</em> cu <em>Plupload</em> în 3.5.2, și când o ramificare securizată a SWFUpload a fost făcută disponibilă de echipa de securitate<sup id="ref15"><a href="#footnote15">15</a></sup> pentru acele module care au continuat să folosească pe termen scurt SWFUpload.</p>
+
+<h4>A10 - Redirectări și trimiteri nevalidate</h4>
+
+<p>Sistemul intern de autentificare și control acces al WordPress va asigura protecția împotriva încercărilor de a direcționa utilizatorii spre destinații nedorite sau redirectări automate. Această funcționalitate este de asemenea accesibilă dezvoltatorilor de module printr-un API, <code>wp_safe_redirect()</code><sup id="ref16"><a href="#footnote16">16</a></sup>.</p>
+
+<h3>Alte riscuri de securitate și motive de îngrijorare</h3>
+
+<h4>Atacuri la procesarea XXE (<em>XML eXternal Entity</em>) a entităților externe XML</h4>
+
+<p>La procesarea XML, WordPress invalidează încărcarea unor entități XML personalizate pentru a preveni atât atacurile de tip Entitate externă cât și cele de tip Expansiune entitate. Dincolo de funcționalitatea de bază a PHP, WordPress nu asigură un API suplimentar de procesare XML pentru autorii de module.</p>
+
+<h4>Atacuri SSRF (<em>Server Side Request Forgery</em>) - Cereri falsificate către server</h4>
+
+<p>Cererile HTTP lansate de WordPress sunt filtrate pentru a preveni accesul la adrese IP private sau de retur (<em>loopback</em>). În plus, accesul este permis numai pe anumite porturi HTTP standard.</p>
+
+<h2>Securitatea modulelor și  temelor WordPress</h2>
+
+<h3>Tema implicită</h3>
+
+<p>WordPress are nevoie de o temă validată pentru a face conținutul vizibil în față pe sit. Tema implicită, livrată cu nucleul WordPress, (acum "<em>Twenty Fifteen</em>") a fost revizuită viguros și testată din punctul de vedere al securității atât de echipa dezvoltatorilor de teme cât și de echipa de dezvoltare de bază.</p>
+
+<p>Tema implicită poate să servească ca punct de plecare pentru dezvoltarea de teme personalizate, iar dezvoltatorii de situri pot să creeze teme copil care să includă unele personalizări dar să se bazeze pe tema implicită pentru majoritatea funcționalității și a securității. Tema implicită poate fi înlăturată cu ușurință de administrator dacă nu e necesară.</p>
+
+<h3>Depozitarele de module și teme de la WordPress.org</h3>
+
+<p>Sunt aporximativ 30.000+ de module și 2.000+ de teme listate pe situl WordPress.org. Aceste teme și module sunt înscrise pentru a fi incluse și sunt manual revizuite de voluntari înainte de a deveni disponibile în depozitar.</p>
+
+<p>Includerea modulelor și temelor în depozitare nu garantează că acestea nu au vulnerabilități de securitate. Există ghiduri pentru dezvoltatorii de module pe care aceștia să le consulte înainte de la depune pentru includerea în depozitar a unui modul<sup id="ref17"><a href="#footnote17">17</a></sup>, iar pe WordPress.org este disponibilă și o documentație extensivă despre cum se dezvoltă o temă WordPress<sup id="ref18"><a href="#footnote18">18</a></sup>.</p>
+
+<p>Fiecare modul și fiecare temă au posibilitatea de a fi dezvoltate în mod continuu de către proprietarul modulului sau temei respective, iar orice următoare reparații sau facilități adăugate pot fi încărcate în depozitar și făcute disponibile utilizatorilor ce au instalat acel modul sau temă împreună cu o descriere a modificărilor. Administratorii de situri sunt notificați despre modulele ce trebuie să fie actualizate prin panoul de control din administrare.</p>
+
+<p>Când este descoperit un modul cu vulnerabilități de către echipa de securitate WordPress, aceasta contactează autorul modulului și lucrează împreună să-l corecteze și să lanseze o nouă versiune sigură. Dacă răspunsul autorului modulului întârzie și vulnerabilitatea e severă, tema/modulul sunt scoase din directorul public, iar în unele cazuri, reparate și actualizate de către echipa de securitate.</p>
+
+<h3>Echipa de revizuire a temelor</h3>
+
+<p>Echipa de revizuire a temelor este un grup de voluntari, conduși de membri cheie consacrați ai comunității WordPress, care revizuiesc și aprobă temele depuse pentru a fi incluse în directorul oficial de teme WordPress. Echipa ține la zi ghidul oficial de revizuire a temelor<sup id="ref19"><a href="#footnote19">19</a></sup>, datele unității de testare a temei<sup id="ref20"><a href="#footnote20">20</a></sup> și modulul de verificare temă<sup id="ref21"><a href="#footnote21">21</a></sup>, și încearcă să angajeze și să educe comunitatea dezvoltatorilor de teme WordPress cu privire la cele mai bune practici de dezvoltare. Includerea în grup e moderată de comiteri de bază ai echipei de dezvoltare WordPress.</p>
+
+<h2>Rolul furnizorului de găzduirie web în securitatea WordPress</h2>
+
+<p>WordPress poate fi instalat pe o mulțime de platforme. Cu toate că nucleul software al WordPress asigură multe posibilități de a opera o aplicație web sigură, trecute în revistă în acest docmuent, configurarea sistemului de operare și a serverului web de dedesubt care îl găzduiește este la fel de importantă pentru a menține securizate aplicațiile WordPress.</p>
+
+<h3>O notă despre WordPress.com și securitatea WordPress</h3>
+
+<p>WordPress.com este cea mai mare instalare WordPress la nivel global, ce aparține și este gestionată de Automattic, Inc., fondată de Matt Mullenweg, co-creatorul proiectului WordPress. WordPress.com deși rulează softul de bază WordPress, are propriile procese de securitate, de risc și de soluționare<sup id="ref22"><a href="#footnote22">22</a></sup>. Acest document se referă la securitatea softului descărcat de la WordPress.org pentru o platformă auto-găzduită pe orice server din lume.</p>
+
+<h2>Anexă</h2>
+
+<h3>API-urile de bază ale WordPress</h3>
+
+<p></p>Interfața de programare a softului de bază Wordpress, <em>Application Programming Interface</em> (API), constă din mai multe API-uri individuale<sup id="ref23"><a href="#footnote23">23</a></sup>, fiecare acoperind funcțiile implicate în, și folosite pentru, un set dat de funcționalități. Împreună, acestea formează interfața proiectului ce permite modulelor și temelor să interacționeze cu, să modifice, sau să extindă funcționalitatea de bază a WordPress într-un mod sigur și securizat.</p>
+
+<p>În vreme ce fiecare API al WordPress oferă bune practici și căi standard de a interacționa cu și a extinde softul de bază WordPress, următoarele API-uri sunt cele mai îndreptățite de a impune și întări securitatea WordPress:</p>
+
+<h3>API-ul bazei de date</h3>
+
+<p>API-ul bazei de date<sup id="ref24"><a href="#footnote24">24</a></sup>, adăugat în WordPress 0.71, oferă metoda corectă de a accesa date ca valori numite ce sunt stocate la nivelul bazei de date.</p>
+
+<h3>API-ul sistemului de fișiere</h3>
+
+<p>API-ul sistemului de fișiere<sup id="ref25"><a href="#footnote25">25</a></sup>, adăugat în WordPress 2.6<sup id="ref26"><a href="#footnote26">26</a></sup>, a fost inițial creat pentru facilitatea automată de actualizare a WordPress-ului. API-ul sistemului de fișiere abstractizează funcționalitatea necesară pentru ca citirea și scrierea fișierelor locale în sistemul de fișiere să fie făcută securizat, pe o varietate de tipuri de siteme ce găzduiesc WordPress-ul.</p>
+
+<p>O face prin clasa <code>WP_Filesystem_Base</code>, precum și alte câteva sub-clase ce implementează diferite moduri de conectare la sistemul de fișiere, în funcție de suportul individual al sistemului gazdă. Orice temă sau modul ce are nevoie să scrie fișiere local trebuie s-o facă folosind familia de clase WP_Filesystem.</p>
+
+<h3>API-ul HTTP</h3>
+
+<p>API-ul HTTP<sup id="ref27"><a href="#footnote27">27</a></sup>, adăugat în WordPress 2.7<sup id="ref28"><a href="#footnote28">28</a></sup> și apoi extins în WordPress 2.8, standardizează cererile HTTP pentru WordPress. API-ul gestionează cookie-urile, codarea și decodarea gzip, decodarea pe bucăți, <em>chunk decoding</em> (pentru HTTP 1.1), și alte variate implementări de protocol HTTP. API-ul standardizează cererile, testează fiecare metodă înainte de trimitere, și, pe baza configurării serverului, folosește metoda corespunzătoare pentru a face o cerere.</p>
+
+<h3>Permisiuni și API-ul utilizatorului curent</h3>
+
+<p>Permisiunile și API-ul utilizatorului curent<sup id="ref29"><a href="#footnote29">29</a></sup> este un set de funcții care ajută la verificarea drepturilor și autorității utilizatorului curent de a face orice sarcină sau operațiune cerută, și care pot asigura protecție și împotriva utilizatorilor neautorizați în a accesa sau executa funcții în afara capabilităților permise.</p>
+
+<h3>Licența pentru conținutul acestui document alb</h3>
+
+<p>Textul din acest document (fără a include sigla WordPress sau <a href="http://wordpressfoundation.org/trademark-policy/">marca comercială</a>) este licențiat sub <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 Universal (CC0 1.0) Dedicată Domeniului public</a>. Puteți copia, modifica, distribui și lucra, chiar și pentru scopuri comerciale, totul fără a cere permisiune.</p>
+
+<p><em>Mulțumiri speciale pentru </em><a href="http://drupalsecurityreport.org/"><em>Documentul alb al securității Drupal</em></a><em>, care ne-a oferit ceva inspirație. </em></p>
+
+<h3>Lecturi suplimentare</h3>
+
+<ul>
+  <li>Știrile WordPress <a href="https://wordpress.org/news/">https://wordpress.org/news/</a></li>
+	<li>Versiunile de securitate ale WordPress <a href="https://wordpress.org/news/category/security/">https://wordpress.org/news/category/security/</a></li>
+	<li>Resurse de dezvoltare pentru WordPress <a href="https://developer.wordpress.org/">https://developer.wordpress.org/</a></li>
+</ul>
+
+<hr />
+
+<p><em>Creeat de </em>Sara Rosso</p>
+
+<p><em>Contribuții din partea </em>Barry Abrahamson, Michael Adams, Jon Cave, Helen Hou-Sand&iacute;, Dion Hulse, Mo Jangda, Paul Maiorana</p>
+
+<p><em>Versiunea 1.0 Martie 2015</em></p>
+
+<hr />
+
+<h3>Referințe</h3>
+
+<ul>
+  <li id='footnote1'><a href="#ref1">[1]</a> <a href="http://w3techs.com/">http://w3techs.com/</a>, la martie 2015</li>
+	<li id='footnote2'><a href="#ref2">[2]</a> <a href="https://make.wordpress.org/core/handbook/how-the-release-cycle-works/">https://make.wordpress.org/core/handbook/how-the-release-cycle-works/</a></li>
+	<li id='footnote3'><a href="#ref3">[3]</a> Andrew Nacin, dezvoltator șef WordPress, <a href="http://vip.wordpress.com/security">http://vip.wordpress.com/security</a></li>
+	<li id='footnote4'><a href="#ref4">[4]</a> <a href="https://wordpress.org/news/2014/08/wordpress-3-9-2/">https://wordpress.org/news/2014/08/wordpress-3-9-2/</a></li>
+	<li id='footnote5'><a href="#ref5">[5]</a> <a href="http://codex.wordpress.org/Security_FAQ">http://codex.wordpress.org/Security_FAQ</a></li>
+	<li id='footnote6'><a href="#ref6">[6]</a> <a href="https://wordpress.org/news/">https://wordpress.org/news/</a></li>
+	<li id='footnote7'><a href="#ref7">[7]</a> <a href="https://wordpress.org/news/2013/10/basie/">https://wordpress.org/news/2013/10/basie/</a></li>
+	<li id='footnote8'><a href="#ref8">[8]</a> <a href="https://www.owasp.org/index.php/Top_10_2013-Top_10">https://www.owasp.org/index.php/Top_10_2013-Top_10</a></li>
+	<li id='footnote9'><a href="#ref9">[9]</a> <a href="https://developer.wordpress.org/plugins/security/">https://developer.wordpress.org/plugins/security/</a></li>
+	<li id='footnote10'><a href="#ref10">[10]</a> <a href="http://codex.wordpress.org/Data_Validation#HTML.2FXML">http://codex.wordpress.org/Data_Validation#HTML.2FXML</a></li>
+	<li id='footnote11'><a href="#ref11">[11]</a> <a href="http://codex.wordpress.org/Hardening_WordPress">http://codex.wordpress.org/Hardening_WordPress</a></li>
+	<li id='footnote12'><a href="#ref12">[12]</a> <a href="http://www.openwall.com/phpass/">http://www.openwall.com/phpass/</a></li>
+	<li id='footnote13'><a href="#ref13">[13]</a> <a href="https://developer.wordpress.org/plugins/security/nonces/">https://developer.wordpress.org/plugins/security/nonces/</a></li>
+	<li id='footnote14'><a href="#ref14">[14]</a> <a href="https://wordpress.org/news/2013/06/wordpress-3-5-2/">https://wordpress.org/news/2013/06/wordpress-3-5-2/</a></li>
+	<li id='footnote15'><a href="#ref15">[15]</a> <a href="https://make.wordpress.org/core/2013/06/21/secure-swfupload/">https://make.wordpress.org/core/2013/06/21/secure-swfupload/</a></li>
+	<li id='footnote16'><a href="#ref16">[16]</a> <a href="https://developer.wordpress.org/reference/functions/wp_safe_redirect/">https://developer.wordpress.org/reference/functions/wp_safe_redirect/</a></li>
+	<li id='footnote17'><a href="#ref17">[17]</a> <a href="https://wordpress.org/plugins/about/guidelines/">https://wordpress.org/plugins/about/guidelines/</a></li>
+	<li id='footnote18'><a href="#ref18">[18]</a> <a href="https://developer.wordpress.org/themes/getting-started/">https://developer.wordpress.org/themes/getting-started/</a></li>
+	<li id='footnote19'><a href="#ref19">[19]</a> <a href="http://codex.wordpress.org/Theme_Review">http://codex.wordpress.org/Theme_Review</a></li>
+	<li id='footnote20'><a href="#ref20">[20]</a> <a href="http://codex.wordpress.org/Theme_Unit_Test">http://codex.wordpress.org/Theme_Unit_Test</a></li>
+	<li id='footnote21'><a href="#ref21">[21]</a> <a href="https://wordpress.org/plugins/theme-check/">https://wordpress.org/plugins/theme-check/</a></li>
+	<li id='footnote22'><a href="#ref22">[22]</a> <a href="http://automattic.com/security/">http://automattic.com/security/</a></li>
+	<li id='footnote23'><a href="#ref23">[23]</a> <a href="https://codex.wordpress.org/WordPress_APIs">https://codex.wordpress.org/WordPress_APIs</a></li>
+	<li id='footnote24'><a href="#ref24">[24]</a> <a href="https://codex.wordpress.org/Database_API">https://codex.wordpress.org/Database_API</a></li>
+	<li id='footnote25'><a href="#ref25">[25]</a> <a href="https://codex.wordpress.org/Filesystem_API">https://codex.wordpress.org/Filesystem_API</a></li>
+	<li id='footnote26'><a href="#ref26">[26]</a> <a href="http://codex.wordpress.org/Version_2.6">http://codex.wordpress.org/Version_2.6</a></li>
+	<li id='footnote27'><a href="#ref27">[27]</a> <a href="https://codex.wordpress.org/HTTP_API">https://codex.wordpress.org/HTTP_API</a></li>
+	<li id='footnote28'><a href="#ref28">[28]</a> <a href="https://codex.wordpress.org/Version_2.7">https://codex.wordpress.org/Version_2.7</a></li>
+	<li id='footnote29'><a href="#ref29">[29]</a> <a href="http://codex.wordpress.org/Function_Reference/current_user_can">http://codex.wordpress.org/Function_Reference/current_user_can</a></li>
+</ul>
+
+</body></html>
