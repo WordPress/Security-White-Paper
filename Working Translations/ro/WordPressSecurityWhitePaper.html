@@ -51,7 +51,7 @@
 
 <p>WordPress are un număr de dezvoltatori contribuitori. Unii dintre ei sunt foști sau actuali comiteri, alții posibil viitori comiteri. Acești dezvoltatori sunt contribuitori veterani, persoane de încredere care și-au câștigat un mare respect printre confrații lor. Pe măsura nevoilor, WordPress a avut și comiteri invitați, persoane ce au primit acces de comit, uneori pe componente specifice, temporar sau pe o perioadă de test.</p>
 
-<p>Dezvoltatorii de bază și contributorii sunt cei care în principal ghidează dezvoltarea WordPress-ului. La fiecare versiune de WordPress contribuie la cod sute de dezvoltatori. Acești contribuitori de bază sunt voluntari care contribuie la baza de cod într-un fel sau altul.</p>
+<p>Dezvoltatorii de bază și contribuitorii sunt cei care în principal ghidează dezvoltarea WordPress-ului. La fiecare versiune de WordPress contribuie la cod sute de dezvoltatori. Acești contribuitori de bază sunt voluntari care contribuie la baza de cod într-un fel sau altul.</p>
 
 <h3>Ciclul de lansare  WordPress</h3>
 
@@ -60,7 +60,7 @@
 <p>Un ciclu de lansare are următoarea structură<sup id="ref2"><a href="#footnote2">2</a></sup>:</p>
 
 <ul>
-	<li>Faza 1: Planificarea și stabilirea conducerii echipei. Asta se face în camera de discuții #core pe Slack. Șeful versiunii discută facilitățile următoarei versiuni de WordPress. Contributorii WordPress se implică în această discuție.  Șeful de versiune va identifica conducătorii de echipe pentru fiecare dintre facilitățile alese.</li>
+	<li>Faza 1: Planificarea și stabilirea conducerii echipei. Asta se face în camera de discuții #core pe Slack. Șeful versiunii discută facilitățile următoarei versiuni de WordPress. Contribuitorii WordPress se implică în această discuție.  Șeful de versiune va identifica conducătorii de echipe pentru fiecare dintre facilitățile alese.</li>
 
 	<li>Faza 2: Începe munca de dezvoltare. Șefii de echipe formează echipele și lucrează la facilitățile ce le-au fost desemnate. Sunt planificate discuții regulate pentru a fi siguri că dezvoltarea merge înainte.</li>
 
@@ -68,7 +68,7 @@
 
 	<li>Faza 4: Candidat pentru lansare. Din acest punct se îngheață șirurile de tradus. Munca este orientată doar spre păstrarea compatibilităților și eliminarea blocajelor.</li>
 
-	<li>Faza 5: Lansare. Versiunea WordPress este lansată și devine disponibilă pentru actualizare în administrarea WordPress.</li>
+	<li>Faza 5: Lansare. Versiunea WordPress este lansată și devine disponibilă pentru actualizare în panoul de control din administrarea WordPress.</li>
 </ul>
 
 <h3>Numerotarea versiunilor și actualizărilor de securitate</h3>
@@ -125,7 +125,7 @@
 
 <h4>A3 - Scripturi inter-situri (XSS)</h4>
 
-<p>WordPress asigură o gamă de funcții ce pot ajuta la punerea în siguranță a datelor furnizate de utilizatori<sup id="ref10"><a href="#footnote10">10</a></sup>. Utilizatorii de încredere, administratorii sau editorii într-o instalare singulară de WordPress, sau doar administratorii de situri în WordPress multi-sit, pot publica HTML sau JavaScript nefiltrat după necesități, cum ar fi în interiorul unui articol sau pagini. Ceilalți utilizatori și elementele de conținut trimis spre publicare sunt implicit filtrate pentru a fi înlăturate entitățile periculoase, folosind biblioteca KSES prin funcția <code>wp_kses</code>.</p>
+<p>WordPress asigură o gamă de funcții ce pot ajuta la punerea în siguranță a datelor furnizate de utilizatori<sup id="ref10"><a href="#footnote10">10</a></sup>. Utilizatorii de încredere, administratorii sau editorii într-o instalare singulară de WordPress, sau doar administratorii de situri în WordPress multi-sit, pot publica HTML sau JavaScript nefiltrat după necesități, cum ar fi în interiorul unui articol sau pagini. Ceilalți utilizatori și elementele de conținut trimise spre publicare sunt implicit filtrate pentru a fi înlăturate entitățile periculoase, folosind biblioteca KSES prin funcția <code>wp_kses</code>.</p>
 
 <p>Ca exemplu, echipa nucleului WordPress a observat că funcția <code>the_search_query()</code> a fost folosită greșit de majoritatea autorilor de teme, care n-au filtrat pentru siguranță (<em>escaping</em>) rezultatul ei pentru a fi folosit în HTML. Într-o foarte rară rupere a compatibilității înapoi, ieșirea funcției a fost schimbată în WordPress 2.3 pentru a fi pre-filtrată pentru securitate (<em>pre-escaped</em>).</p>
 
