@@ -19,34 +19,34 @@
 <p>Il Team di Sicurezza di WordPress, in collaborazione con il Team di WordPress Core Leadership e coadiuvato dalla comunità globale di WordPress, lavora per identificare e risolvere i problemi di sicurezza nel core software disponibile per la distribuzione e l'installazione su WordPress.org, così come consigliare e documentare le migliori pratiche di sicurezza per plugin di terze parti e autori di temi.</p>
 
 <p>Sviluppatori e amministratori di siti dovrebbero prestare particolare attenzione all'uso corretto delle API di core e alla sottostante configurazione del server che sono causa di comuni vulnerabilità, come anche assicurare che tutti gli utenti usino potenti password per accedere a WordPress.</p>
-<h2>An Overview of WordPress</h2>
-<p>WordPress is a free and open source content management system (CMS). It is the most widely-used CMS software in the world and it powers more than 23% of the top 10 million websites<sup id="ref1"><a href="#footnote1">1</a></a></sup>, giving it an estimated 60% market share of all sites using a CMS.</p>
+<h2>Panoramica di WordPress</h2>
+<p>WordPress &egrave; un content management system (CMS)libero e open source. &Egrave; il software CMS pi&ugrave; utilizzato al mondo e fa girare oltre il 23% dei primi 10 milioni di siti web<sup id="ref1"><a href="#footnote1">1</a></a></sup>, assegnandogli una fetta di mercato stimata del 60% di tutti i siti che utilizzano un CMS.</p>
 
-<p>WordPress is licensed under the General Public License (GPLv2 or later) which provides four core freedoms, and can be considered as the WordPress "bill of rights":</p>
+<p>WordPress &grave; licenziato sotto una General Public License (GPLv2 o successiva) che afferma quattro libert&agrave; fondamentali, e che pu&ograve; essere considerata come la "carta dei diritti" di WordPress:</p>
 <ol>
-	<li>The freedom to run the program, for any purpose.</li>
-	<li>The freedom to study how the program works, and change it to make it do what you wish.</li>
-	<li>The freedom to redistribute.</li>
-	<li>The freedom to distribute copies of your modified versions to others.</li>
+	<li>La libert&agrave di utilizzare il programma, per qualsiasi scopo.</li>
+	<li>La libert&agrave di studiare come il programma funziona, e cambiarlo per fargli fare ci&ograve; che vuoi.</li>
+	<li>La libert&agrave di ridistribuirlo.</li>
+	<li>La libert&agrave di distribuire a terzi una copia della tua versione modificata.</li>
 </ol>
-<h3>The WordPress Core Leadership Team</h3>
-<p>The WordPress project is a meritocracy, run by a core leadership team, and led by its co-creator and lead developer, Matt Mullenweg. The team governs all aspects of the project, including core development, WordPress.org, and community initiatives.</p>
+<h3>Il WordPress Core Leadership Team</h3>
+<p>Il progetto WordPress &egrave; una meritocrazia, guidata da un core leadership team, e guidato dal suo co-creatore e sviluppatore capo, Matt Mullenweg. Il team dirige tutti gli aspetti del progetto, incluso lo sviluppo del core, WordPress.org, e le iniziative della community.</p>
 
-<p>The Core Leadership Team consists of Matt Mullenweg, five lead developers, and more than a dozen core developers with permanent commit access. These developers have final authority on technical decisions, and lead architecture discussions and implementation efforts.</p>
+<p>Il Core Leadership Team &egrave; composto da Matt Mullenweg, cinque sviluppatori capo, e pi&ugrave; di una dozzina di sviluppatori del core con accesso di commit permanente. Detti sviluppatori hanno l'ultima parola sulle decisioni tecniche, tracciano le linee guida strutturali e dirigono gli sforzi di implementazione.</p>
 
-<p>WordPress has a number of contributing developers. Some of these are former or current committers, and some are likely future committers. These contributing developers are trusted and veteran contributors to WordPress who have earned a great deal of respect among their peers. As needed, WordPress also has guest committers, individuals who are granted commit access, sometimes for a specific component, on a temporary or trial basis.</p>
+<p>WordPress ha un gran numero di collaboratori allo sviluppo. Alcuni sono o sono stati committer, altri probabilmente lo saranno in futuro. Detti collaboratori sono stimati veterani sviluppatori di WordPress che hanno acquisito grande rispetto agli occhi dei loro pari. Alla bisogna, WordPress pu&ograve; anche avere committer ospiti, individui cui viene fornito l'accesso di commit, a volte per un componente specifico, su base temporale o di prova.</p>
 
-<p>The core and contributing developers primarily guide WordPress development. Every version, hundreds of developers contribute code to WordPress. These core contributors are volunteers who contribute to the core codebase in some way.</p>
-<h3>The WordPress Release Cycle</h3>
-<p>Each WordPress release cycle is led by one or more of the core WordPress developers. A release cycle usually lasts around 4 months from the initial scoping meeting to launch of the version.</p>
+<p>I collaboratori e gli sviluppatori di core guidano in prima persona lo sviluppo di WordPress. In ciascuna versione, centinaia di sviluppatori contribuscono al codice di WordPress. Detti collaboratori del core sono volontari che in vari modi contribuiscono ad arricchire il codice del core.</p>
+<h3>Il Ciclo di Release di WordPress</h3>
+<p>Ogni ciclo di release di WordPress &egrave; guidato da uno o pi&ugrave; sviluppatori del core di WordPress. Un ciclo di release generalmente dura 4 mesi dalla prima riunione programmatica fino al rilascio della versione.</p>
 
-<p>A release cycle follows the following pattern<sup id="ref2"><a href="#footnote2">2</a></sup>:</p>
+<p>Un ciclo di release segue questo schema<sup id="ref2"><a href="#footnote2">2</a></sup>:</p>
 <ul>
-	<li>Phase 1: Planning and securing team leads. This is done in the #core chat room on Slack. The release lead discusses features for the next release of WordPress. WordPress contributors get involved with that discussion. The release lead will identify team leads for each of the features.</li>
-	<li>Phase 2: Development work begins. Team leads assemble teams and work on their assigned features. Regular chats are scheduled to ensure the development keeps moving forward.</li>
-	<li>Phase 3: Beta. Betas are released, and beta-testers are asked to start reporting bugs. No more commits for new enhancements or feature requests are carried out from this phase on. Third-party plugin and theme authors are encouraged to test their code against the upcoming changes.</li>
-	<li>Phase 4: Release Candidate. There is a string freeze for translatable strings from this point on. Work is targeted on regressions and blockers only.</li>
-	<li>Phase 5: Launch. WordPress version is launched and made available in the WordPress Admin for updates.</li>
+	<li>Fase 1: Pianificazione e nomina dei team leader. Ci&ograve; avviene nella chat-room #core su Slack. Il release leader discute le feature da introdurre nella prossima release di WordPress. I collaboratori sono coinvolti nella discussione. Il release leader identifica i team leader per ciascuna feature.</li>
+	<li>Fase 2: Inizia il lavoro di sviluppo. I team leader assemblano i team e lavorano sulla feature loro assegnata. Si organizzano riunioni a cadenza regolare per far s&igrave; che lo sviluppo proceda in modo scorrevole.</li>
+	<li>Fase 3: Beta. Si rilasciano i beta, si richiede ai beta-tester di segnalare eventuali bug. Da qui in poi non si accettano piu commit per nuove funzionalit&agrave; e richieste di feature. Plugin di terze parti e autori di temi sono incoraggiati a testare i loro prodotti nell'ambito delle future modifiche.</li>
+	<li>Fase 4: Candidatura di Release. Da questo momento in poi non si possono pi&ugrave; effettuare traduzioni. Il lavoro si concentra solo su regressions e blockers.</li>
+	<li>Fase 5: Rilascio. La versione di WordPress &egrave; lanciata e resa disponibile nella Admin di WordPress per l'aggiornamento.</li>
 </ul>
 <h3>Version Numbering and Security Releases</h3>
 <p>A major WordPress version is dictated by the first two sequences. For example, 3.5 is a major release, as is 3.6, 3.7, or 4.0. There isn't a "WordPress 3" or "WordPress 4" and each major release is referred to by its numbering, e.g., "WordPress 3.9."</p>
