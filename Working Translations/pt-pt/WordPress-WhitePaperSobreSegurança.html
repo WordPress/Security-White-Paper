@@ -1,35 +1,42 @@
 <html>
-<title>WordPress Security White Paper</title>
+<title>WordPress-White Paper Sobre Segurança</title>
 <body>
 
-<h1>WordPress Security White Paper</h1>
+<h1>WordPress-White Paper Sobre Segurança</h1>
 
 <img src="//s.w.org/about/images/logos/wordpress-logo-stacked-rgb.png" class="aligncenter" />
 
-<h2>Overview</h2>
+<h2>Visão Geral</h2>
 
-<p>This document is an analysis and explanation of the WordPress core software development and its related security processes, as well as an examination of the inherent security built directly into the software. Decision makers evaluating WordPress as a content management system or web application framework should use this document in their analysis and decision-making, and for developers to refer to it to familiarize themselves with the security components and best practices of the software.</p>
+<p>Este documento é uma análise e explicação do desenvolvimento do núcleo do programa do WordPress e dos seus processos de segurança relacionados, assim como um exame da segurança inerente construída diretamente no programa. Os decisores avaliam o WordPress como um sistema de gestão de conteúdo ou como uma framework de aplicação web devem usar este documento nas suas análises e decisões, e para os programadores se referirem a ele para se familiarizarem com os componentes de segurança e as boas práticas do programa.</p>
 
-<p>The information in this document is up-to-date for the latest stable release of the software, WordPress 4.7 at time of publication, but should be considered relevant also to the most recent versions of the software as backwards compatibility is a strong focus for the WordPress development team. Specific security measures and changes will be noted as they have been added to the core software in specific releases. It is strongly encouraged to always be running the latest stable version of WordPress to ensure the most secure experience possible.</p>
-<h2>Executive Summary</h2>
-<p>WordPress is a dynamic open-source content management system which is used to power millions of websites, web applications, and blogs. It currently powers more than 27% of the top 10 million websites on the Internet. WordPress' usability, extensibility, and mature development community make it a popular and secure choice for websites of all sizes.</p>
+<p>A informação neste documento é atualizada para o lançamento estável mais recente do programa, WordPress 4.1 no momento da publicação, mas deve ser considerada relevante também para as versões mais recente do programa como a compatibilidade com versões anteriores é um forte foco para o tempo de desenvolvimento do WordPress. Medidas específicas de segurança e mudanças serão alteradas à medidaque elas forem adicionadas ao núcleo do programa nos lançamentos específicos. É fortemente recomendado para sempre estar a rodar a última versão estável do WordPress para garantir a experiência mais segura possível.
+</p>
+<h2>Sumário Executivo</h2>
+<p>O WordPress é um sistema de gestão de conteúdo dinâmico e de código-fonte aberto, usado para dar força a milhões de sites, aplicações web, e blogs. Cerca de 23% do top 10 dos 10 milhões de websites na internet corre em WordPress. A sua usabilidade, extensibilidade da sua comunidade de desenvolvimento tornam o WordPress uma escolha popular e segura para websites de todos os tamanhos. </p>
+
+<p>Desde XXXXXXX em 2003, o WordPress 
 
 <p>Since its inception in 2003, WordPress has undergone continual hardening so its core software can address and mitigate common security threats, including the Top 10 list identified by The Open Web Application Security Project (OWASP) as common security vulnerabilities, which are discussed in this document.</p>
+
+<p>A Equipa de Segurança de WordPress, em colaboração com a Equipa de Liderança do Core do WordPress, suportados pela comunidade global do WordPress trabalham em conjunto para identificar e resolver erros de segurança no core do software disponível para distribuição e instalação em WordPress.org (PT.WordPress.org em Portugal), 
 
 <p>The WordPress Security Team, in collaboration with the WordPress Core Leadership Team and backed by the WordPress global community, works to identify and resolve security issues in the core software available for distribution and installation at WordPress.org, as well as recommending and documenting security best practices for third-party plugin and theme authors.</p>
 
 <p>Site developers and administrators should pay particular attention to the correct use of core APIs and underlying server configuration which have been the source of common vulnerabilities, as well as ensuring all users employ strong passwords to access WordPress.</p>
-<h2>An Overview of WordPress</h2>
-<p>WordPress is a free and open source content management system (CMS). It is the most widely-used CMS software in the world and it powers more than 27% of the top 10 million websites<sup id="ref1"><a href="#footnote1">1</a></a></sup>, giving it an estimated 58% market share of all sites using a CMS.</p>
+<h2>Uma visão geral sobre o WordPress</h2>
+<p>O WordPress é um sistema de gestão de conteúdo (CMS) gratuito e de código aberto. É 
+
+<p>WordPress a free and open source content management system (CMS). It is the most widely-used CMS software in the world and it powers more than 23% of the top 10 million websites<sup id="ref1"><a href="#footnote1">1</a></a></sup>, giving it an estimated 60% market share of all sites using a CMS.</p>
 
 <p>WordPress is licensed under the General Public License (GPLv2 or later) which provides four core freedoms, and can be considered as the WordPress "bill of rights":</p>
 <ol>
-	<li>The freedom to run the program, for any purpose.</li>
-	<li>The freedom to study how the program works, and change it to make it do what you wish.</li>
-	<li>The freedom to redistribute.</li>
-	<li>The freedom to distribute copies of your modified versions to others.</li>
+	<li>Liberdade para correr o programa, para qualquer propósito.</li>
+	<li>Liberdade para estudar como é que o programa trabalha e modifica-lo para fazer o que pretender.</li>
+	<li>Liberdade para o redistribuir.</li>
+	<li>Liberdade para distribuir cópias ou versões modificadas.</li>
 </ol>
-<h3>The WordPress Core Leadership Team</h3>
+<h3>Equipa de Liderança do Core do WordPress</h3>
 <p>The WordPress project is a meritocracy, run by a core leadership team, and led by its co-creator and lead developer, Matt Mullenweg. The team governs all aspects of the project, including core development, WordPress.org, and community initiatives.</p>
 
 <p>The Core Leadership Team consists of Matt Mullenweg, five lead developers, and more than a dozen core developers with permanent commit access. These developers have final authority on technical decisions, and lead architecture discussions and implementation efforts.</p>
@@ -42,11 +49,11 @@
 
 <p>A release cycle follows the following pattern<sup id="ref2"><a href="#footnote2">2</a></sup>:</p>
 <ul>
-	<li>Phase 1: Planning and securing team leads. This is done in the #core chat room on Slack. The release lead discusses features for the next release of WordPress. WordPress contributors get involved with that discussion. The release lead will identify team leads for each of the features.</li>
-	<li>Phase 2: Development work begins. Team leads assemble teams and work on their assigned features. Regular chats are scheduled to ensure the development keeps moving forward.</li>
-	<li>Phase 3: Beta. Betas are released, and beta-testers are asked to start reporting bugs. No more commits for new enhancements or feature requests are carried out from this phase on. Third-party plugin and theme authors are encouraged to test their code against the upcoming changes.</li>
-	<li>Phase 4: Release Candidate. There is a string freeze for translatable strings from this point on. Work is targeted on regressions and blockers only.</li>
-	<li>Phase 5: Launch. WordPress version is launched and made available in the WordPress Admin for updates.</li>
+	<li>Fase 1: Planning and securing team leads. This is done in the #core chat room on Slack. The release lead discusses features for the next release of WordPress. WordPress contributors get involved with that discussion. The release lead will identify team leads for each of the features.</li>
+	<li>Fase 2: Development work begins. Team leads assemble teams and work on their assigned features. Regular chats are scheduled to ensure the development keeps moving forward.</li>
+	<li>Fase 3: Beta. Betas are released, and beta-testers are asked to start reporting bugs. No more commits for new enhancements or feature requests are carried out from this phase on. Third-party plugin and theme authors are encouraged to test their code against the upcoming changes.</li>
+	<li>Fase 4: Release Candidate. There is a string freeze for translatable strings from this point on. Work is targeted on regressions and blockers only.</li>
+	<li>Fase 5: Launch. WordPress version is launched and made available in the WordPress Admin for updates.</li>
 </ul>
 <h3>Version Numbering and Security Releases</h3>
 <p>A major WordPress version is dictated by the first two sequences. For example, 3.5 is a major release, as is 3.6, 3.7, or 4.0. There isn't a "WordPress 3" or "WordPress 4" and each major release is referred to by its numbering, e.g., "WordPress 3.9."</p>
@@ -59,11 +66,11 @@
 <p>The WordPress project has a strong commitment to backwards compatibility. This commitment means that themes, plugins, and custom code continues to function when WordPress core software is updated, encouraging site owners to keep their WordPress version updated to the latest secure release.</p>
 <h2>WordPress and Security</h2>
 <h3>The WordPress Security Team</h3>
-<p>The WordPress Security Team is made up of approximately 50 experts including lead developers and security researchers &mdash; about half are employees of Automattic (makers of WordPress.com, the earliest and largest WordPress hosting platform on the web), and a number work in the web security field. The team consults with well-known and trusted security researchers and hosting companies<sup><a href="#footnote3">3</a></sup>.</p>
+<p>The WordPress Security Team is made up of approximately 25 experts including lead developers and security researchers &mdash; about half are employees of Automattic (makers of WordPress.com, the earliest and largest WordPress hosting platform on the web), and a number work in the web security field. The team consults with well-known and trusted security researchers and hosting companies<sup><a href="#footnote3">3</a></sup>.</p>
 
 <p>The WordPress Security Team often collaborates with other security teams to address issues in common dependencies, such as resolving the vulnerability in the PHP XML parser, used by the XML-RPC API that ships with WordPress, in WordPress 3.9.2<sup id="ref4"><a href="#footnote4">4</a></sup>. This vulnerability resolution was a result of a joint effort by both WordPress and Drupal security teams.</p>
 <h3>WordPress Security Risks, Process, and History</h3>
-<p>The WordPress Security Team believes in Responsible Disclosure by alerting the security team immediately of any potential vulnerabilities. Potential security vulnerabilities can be signaled to the Security Team via the <a href="https://hackerone.com/wordpress">WordPress HackerOne</a><sup id="ref5"><a href="#footnote5">5</a></sup>. The Security Team communicates amongst itself via a private Slack channel, and works on a walled-off, private Trac for tracking, testing, and fixing bugs and security problems.</p>
+<p>The WordPress Security Team believes in Responsible Disclosure by alerting the security team immediately of any potential vulnerabilities. Potential security vulnerabilities can be signaled to the Security Team directly via the email address: security@wordpress.org<sup id="ref5"><a href="#footnote5">5</a></sup>. The Security Team communicates amongst itself via a private email list, and works on a walled-off, private Trac for tracking, testing, and fixing bugs and security problems.</p>
 
 <p>Each security report is acknowledged upon receipt, and the team works to verify the vulnerability and determine its severity. If confirmed, the security team then plans for a patch to fix the problem which can be committed to an upcoming release of the WordPress software or it can be pushed as an immediate security release, depending on the severity of the issue.</p>
 
@@ -85,7 +92,7 @@
 <h4>A2 - Broken Authentication and Session Management</h4>
 <p>WordPress core software manages user accounts and authentication and details such as the user ID, name, and password are managed on the server-side, as well as the authentication cookies. Passwords are protected in the database using standard salting and stretching techniques. Existing sessions are destroyed upon logout for versions of WordPress after 4.0.</p>
 <h4>A3 - Cross Site Scripting (XSS)</h4>
-<p>WordPress provides a range of functions which can help ensure that user-supplied data is safe<sup id="ref10"><a href="#footnote10">10</a></sup>. Trusted users, that is administrators and editors on a single WordPress installation, and network administrators only in WordPress Multisite, can post unfiltered HTML or JavaScript as they need to, such as inside a post or page. Untrusted users and user-submitted content is filtered by default to remove dangerous entities, using the KSES library through the <code>wp_kses</code> function.</p>
+<p>WordPress provides a range of functions which can help ensure that user-supplied data is safe<sup id="ref10"><a href="#footnote10">10</a></sup>. Trusted users, that is administrators and editors on a single WordPress installation, and site administrators only in WordPress Multisite, can post unfiltered HTML or JavaScript as they need to, such as inside a post or page. Untrusted users and user-submitted content is filtered by default to remove dangerous entities, using the KSES library through the <code>wp_kses</code> function.</p>
 
 <p>As an example, the WordPress core team noticed before the release of WordPress 2.3 that the function <code>the_search_query()</code> was being misused by most theme authors, who were not escaping the function's output for use in HTML. In a very rare case of slightly breaking backward compatibility, the function's output was changed in WordPress 2.3 to be pre-escaped.</p>
 <h4>A4 - Insecure Direct Object Reference</h4>
@@ -101,7 +108,7 @@
 <h4>A9 - Using Components with Known Vulnerabilities</h4>
 <p>The WordPress core team closely monitors the few included libraries and frameworks WordPress integrates with for core functionality. In the past the core team has made contributions to several third-party components to make them more secure, such as the update to fix a cross-site vulnerability in TinyMCE in WordPress 3.5.2<sup id="ref14"><a href="#footnote14">14</a></sup>.</p>
 
-<p>If necessary, the core team may decide to fork or replace critical external components, such as when the SWFUpload library was officially replaced by the Plupload library in 3.5.2, and a secure fork of SWFUpload was made available by the security team<sup id="ref15"><a href="#footnote15">15</a></sup> for those plugins who continued to use SWFUpload in the short-term.</p>
+<p>If necessary, the core team may decide to fork or replace critical external components, such as when the SWFUpload library was officially replaced by the Plupload in 3.5.2, and a secure fork of SWFUpload was made available by the security team<sup id="ref15"><a href="#footnote15">15</a></sup> for those plugins who continued to use SWFUpload in the short-term.</p>
 <h4>A10 - Unvalidated Redirects and Forwards</h4>
 <p>WordPress' internal access control and authentication system will protect against attempts to direct users to unwanted destinations or automatic redirects. This functionality is also made available to plugin developers via an API, <code>wp_safe_redirect()</code><sup id="ref16"><a href="#footnote16">16</a></sup>.</p>
 <h3>Further Security Risks and Concerns</h3>
@@ -115,9 +122,9 @@
 
 <p>The default theme can serve as a starting point for custom theme development, and site developers can create a child theme which includes some customization but falls back on the default theme for most functionality and security. The default theme can be easily removed by an administrator if not needed.</p>
 
-<h3>WordPress.org Theme and Plugin Repositories</h3>
+<h3>Repositório de Plugins e Temas do WordPress.org</h3>
 
-<p>There are approximately 50,000+ plugins and 4,500+ themes listed on the WordPress.org site. These themes and plugins are submitted for inclusion and are manually reviewed by volunteers before making them available on the repository.</p>
+<p>There are approximately 30,000+ plugins and 2,000+ themes listed on the WordPress.org site. These themes and plugins are submitted for inclusion and are manually reviewed by volunteers before making them available on the repository.</p>
 
 <p>Inclusion of plugins and themes in the repository is not a guarantee that they are free from security vulnerabilities. Guidelines are provided for plugin authors to consult prior to submission for inclusion in the repository<sup id="ref17"><a href="#footnote17">17</a></sup>, and extensive documentation about how to do WordPress theme development<sup id="ref18"><a href="#footnote18">18</a></sup> is provided on the WordPress.org site.</p>
 
@@ -136,7 +143,7 @@
 
 <p>While each WordPress API provides best practices and standardized ways to interact with and extend WordPress core software, the following WordPress APIs are the most pertinent to enforcing and hardening WordPress security:</p>
 
-<h3>Database API</h3>
+<h3>API da Base de Dados</h3>
 
 <p>The Database API<sup id="ref24"><a href="#footnote24">24</a></sup>, added in WordPress 0.71, provides the correct method for accessing data as named values which are stored in the database layer.</p>
 
@@ -148,35 +155,37 @@
 
 <h3>HTTP API</h3>
 
-<p>The HTTP API<sup id="ref27"><a href="#footnote27">27</a></sup>, added in WordPress 2.7<sup id="ref28"><a href="#footnote28">28</a></sup> and extended further in WordPress 2.8, standardizes the HTTP requests for WordPress. The API handles cookies, gzip encoding and decoding, chunk decoding (if HTTP 1.1), and various other HTTP protocol implementations. The API standardizes requests, tests each method prior to sending, and, based on your server configuration, uses the appropriate method to make the request.</p>
+<p>A HTTP API<sup id="ref27"><a href="#footnote27">27</a></sup>, added in WordPress 2.7<sup id="ref28"><a href="#footnote28">28</a></sup> and extended further in WordPress 2.8, standardizes the HTTP requests for WordPress. The API handles cookies, gzip encoding and decoding, chunk decoding (if HTTP 1.1), and various other HTTP protocol implementations. The API standardizes requests, tests each method prior to sending, and, based on your server configuration, uses the appropriate method to make the request.</p>
 
-<h3>Permissions and current user API</h3>
+<h3>Permissões e API de utilizadores (current user)</h3>
 
 <p>The permissions and current user API<sup id="ref29"><a href="#footnote29">29</a></sup> is a set of functions which will help verify the current user's permissions and authority to perform any task or operation being requested, and can protect further against unauthorized users accessing or performing functions beyond their permitted capabilities.</p>
-<h3>White paper content License</h3>
+<h3>Licença sobre o conteúdo do White Paper</h3>
 <p>The text in this document (not including the WordPress logo or <a href="http://wordpressfoundation.org/trademark-policy/">trademark</a>) is licensed under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 Universal (CC0 1.0) Public Domain Dedication</a>. You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission.</p>
 
-<p><em>A special thank you to Drupal's </em><a href="http://drupalsecurityreport.org/"><em>security white paper</em></a><em>, which provided some inspiration. </em></p>
+<p><em>Um agradecimento especial para o </em><a href="http://drupalsecurityreport.org/"><em>White Paper de Segurança</em></a><em> do Drupal, que deu alguma inspiração. </em></p>
 <h3>Additional Reading</h3>
 <ul>
-	<li>WordPress News <a href="https://wordpress.org/news/">https://wordpress.org/news/</a></li>
+	<li>Notícias do WordPress<a href="https://wordpress.org/news/">https://wordpress.org/news/</a></li>
 	<li>WordPress Security releases <a href="https://wordpress.org/news/category/security/">https://wordpress.org/news/category/security/</a></li>
-	<li>WordPress Developer Resources <a href="https://developer.wordpress.org/">https://developer.wordpress.org/</a></li>
+	<li>Recursos do WordPress Developer<a href="https://developer.wordpress.org/">https://developer.wordpress.org/</a></li>
 </ul>
 
 <hr />
 
-<p><em>Authored by </em>Sara Rosso </p>
+<p><em>Autor: </em>Sara Rosso </p>
 
-<p><em>Contributions from</em> Barry Abrahamson, Michael Adams, Jon Cave, Helen Hou-Sand&iacute;, Dion Hulse, Mo Jangda, Paul Maiorana</p>
+<p><em>Contribuições de</em> Barry Abrahamson, Michael Adams, Jon Cave, Helen Hou-Sand&iacute; , Dion Hulse, Mo Jangda, Paul Maiorana</p>
 
-<p><em>Version 1.0 March 2015</em></p>
+<p><em>Traduzido a partir da versão inglesa por</em>Rogério Moreira</p>
+
+<p><em>Versão 1.0 (Março de 2015)</em></p>
 
 <hr />
 
 <h3>Footnotes</h3>
 <ul>
-	<li id='footnote1'><a href="#ref1">[1]</a> <a href="http://w3techs.com/">http://w3techs.com/</a>, as of March 2017</li>
+	<li id='footnote1'><a href="#ref1">[1]</a> <a href="http://w3techs.com/">http://w3techs.com/</a>, as of March 2015</li>
 	<li id='footnote2'><a href="#ref2">[2]</a> <a href="https://make.wordpress.org/core/handbook/how-the-release-cycle-works/">https://make.wordpress.org/core/handbook/how-the-release-cycle-works/</a></li>
 	<li id='footnote3'><a href="#ref3">[3]</a> Andrew Nacin, WordPress lead developer, <a href="http://vip.wordpress.com/security">http://vip.wordpress.com/security</a></li>
 	<li id='footnote4'><a href="#ref4">[4]</a> <a href="https://wordpress.org/news/2014/08/wordpress-3-9-2/">https://wordpress.org/news/2014/08/wordpress-3-9-2/</a></li>
