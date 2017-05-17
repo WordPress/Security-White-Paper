@@ -20,33 +20,33 @@
 
 <p>Los desarrolladores de sitios web y los administradores deberían prestar especial atención al uso correcto de las APIs del núcleo y a la configuración del servidor ya que han sido la fuente de vulnerabilidades más frecuentes, y también deberían asegurarse que todos los usuarios emplean claves seguras para acceder a WordPress.</p>
 <h2>Una visión general de WordPress</h2>
-<p>WordPress es un sistema de gestión de contenidos (CMS) de fuentes abiertas y gratuito. Es el CMS más extensamente usado en el mundo y funciona en más del 23% de los 10 millones de sitios web más vistos<sup id="ref1"><a href="#footnote1">1</a></a></sup>, ofreciendo una cuota de mercado estimada del 60% de todos los sitios que usan un CMS.</p>
+<p>WordPress es un sistema de gestión de contenidos (CMS) gratuito y de código libre. Es el CMS más usado del mundo y funciona en más del 27% de los 10 millones de sitios web más vistos<sup id="ref1"><a href="#footnote1">1</a></a></sup>, ofreciendo una cuota de mercado estimada del 58% de todos los sitios que usan un CMS.</p>
 
 <p>WordPress está bajo la Licencia Publica General (GPLv2 o posterior) que proporciona 4 libertades fundamentales, y que puede considerarse como la "carta de derechos" de WordPress</p>
 <ol>
 	<li>La libertad de ejecutar el programa, para cualquier propósito.</li>
-	<li>El acceso al código fuente, libertad de estudiar cómo funciona el programa, y la libertad de cambiarlo para que haga lo que deseas.</li>
+	<li>ELa libertad de estudiar cómo funciona el programa, y la libertad de modificarlo para que haga lo que deseas.</li>
 	<li>La libertad de redistribuirlo.</li>
-	<li>La libertad de distribuir copias de tus versiones modificadas a otros. Si lo haces, das la oportunidad de beneficiarse de tus cambios a toda la comunidad.</li>
+	<li>La libertad de distribuir copias de tus versiones modificadas a otros.</li>
 </ol>
 <h3>El equipo líder del núcleo de WordPress</h3>
-<p>El proyecto WordPress es una meritocracia, dirigido por un equipo líder central, y conducido por su co-creador y desarrollador principal, Matt Mullenweg. El equipo gobierna todos los aspectos del proyecto, incluyendo el desarrollo del núcleo, WordPress.org, y las iniciativas de la comunidad.</p>
+<p>El proyecto WordPress es una meritocracia, gestionado por un equipo central, y liderado por su co-creador y desarrollador principal, Matt Mullenweg. El equipo gobierna todos los aspectos del proyecto, incluyendo el desarrollo del núcleo, WordPress.org, y las iniciativas de la comunidad.</p>
 
-<p>El equipo que lidera el núcleo está formado por Matt Mullenweg, 5 desarrolladores principales, y más de una docena de desarrolladores del core con acceso permanente a incluir código. Estos desarrolladores tienen autoridad final en decisiones técnicas, y conducen las discusiones técnicas y los esfuerzos de implementación.</p>
+<p>El equipo que lidera el núcleo está formado por Matt Mullenweg, 5 desarrolladores principales, y más de una docena de desarrolladores del core con acceso permanente a incluir código. Estos desarrolladores tienen autoridad final en decisiones técnicas, y lideran las discusiones técnicas y los esfuerzos de implementación.</p>
 
 <p>WordPress tiene un número de desarrolladores contribuyendo. Algunos de estos son antiguos o actuales commiters, y algunos son probablemente futuros commiters. Estos desarrolladores que contribuyen son contribuidores veteranos y de confianza de WordPress que se han ganado un gran respeto entre sus homólogos. Según necesidades, WordPress tiene committers invitados, que son individuos a los que se concede acceso para commit, en algunas ocasiones para componentes específicos o con criterios temporales o de prueba.</p>
 
-<p>Los desarrolladores del núcleo y los contribuidores guían principalmente el desarrollo. En cada versión, cientos de desarrolladores contribuyen al código de WordPress. Estos contribuidores del core son voluntarios que contribuyen al código fuente base de alguna manera.</p>
-<h3>El ciclo de liberación de versión de WordPress</h3>
-<p>Cada ciclo de liberación de WordPress es conducido por uno o más desarrolladores del core de WordPress. Un ciclo de liberación generalmente dura unos 4 meses desde la reunión inicial hasta el lanzamiento de la versión.</p>
+<p>Los desarrolladores del núcleo y los contribuidores guían principalmente el desarrollo. En cada versión, cientos de desarrolladores contribuyen al código de WordPress. Estos contribuidores de código son voluntarios que contribuyen al código fuente base de alguna manera.</p>
+<h3>El ciclo de lanzamiento de una nueva versión de WordPress</h3>
+<p>Cada ciclo de lanzamiento de WordPress es dirigido por uno o más desarrolladores del núcleo de WordPress. Un ciclo de lanzamiento generalmente dura unos 4 meses desde la reunión inicial hasta el lanzamiento de la versión.</p>
 
-<p>Un ciclo de liberación sigue el siguiente patrón<sup id="ref2"><a href="#footnote2">2</a></sup>:</p>
+<p>Cada ciclo de lanzamiento sigue el siguiente patrón<sup id="ref2"><a href="#footnote2">2</a></sup>:</p>
 <ul>
 	<li>Fase 1: Planificación y confirmación de los líderes de equipo. Esto se hace en la sala de chat #core en Slack. El desarrollador principal de la versión discute las características que se incluirán en la siguiente versión de WordPress. Los contribuidores de WordPress se implican y forman parte de la mencionada discusión. El desarrollador principal asignará líderes de equipo para cada una de las características.</li>
 	<li>Fase 2: Inicio del desarrollo. Los lideres de equipo montan equipos y trabajan en sus funciones o características asignadas. Se programan chats periodicos para asegurarse que el desarrollo sigue progresando.</li>
-	<li>Fase 3: Beta. Se liberan las Betas, y los a los beta-testers se les pide que empiecen a informar de fallos. No se realizan más commits para nuevas mejoras, y no se toman en cuenta solicitudes de funcionalidades a partir de esta fase. Se avisa a los autores de plugins y temas externos para que se aseguren de que su código funciona con la nueva versión.</li>
-	<li>Fase 4: Release Candidate. Se congelan las cadenas traducibles a partir de este punto (es decir, no habrá cadenas nuevas). El trabajo se centra en regresiones e incidencias críticas únicamente.</li>
-	<li>Fase 5: Lanzamiento. Se lanza la versión de WordPress y se hace disponible en el escritorio de WordPress para actualizaciones.</li>
+	<li>Fase 3: Beta. Se liberan las Betas, y a los beta-testers se les pide que empiecen a informar de fallos. No se permite introducir más cambios para nuevas mejoras o petición de nuevas funcionalidades a partir de esta fase. Se avisa a los autores de plugins y temas externos para que se aseguren de que su código funciona con la nueva versión.</li>
+	<li>Fase 4: Versión candidata a definitiva. Se congelan las cadenas traducibles a partir de este punto (es decir, no habrá cadenas nuevas). El trabajo se centra en regresiones e incidencias críticas únicamente.</li>
+	<li>Fase 5: Lanzamiento. Se lanza la versión de WordPress y se permite su actualización desde el panel de administración de WordPress.</li>
 </ul>
 <h3>Numeración de versiones y distribuciones de seguridad</h3>
 <p>Una versión principal de WordPress se identifica por las 2 primeras secuencias. Por ejemplo, 3.5 es una versión principal, al igual que 3.6, 3.7, o 4.0. No hay un "WordPress 3" o "WordPress 4" y cada distribución o versión principal es referida por su numeración, i.e., "WordPress 3.9."</p>
