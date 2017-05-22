@@ -1,8 +1,8 @@
 <html>
-<title>Libro Blanco de Seguridad de WordPress</title>
+<title>Libro blanco de seguridad de WordPress</title>
 <body>
 
-<h1>Libro Blanco de Seguridad de WordPress</h1>
+<h1>Libro blanco de seguridad de WordPress</h1>
 
 <img src="//s.w.org/about/images/logos/wordpress-logo-stacked-rgb.png" class="aligncenter" />
 
@@ -11,7 +11,7 @@
 <p>Este documento es un análisis y explicación del desarrollo de software del núcleo de WordPress y sus procesos de seguridad relacionados, al igual que un examen de la seguridad  inherente  construida directamente en el software. Las personas que toman decisión y que evaluan WordPress como un sistema de gestión de contenidos o como un marco de aplicaciones web deberían usar este documento en su análisis y toma de decisión, y para los desarrolladores deberían referirse al mismo para familiarizarse con los componentes de seguridad y las mejores prácticas de software.</p>
 
 <p>La información de este documento está actualizada para la última versión estable del software, WordPress 4.7 en el momento de su publicación, pero debería  ser considerado relevante también para las versiones más recientes del software, ya que la compatibilidad con versiones anteriores es una prioridad en el equipo de desarrollo de WordPress. Medidas de seguridad específicas y otros cambios se anotarán a medida que se añadan al núcleo del software en versiones específicas. Se recomienda encarecidamente que siempre se ejecute la última versión estable de WordPress para asegurarse de tener la experiencia más segura posible.</p>
-<h2>Sumario Ejecutivo</h2>
+<h2>Sumario ejecutivo</h2>
 <p>WordPress es un sistema de gestión de contenidos dinámico de fuentes abiertas que se usa para hacer funcionar millones de sitios web, aplicaciones web y blogs. En la actualidad es usado por más del 27% de los 10 millones de sitios web más importantes en Internet. La usabilidady extensibilidad de WordPress y la madurez de la comunidad de desarrollo hace que sea una elección popular y segura para sitios web de todos los tamaños.</p>
 
 <p>Desde su concepción en 2003, WordPress ha sufrido continuos cambios para hacerlo más robusto, de manera que su núcleo pueda gestionar y mitigar las amenazas de seguridad más comunes, incluyendo las 10 vulnerabilidades de seguridad más frecuentes identificadas por El Proyecto de Seguridad para Aplicaciones Web Abiertas (OWASP), las cuales se discuten en el presente documento.</p>
@@ -57,29 +57,29 @@
 
 <h3>Compatibilidad con versiones precedentes</h3>
 <p>El proyecto WordPress mantiene un fuerte compromiso con la compatibilidad con versiones precedentes. Este compromiso significa que los temas, plugins y el código personalizado continúa funcionando cuando el núcleo de WordPress se actualiza, animando a los propietarios de los sitios web a mantener sus WordPress actualizados a la última versión segura.</p>
-<h2>WordPress y la Seguridad</h2>
+<h2>WordPress y la seguridad</h2>
 <h3>El equipo de seguridad de WordPress</h3>
-<p>El equipo de seguridad de WordPress está formado por aproximadamente 25 expertos, incluyendo a desarrolladores principales e investigadores de seguridad — aproximadamente la mitad son empleados de Automattic (los creadores de WordPress.com, la plataforma más antigua y grande de alojamiento de WordPress en la web), mientras que otros trabajan en el campo de la seguridad web. El equipo consulta con investigadores en seguridad bien conocidos y de confianza, y con empresas de alojamiento web.<sup><a href="#footnote3">3</a></sup>.</p>
+<p>El equipo de seguridad de WordPress está formado por aproximadamente 50 expertos, incluyendo a desarrolladores principales e investigadores de seguridad — aproximadamente la mitad son empleados de Automattic (los creadores de WordPress.com, la plataforma más antigua y grande de alojamiento de WordPress en la web), mientras que otros trabajan en el campo de la seguridad web. El equipo consulta con investigadores en seguridad bien conocidos y de confianza, y con empresas de alojamiento web.<sup><a href="#footnote3">3</a></sup>.</p>
 
 <p>El equipo de seguridad de WordPress a menudo colabora con otros equipos de seguridad para abordar incidencias en dependencias comunes, tales como resolver la vulnerabilidad en el intérprete de PHP XML, usado por la API de XML-RPC que se incluye con WordPress, en WordPress 3.9.2<sup id="ref4"><a href="#footnote4">4</a></sup>. Esta resolución de la vulnerabilidad fue el resultado de un esfuerzo conjunto entre los equipos de seguridad de WordPress y Drupal.</p>
-<h3>Riesgos de seguridad en WordPress, Proceso e Historia</h3>
-<p>El equipo de seguridad de WordPress cree en la revelación responsable de información, alertando al equipo de seguridad de manera inmediata ante cualquier vulnerabilidad potencial. Las vulnerabilidades de seguridad potenciales se pueden indicar al equipo de seguridad directamente a través de la dirección de email: security@wordpress.org<sup id="ref5"><a href="#footnote5">5</a></sup>. El equipo de seguridad se comunica entre sí a través de una lista privada de correo, y trabaja en un entorno seguro y privado con Trac para seguimiento de incidencias, pruebas, y arreglos de fallos y problemas de seguridad.</p>
+<h3>Riesgos de seguridad en WordPress, proceso e historia</h3>
+<p>El equipo de seguridad de WordPress cree en la revelación responsable de información, alertando al equipo de seguridad de manera inmediata ante cualquier vulnerabilidad potencial. Las vulnerabilidades de seguridad potenciales se pueden indicar al equipo de seguridad directamente a través de <a href="https://hackerone.com/wordpress">WordPress HackerOne</a><sup id="ref5"><a href="#footnote5">5</a></sup>. El equipo de seguridad se comunica entre sí a través de una canal privado de Slack, y trabaja en un entorno seguro y privado con Trac para seguimiento de incidencias, pruebas y arreglos de fallos y problemas de seguridad.</p>
 
 <p>Cada informe de seguridad es reconocido tras su recepción, y el equipo trabaja para verificar la vulnerabilidad y determinar su grado de severidad. Si se confirma, el equipo de seguridad planifica el parche para solventar el problema, que puede ser confirmado para la siguiente versión del software de WordPress, o que puede ser subido de inmediato como una distribución de seguridad, dependiendo de la severidad de la incidencia.</p>
 
-<p>Para una distribución inmediata de seguridad, se publica un aviso por parte del equipo de seguridad en el sitio de noticias de WordPress.org<sup id="ref6"><a href="#footnote6">6</a></sup>anunciando la distribución y detallando los cambios. Se da crédito al responsable del aviso para animar y reforzar a que se informe de forma responsable sobre futuras vulnerabilidades.</p>
+<p>Para una distribución inmediata de seguridad, se publica un aviso por parte del equipo de seguridad en el sitio de noticias de WordPress.org<sup id="ref6"><a href="#footnote6">6</a></sup>anunciando el lanzamiento y detallando los cambios. Se da crédito al responsable del aviso para animar y reforzar a que se informe de forma responsable sobre futuras vulnerabilidades.</p>
 
 <p>Los Administradores de WordPress ven una notificación en el escritorio de su sitio web para actualizar cuando hay una nueva versión disponible y, siguiendo el manual de actualización, los usuarios son redirigidos a la pantalla de Acerca de WordPress que detalla los cambios. Si los administradores tienen habilitadas las actualizaciones automáticas en segundo plano, recibirán un email después de que la actualización se haya completado.</p>
-<h3>Actualizaciones automáticas en segundo plano para versiones de seguridad</h3>
+<h3>Actualizaciones de seguridad automáticas en segundo plano</h3>
 <p>Desde la versión 3.7, WordPress introdujo actualizaciones automáticas en segundo plano para todas las versiones menores<sup id="ref7"><a href="#footnote7">7</a></sup>, tales como la 3.7.1 y 3.7.2. El equipo de seguridad de WordPress puede identificar, arreglar, y promover mejoras de seguridad automáticas para WordPress sin que el propietario del sitio necesite hacer nada por su parte, y la actualización de seguridad se instalará automáticamente.</p>
 
-<p>Cuando una actualización de seguridad se propone para la versión estable vigente de WordPress, el equipo principal realizará también dicha actualización de seguridad para todas las versiones que sean capaces de recibir actualizaciones en segundo plano (desde WordPress 3.7), de manera que versiones  más antiguas pero recientes de WordPress reciban estas mejoras de seguridad.</p>
+<p>Cuando una actualización de seguridad se propone para la versión estable vigente de WordPress, el equipo principal realizará también dicha actualización de seguridad para todas las versiones que sean capaces de recibir actualizaciones en segundo plano (desde WordPress 3.7), de manera que estas versiones más antiguas pero recientes de WordPress recibirán también estas mejoras de seguridad.</p>
 
-<p>Los propietarios de sitios web pueden optar por desactivar las actualizaciones automáticas en segundo plano a través de un simple cambio de su fichero de configuración, pero se recomienda mantener esta funcionalidad por parte del equipo principal, al igual que ejecutar la versión estable más reciente de WordPress.</p>
+<p>Los propietarios de sitios web pueden optar por desactivar las actualizaciones automáticas en segundo plano a través de un simple cambio en su fichero de configuración, pero el equipo principal recomienda mantener esta funcionalidad activa, al igual que siempre utilizar la última versión estable de WordPress.</p>
 <h3>El Top 10 de OWASP 2013</h3>
-<p>El Proyecto Abierto de Seguridad de Aplicaciones Web (OWASP) es una comunidad online dedicada a la seguridad de aplicaciones web. La lista de los 10 principales de OWASP<sup id="ref8"><a href="#footnote8">8</a></sup> se centra en la identificación de los riesgos de seguridad más importantes en aplicaciones para una amplia gama de organizaciones. Los 10 elementos más importantes son seleccionados y priorizados en combinación con la estimación consensuada sobre explotabilidad, detectabilidad e impacto.</p>
+<p>El Proyecto Abierto de Seguridad de Aplicaciones Web (OWASP) es una comunidad online dedicada a la seguridad de aplicaciones web. La lista de los 10 principales realizada por OWASP<sup id="ref8"><a href="#footnote8">8</a></sup> se centra en la identificación de los riesgos de seguridad más importantes en aplicaciones para una amplia gama de organizaciones. Los 10 elementos más importantes son seleccionados y priorizados en combinación con una estimación consensuada sobre explotabilidad, detectabilidad e impacto.</p>
 
-<p>Las siguientes secciones discuten las APIs, recursos, y políticas que usa WordPress para endurecer el núcleo de software y los plugins y temas de terceras partes contra estos riesgos potenciales.</p>
+<p>Las siguientes secciones explican las APIs, recursos, y políticas que usa WordPress para fortalecer el núcleo de software y los plugins y temas de terceras partes contra estos riesgos potenciales.</p>
 <h4>A1 - Inyección</h4>
 <p>Hay un conjunto de funciones y APIs disponibles en WordPress para ayudar a los desarrolladores a asegurar sus sitios contra inyección de código no autorizado, y ayudarles a validar y sanitizar los datos. Las mejores prácticas y documentación sobre como usar estás APIs para proteger, validar o sanitizar la entrada y salida de datos en HTML, URLs, cabeceras HTTP, y cuando se interacciona con la base de datos o el sistema de ficheros están disponibles<sup id="ref9"><a href="#footnote9">9</a></sup>. Los Administradores pueden además restringir los tipos de fichero que se pueden subir a su sitio web mediante filtros.</p>
 <h4>A2 - Rotura de autenticación y gestión de sesiones.</h4>
