@@ -71,7 +71,7 @@
 
 <p>Administrators of the WordPress software see a notification on their site dashboard to upgrade when a new release is available, and following the manual upgrade users are redirected to the About WordPress screen which details the changes. If administrators have automatic background updates enabled, they will receive an email after an upgrade has been completed.</p>
 <h3>Automatic Background Updates for Security Releases</h3>
-<p>Starting with version 3.7, WordPress introduced automated background updates for all minor releases<sup id="ref7"><a href="#footnote7">7</a></sup>, such as 3.7.1 and 3.7.2. The WordPress Security Team can identify, fix, and push out automated security enhancements for WordPress without the site owner needing to do anything on their end, and the security update will install automatically.</p>
+<p>WordPress benefits from automated background updates for all minor releases<sup id="ref7"><a href="#footnote7">7</a></sup>, such as 3.7.1 and 3.7.2. The WordPress Security Team can identify, fix, and push out automated security enhancements for WordPress without the site owner needing to do anything on their end, and the security update will install automatically.</p>
 
 <p>When a security update is pushed for the current stable release of WordPress, the core team will also push security updates for all the releases that are capable of background updates (since WordPress 3.7), so these older but still recent versions of WordPress will receive security enhancements.</p>
 
@@ -87,13 +87,13 @@
 <h4>A3 - Cross Site Scripting (XSS)</h4>
 <p>WordPress provides a range of functions which can help ensure that user-supplied data is safe<sup id="ref10"><a href="#footnote10">10</a></sup>. Trusted users, that is administrators and editors on a single WordPress installation, and network administrators only in WordPress Multisite, can post unfiltered HTML or JavaScript as they need to, such as inside a post or page. Untrusted users and user-submitted content is filtered by default to remove dangerous entities, using the KSES library through the <code>wp_kses</code> function.</p>
 
-<p>As an example, the WordPress core team noticed before the release of WordPress 2.3 that the function <code>the_search_query()</code> was being misused by most theme authors, who were not escaping the function's output for use in HTML. In a very rare case of slightly breaking backward compatibility, the function's output was changed in WordPress 2.3 to be pre-escaped.</p>
+<p>Proactive measures are also sometimes taken to harden the software to protect against misuse. For example, the function <code>the_search_query()</code> is often misused by theme authors who do not escape the function's output for use in HTML. The function's output was proactively changed in WordPress 2.3 to be pre-escaped for security.</p>
 <h4>A4 - Insecure Direct Object Reference</h4>
 <p>WordPress often provides direct object reference, such as unique numeric identifiers of user accounts or content available in the URL or form fields. While these identifiers disclose direct system information, WordPress' rich permissions and access control system prevent unauthorized requests.</p>
 <h4>A5 - Security Misconfiguration</h4>
 <p>The majority of the WordPress security configuration operations are limited to a single authorized administrator. Default settings for WordPress are continually evaluated at the core team level, and the WordPress core team provides documentation and best practices to tighten security for server configuration for running a WordPress site<sup id="ref11"><a href="#footnote11">11</a></sup>.</p>
 <h4>A6 - Sensitive Data Exposure</h4>
-<p>WordPress user account passwords are salted and hashed based on the Portable PHP Password Hashing Framework<sup id="ref12"><a href="#footnote12">12</a></sup>. WordPress' permission system is used to control access to private information such an registered users' PII, commenters' email addresses, privately published content, etc. In WordPress 3.7, a password strength meter was included in the core software providing additional information to users setting their passwords and hints on increasing strength. WordPress also has an optional configuration setting for requiring HTTPS.</p>
+<p>WordPress user account passwords are salted and hashed based on the Portable PHP Password Hashing Framework<sup id="ref12"><a href="#footnote12">12</a></sup>. WordPress' permission system is used to control access to private information such an registered users' PII, commenters' email addresses, privately published content, etc. A password strength meter is included in the core software providing additional information to users setting their passwords and hints on increasing strength. WordPress also has an optional configuration setting for enforcing HTTPS access for the administration area.</p>
 <h4>A7 - Missing Function Level Access Control</h4>
 <p>WordPress checks for proper authorization and permissions for any function level access requests prior to the action being executed. Access or visualization of administrative URLs, menus, and pages without proper authentication is tightly integrated with the authentication system to prevent access from unauthorized users.</p>
 <h4>A8 - Cross Site Request Forgery (CSRF)</h4>
@@ -142,13 +142,13 @@
 
 <h3>Filesystem API</h3>
 
-<p>The Filesystem API<sup id="ref25"><a href="#footnote25">25</a></sup>, added in WordPress 2.6<sup id="ref26"><a href="#footnote26">26</a></sup>, was originally created for WordPress' own automatic updates feature. The Filesystem API abstracts out the functionality needed for reading and writing local files to the filesystem to be done securely, on a variety of host types.</p>
+<p>The Filesystem API<sup id="ref25"><a href="#footnote25">25</a></sup> abstracts out the functionality needed for reading and writing local files to the filesystem to be done securely, on a variety of host types.</p>
 
 <p>It does this through the <code>WP_Filesystem_Base</code> class, and several subclasses which implement different ways of connecting to the local filesystem, depending on individual host support. Any theme or plugin that needs to write files locally should do so using the WP_Filesystem family of classes.</p>
 
 <h3>HTTP API</h3>
 
-<p>The HTTP API<sup id="ref27"><a href="#footnote27">27</a></sup>, added in WordPress 2.7<sup id="ref28"><a href="#footnote28">28</a></sup> and extended further in WordPress 2.8, standardizes the HTTP requests for WordPress. The API handles cookies, gzip encoding and decoding, chunk decoding (if HTTP 1.1), and various other HTTP protocol implementations. The API standardizes requests, tests each method prior to sending, and, based on your server configuration, uses the appropriate method to make the request.</p>
+<p>The HTTP API<sup id="ref27"><a href="#footnote27">27</a></sup> standardizes the server-side HTTP requests for WordPress. The API handles cookies, gzip encoding and decoding, chunk decoding, and various other HTTP protocol implementations. The API standardizes requests, tests each method prior to sending, and, based on the server configuration, uses the appropriate method to make the request.</p>
 
 <h3>Permissions and current user API</h3>
 
@@ -201,9 +201,7 @@
 	<li id='footnote23'><a href="#ref23">[23]</a> <a href="https://codex.wordpress.org/WordPress_APIs">https://codex.wordpress.org/WordPress_APIs</a></li>
 	<li id='footnote24'><a href="#ref24">[24]</a> <a href="https://codex.wordpress.org/Database_API">https://codex.wordpress.org/Database_API</a></li>
 	<li id='footnote25'><a href="#ref25">[25]</a> <a href="https://codex.wordpress.org/Filesystem_API">https://codex.wordpress.org/Filesystem_API</a></li>
-	<li id='footnote26'><a href="#ref26">[26]</a> <a href="http://codex.wordpress.org/Version_2.6">http://codex.wordpress.org/Version_2.6</a></li>
 	<li id='footnote27'><a href="#ref27">[27]</a> <a href="https://codex.wordpress.org/HTTP_API">https://codex.wordpress.org/HTTP_API</a></li>
-	<li id='footnote28'><a href="#ref28">[28]</a> <a href="https://codex.wordpress.org/Version_2.7">https://codex.wordpress.org/Version_2.7</a></li>
 	<li id='footnote29'><a href="#ref29">[29]</a> <a href="http://codex.wordpress.org/Function_Reference/current_user_can">http://codex.wordpress.org/Function_Reference/current_user_can</a></li>
 </ul>
 
