@@ -71,7 +71,7 @@
 
 <p>Administrators of the WordPress software see a notification on their site dashboard to upgrade when a new release is available, and following the manual upgrade users are redirected to the About WordPress screen which details the changes. If administrators have automatic background updates enabled, they will receive an email after an upgrade has been completed.</p>
 <h3>Automatic Background Updates for Security Releases</h3>
-<p>Starting with version 3.7, WordPress introduced automated background updates for all minor releases<sup id="ref7"><a href="#footnote7">7</a></sup>, such as 3.7.1 and 3.7.2. The WordPress Security Team can identify, fix, and push out automated security enhancements for WordPress without the site owner needing to do anything on their end, and the security update will install automatically.</p>
+<p>WordPress benefits from automated background updates for all minor releases<sup id="ref7"><a href="#footnote7">7</a></sup>, such as 3.7.1 and 3.7.2. The WordPress Security Team can identify, fix, and push out automated security enhancements for WordPress without the site owner needing to do anything on their end, and the security update will install automatically.</p>
 
 <p>When a security update is pushed for the current stable release of WordPress, the core team will also push security updates for all the releases that are capable of background updates (since WordPress 3.7), so these older but still recent versions of WordPress will receive security enhancements.</p>
 
@@ -87,13 +87,22 @@
 <h4>A3 - Cross Site Scripting (XSS)</h4>
 <p>WordPress provides a range of functions which can help ensure that user-supplied data is safe<sup id="ref10"><a href="#footnote10">10</a></sup>. Trusted users, that is administrators and editors on a single WordPress installation, and network administrators only in WordPress Multisite, can post unfiltered HTML or JavaScript as they need to, such as inside a post or page. Untrusted users and user-submitted content is filtered by default to remove dangerous entities, using the KSES library through the <code>wp_kses</code> function.</p>
 
-<p>As an example, the WordPress core team noticed before the release of WordPress 2.3 that the function <code>the_search_query()</code> was being misused by most theme authors, who were not escaping the function's output for use in HTML. In a very rare case of slightly breaking backward compatibility, the function's output was changed in WordPress 2.3 to be pre-escaped.</p>
+<p>WordPress' range of security-related functions include:</p>
+
+<ul>
+	<li><code>esc_html()</code>, <code>esc_attr()</code>, <code>esc_url()</code>, and <code>esc_js()</code> for escaping the output of user-supplied or untrusted content according to its context.</li>
+	<li><code>wp_kses()</code>, <code>wp_kses_post()</code>, <code>wp_kses_data()</code> and related functions for filtering out non-whitelisted elements in HTML output.</li>
+	<li>Database driver helper functions such as <code>wpdb::prepare()</code>, <code>wpdb::update()</code>, and <code>wpdb::insert()</code> which help developers write safe SQL queries that don't require manual, unsafe interpolation.</li>
+	<li>A range of <code>sanitize_*()</code> functions for sanitizing user input according to the context, for example <code>sanitize_email()</code> and <code>sanitize_html_class()</code>.</li>
+</ul>
+
+<p>Proactive measures are also sometimes taken to harden the software to protect against misuse. For example, the function <code>the_search_query()</code> is often misused by theme authors who do not escape the function's output for use in HTML. The function's output was proactively changed in WordPress 2.3 to be pre-escaped for security.</p>
 <h4>A4 - Insecure Direct Object Reference</h4>
 <p>WordPress often provides direct object reference, such as unique numeric identifiers of user accounts or content available in the URL or form fields. While these identifiers disclose direct system information, WordPress' rich permissions and access control system prevent unauthorized requests.</p>
 <h4>A5 - Security Misconfiguration</h4>
 <p>The majority of the WordPress security configuration operations are limited to a single authorized administrator. Default settings for WordPress are continually evaluated at the core team level, and the WordPress core team provides documentation and best practices to tighten security for server configuration for running a WordPress site<sup id="ref11"><a href="#footnote11">11</a></sup>.</p>
 <h4>A6 - Sensitive Data Exposure</h4>
-<p>WordPress user account passwords are salted and hashed based on the Portable PHP Password Hashing Framework<sup id="ref12"><a href="#footnote12">12</a></sup>. WordPress' permission system is used to control access to private information such an registered users' PII, commenters' email addresses, privately published content, etc. In WordPress 3.7, a password strength meter was included in the core software providing additional information to users setting their passwords and hints on increasing strength. WordPress also has an optional configuration setting for requiring HTTPS.</p>
+<p>WordPress user account passwords are salted and hashed based on the Portable PHP Password Hashing Framework<sup id="ref12"><a href="#footnote12">12</a></sup>. WordPress' permission system is used to control access to private information such an registered users' PII, commenters' email addresses, privately published content, etc. A password strength meter is included in the core software providing additional information to users setting their passwords and hints on increasing strength. WordPress also has an optional configuration setting for enforcing HTTPS access for the administration area.</p>
 <h4>A7 - Missing Function Level Access Control</h4>
 <p>WordPress checks for proper authorization and permissions for any function level access requests prior to the action being executed. Access or visualization of administrative URLs, menus, and pages without proper authentication is tightly integrated with the authentication system to prevent access from unauthorized users.</p>
 <h4>A8 - Cross Site Request Forgery (CSRF)</h4>
@@ -104,6 +113,48 @@
 <p>If necessary, the core team may decide to fork or replace critical external components, such as when the SWFUpload library was officially replaced by the Plupload library in 3.5.2, and a secure fork of SWFUpload was made available by the security team<sup id="ref15"><a href="#footnote15">15</a></sup> for those plugins who continued to use SWFUpload in the short-term.</p>
 <h4>A10 - Unvalidated Redirects and Forwards</h4>
 <p>WordPress' internal access control and authentication system will protect against attempts to direct users to unwanted destinations or automatic redirects. This functionality is also made available to plugin developers via an API, <code>wp_safe_redirect()</code><sup id="ref16"><a href="#footnote16">16</a></sup>.</p>
+
+<h3>Threat Management</h3>
+
+<p>Threat management for the WordPress project covers two areas, the WordPress software and the WordPress.org infrastructure.</p>
+
+<h4>The WordPress Software</h4>
+
+<p>As a distributed, open-source, volunteer driven software project, the security of the source code needs to be maintained and monitored to protect it against malicious actors and unintentional regressions. Various functionality and processes are in place to help protect against these threats:</p>
+
+<ul>
+	<li>A meritocracy based trust process for core committers</li>
+	<li>Coding standards<sup id="ref30"><a href="#footnote30">30</a></sup> that aid legibility and consistency (full disclosure: the standards used by WordPress core do not yet enforce all standards that are available)</li>
+	<li>A peer review process for every patch that makes its way into the core software</li>
+	<li>Open feeds of every commit that goes into the core software, including WordPress Trac's firehose and timeline</li>
+	<li>As mentioned above, an active <a href="https://hackerone.com/wordpress">HackerOne program</a><sup id="ref5"><a href="#footnote5">5</a></sup> for responsible disclosure of security issues</li>
+</ul>
+
+<p>In addition, the open-source nature of the project is an inherent advantage to its security. While closed source, proprietary software is seen by the eyes of just a few, open-source software is seen by the eyes of the world. Security and performance issues are reported and fixed by developers from both within and from outside of the WordPress community, and often by people new to the project who take a keen interest in web application security.</p>
+
+<h4>The WordPress.org Infrastructure</h4>
+
+<p>Automatic updates to WordPress sites are powered by the WordPress.org platform, therefore the security and resilience of this service is vital. WordPress.org is built on the same infrastructure that powers the WordPress.com service, but remains entirely separate. The WordPress.org platform uses a variety of practices to secure its operations, including:</p>
+
+<ul>
+	<li>Globally distributed data centers</li>
+	<li>Custom containerized hosting</li>
+	<li>A central team constantly monitoring performance</li>
+	<li>Load balancing and fault tolerance</li>
+	<li>DDoS monitoring and mitigation</li>
+	<li>Security compliance, and performance and reliability monitoring</li>
+	<li>Hourly backups at multiple offsite locations</li>
+	<li>Brute force login detection</li>
+	<li>Strict use of roles for user accounts to minimise unnecessary privileges</li>
+	<li>Sandbox environments and stricter account security requirements for core team members</li>
+</ul>
+
+<h3>Disaster Recovery</h3>
+
+<p>Disaster recovery processes are in place and well tested for the entire WordPress.org platform, supported by the hourly backups at multiple offsite locations.</p>
+
+<p>Disaster recovery is less of a concern for the core software, due to its open-source and highly distributed nature. Should the source of WordPress be lost or comporomised, there are clones of the software that are kept by many trusted sources.</p>
+
 <h3>Further Security Risks and Concerns</h3>
 <h4>XXE (XML eXternal Entity) processing attacks</h4>
 <p>When processing XML, WordPress disables the loading of custom XML entities to prevent both External Entity and Entity Expansion attacks. Beyond PHP's core functionality, WordPress does not provide additional secure XML processing API for plugin authors.</p>
@@ -111,7 +162,7 @@
 <p>HTTP requests issued by WordPress are filtered to prevent access to loopback and private IP addresses. Additionally, access is only allowed to certain standard HTTP ports.</p>
 <h2>WordPress Plugin and Theme Security</h2>
 <h3>The Default Theme</h3>
-<p>WordPress requires a theme to be enabled to render content visible on the frontend. The default theme which ships with core WordPress (currently "Twenty Fifteen") has been vigorously reviewed and tested for security reasons by both the team of theme developers plus the core development team.</p>
+<p>WordPress requires a theme to be enabled to render content visible on the front end. The default themes which ship with core WordPress have been vigorously reviewed and tested for security reasons by both the team of theme developers plus the core development team.</p>
 
 <p>The default theme can serve as a starting point for custom theme development, and site developers can create a child theme which includes some customization but falls back on the default theme for most functionality and security. The default theme can be easily removed by an administrator if not needed.</p>
 
@@ -142,17 +193,26 @@
 
 <h3>Filesystem API</h3>
 
-<p>The Filesystem API<sup id="ref25"><a href="#footnote25">25</a></sup>, added in WordPress 2.6<sup id="ref26"><a href="#footnote26">26</a></sup>, was originally created for WordPress' own automatic updates feature. The Filesystem API abstracts out the functionality needed for reading and writing local files to the filesystem to be done securely, on a variety of host types.</p>
+<p>The Filesystem API<sup id="ref25"><a href="#footnote25">25</a></sup> abstracts out the functionality needed for reading and writing local files to the filesystem to be done securely, on a variety of host types.</p>
 
 <p>It does this through the <code>WP_Filesystem_Base</code> class, and several subclasses which implement different ways of connecting to the local filesystem, depending on individual host support. Any theme or plugin that needs to write files locally should do so using the WP_Filesystem family of classes.</p>
 
 <h3>HTTP API</h3>
 
-<p>The HTTP API<sup id="ref27"><a href="#footnote27">27</a></sup>, added in WordPress 2.7<sup id="ref28"><a href="#footnote28">28</a></sup> and extended further in WordPress 2.8, standardizes the HTTP requests for WordPress. The API handles cookies, gzip encoding and decoding, chunk decoding (if HTTP 1.1), and various other HTTP protocol implementations. The API standardizes requests, tests each method prior to sending, and, based on your server configuration, uses the appropriate method to make the request.</p>
+<p>The HTTP API<sup id="ref27"><a href="#footnote27">27</a></sup> standardizes the server-side HTTP requests for WordPress. The API handles cookies, gzip encoding and decoding, chunk decoding, and various other HTTP protocol implementations. The API standardizes requests, tests each method prior to sending, and, based on the server configuration, uses the appropriate method to make the request.</p>
 
 <h3>Permissions and current user API</h3>
 
 <p>The permissions and current user API<sup id="ref29"><a href="#footnote29">29</a></sup> is a set of functions which will help verify the current user's permissions and authority to perform any task or operation being requested, and can protect further against unauthorized users accessing or performing functions beyond their permitted capabilities.</p>
+
+<h3>Privacy Statement</h3>
+
+<p>From time to time, a WordPress site may send data to WordPress.org — including, but not limited to — the version of WordPress being used, and a list of installed plugins and themes.</p>
+
+<p>This data is used to provide general enhancements to WordPress, which includes helping to protect your site by finding and automatically installing new updates. It is also used to calculate statistics, such as those shown on the <a href="https://wordpress.org/about/stats/">WordPress.org stats page</a>.</p>
+
+<p>Privacy and transparency is taken very seriously. To learn more about what data is collected, and how it's used, please see the <a href="https://wordpress.org/about/privacy/">WordPress.org privacy policy</a>.</p>
+
 <h3>White paper content License</h3>
 <p>The text in this document (not including the WordPress logo or <a href="http://wordpressfoundation.org/trademark-policy/">trademark</a>) is licensed under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 Universal (CC0 1.0) Public Domain Dedication</a>. You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission.</p>
 
@@ -201,10 +261,9 @@
 	<li id='footnote23'><a href="#ref23">[23]</a> <a href="https://codex.wordpress.org/WordPress_APIs">https://codex.wordpress.org/WordPress_APIs</a></li>
 	<li id='footnote24'><a href="#ref24">[24]</a> <a href="https://codex.wordpress.org/Database_API">https://codex.wordpress.org/Database_API</a></li>
 	<li id='footnote25'><a href="#ref25">[25]</a> <a href="https://codex.wordpress.org/Filesystem_API">https://codex.wordpress.org/Filesystem_API</a></li>
-	<li id='footnote26'><a href="#ref26">[26]</a> <a href="http://codex.wordpress.org/Version_2.6">http://codex.wordpress.org/Version_2.6</a></li>
 	<li id='footnote27'><a href="#ref27">[27]</a> <a href="https://codex.wordpress.org/HTTP_API">https://codex.wordpress.org/HTTP_API</a></li>
-	<li id='footnote28'><a href="#ref28">[28]</a> <a href="https://codex.wordpress.org/Version_2.7">https://codex.wordpress.org/Version_2.7</a></li>
 	<li id='footnote29'><a href="#ref29">[29]</a> <a href="http://codex.wordpress.org/Function_Reference/current_user_can">http://codex.wordpress.org/Function_Reference/current_user_can</a></li>
+	<li id='footnote30'><a href="#ref30">[30]</a> <a href="https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards">https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards</a></li>
 </ul>
 
 </body></html>
