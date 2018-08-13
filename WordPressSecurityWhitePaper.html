@@ -87,6 +87,15 @@
 <h4>A3 - Cross Site Scripting (XSS)</h4>
 <p>WordPress provides a range of functions which can help ensure that user-supplied data is safe<sup id="ref10"><a href="#footnote10">10</a></sup>. Trusted users, that is administrators and editors on a single WordPress installation, and network administrators only in WordPress Multisite, can post unfiltered HTML or JavaScript as they need to, such as inside a post or page. Untrusted users and user-submitted content is filtered by default to remove dangerous entities, using the KSES library through the <code>wp_kses</code> function.</p>
 
+<p>WordPress' range of security-related functions include:</p>
+
+<ul>
+	<li><code>esc_html()</code>, <code>esc_attr()</code>, <code>esc_url()</code>, and <code>esc_js()</code> for escaping the output of user-supplied or untrusted content according to its context.</li>
+	<li><code>wp_kses()</code>, <code>wp_kses_post()</code>, <code>wp_kses_data()</code> and related functions for filtering out non-whitelisted elements in HTML output.</li>
+	<li>Database driver helper functions such as <code>wpdb::prepare()</code>, <code>wpdb::update()</code>, and <code>wpdb::insert()</code> which help developers write safe SQL queries that don't require manual, unsafe interpolation.</li>
+	<li>A range of <code>sanitize_*()</code> functions for sanitizing user input according to the context, for example <code>sanitize_email()</code> and <code>sanitize_html_class()</code>.</li>
+</ul>
+
 <p>Proactive measures are also sometimes taken to harden the software to protect against misuse. For example, the function <code>the_search_query()</code> is often misused by theme authors who do not escape the function's output for use in HTML. The function's output was proactively changed in WordPress 2.3 to be pre-escaped for security.</p>
 <h4>A4 - Insecure Direct Object Reference</h4>
 <p>WordPress often provides direct object reference, such as unique numeric identifiers of user accounts or content available in the URL or form fields. While these identifiers disclose direct system information, WordPress' rich permissions and access control system prevent unauthorized requests.</p>
