@@ -113,6 +113,42 @@
 <p>If necessary, the core team may decide to fork or replace critical external components, such as when the SWFUpload library was officially replaced by the Plupload library in 3.5.2, and a secure fork of SWFUpload was made available by the security team<sup id="ref15"><a href="#footnote15">15</a></sup> for those plugins who continued to use SWFUpload in the short-term.</p>
 <h4>A10 - Unvalidated Redirects and Forwards</h4>
 <p>WordPress' internal access control and authentication system will protect against attempts to direct users to unwanted destinations or automatic redirects. This functionality is also made available to plugin developers via an API, <code>wp_safe_redirect()</code><sup id="ref16"><a href="#footnote16">16</a></sup>.</p>
+
+<h3>Threat Management</h3>
+
+<p>Threat management for the WordPress project covers two areas, the WordPress software and the WordPress.org infrastructure.</p>
+
+<h4>The WordPress Software</h4>
+
+<p>As a distributed, open-source, volunteer driven software project, the security of the source code needs to be maintained and monitored to protect it against malicious actors and unintentional regressions. Various functionality and processes are in place to help protect against these threats:</p>
+
+<ul>
+	<li>A meritocracy based trust process for core committers</li>
+	<li>Coding standards<sup id="ref30"><a href="#footnote30">30</a></sup> that aid legibility and consistency (full disclosure: the standards used by WordPress core do not yet enforce all standards that are available)</li>
+	<li>A peer review process for every patch that makes its way into the core software</li>
+	<li>Open feeds of every commit that goes into the core software, including WordPress Trac's firehose and timeline</li>
+	<li>As mentioned above, an active <a href="https://hackerone.com/wordpress">HackerOne program</a><sup id="ref5"><a href="#footnote5">5</a></sup> for responsible disclosure of security issues</li>
+</ul>
+
+<p>In addition, the open-source nature of the project is an inherent advantage to its security. While closed source, proprietary software is seen by the eyes of just a few, open-source software is seen by the eyes of the world. Security and performance issues are reported and fixed by developers from both within and from outside of the WordPress community, and often by people new to the project who take a keen interest in web application security.</p>
+
+<h4>The WordPress.org Infrastructure</h4>
+
+<p>Automatic updates to WordPress sites are powered by the WordPress.org platform, therefore the security and resilience of this service is vital. WordPress.org is built on the same infrastructure that powers the WordPress.com service, but remains entirely separate. The WordPress.org platform uses a variety of practices to secure its operations, including:</p>
+
+<ul>
+	<li>Globally distributed data centers</li>
+	<li>Custom containerized hosting</li>
+	<li>A central team constantly monitoring performance</li>
+	<li>Load balancing and fault tolerance</li>
+	<li>DDoS monitoring and mitigation</li>
+	<li>Security compliance, and performance and reliability monitoring</li>
+	<li>Hourly backups at multiple offsite locations</li>
+	<li>Brute force login detection</li>
+	<li>Strict use of roles for user accounts to minimise unnecessary privileges</li>
+	<li>Sandbox environments and stricter account security requirements for core team members</li>
+</ul>
+
 <h3>Further Security Risks and Concerns</h3>
 <h4>XXE (XML eXternal Entity) processing attacks</h4>
 <p>When processing XML, WordPress disables the loading of custom XML entities to prevent both External Entity and Entity Expansion attacks. Beyond PHP's core functionality, WordPress does not provide additional secure XML processing API for plugin authors.</p>
