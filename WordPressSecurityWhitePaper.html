@@ -10,7 +10,7 @@
 
 <p>This document is an analysis and explanation of the WordPress core software development and its related security processes, as well as an examination of the inherent security built directly into the software. Decision makers evaluating WordPress as a content management system or web application framework should use this document in their analysis and decision-making, and for developers to refer to it to familiarize themselves with the security components and best practices of the software.</p>
 
-<p>The information in this document is up-to-date for the latest stable release of the software, WordPress 4.7 at time of publication, but should be considered relevant also to the most recent versions of the software as backwards compatibility is a strong focus for the WordPress development team. Specific security measures and changes will be noted as they have been added to the core software in specific releases. It is strongly encouraged to always be running the latest stable version of WordPress to ensure the most secure experience possible.</p>
+<p>The information in this document is up-to-date for the latest stable release of the software but should be considered relevant also to most recent versions of the software as backwards compatibility is a strong focus for the WordPress development team. Specific security measures and changes will be noted as they have been added to the core software in specific releases. It is strongly encouraged to always be running the latest stable version of WordPress to ensure the most secure experience possible.</p>
 <h2>Executive Summary</h2>
 <p>WordPress is a dynamic open-source content management system which is used to power millions of websites, web applications, and blogs. It currently powers more than 43% of the top 10 million websites on the Internet. WordPress' usability, extensibility, and mature development community make it a popular and secure choice for websites of all sizes.</p>
 
@@ -71,9 +71,9 @@
 
 <p>Administrators of the WordPress software see a notification on their site dashboard to upgrade when a new release is available, and following the manual upgrade users are redirected to the About WordPress screen which details the changes. If administrators have automatic background updates enabled, they will receive an email after an upgrade has been completed.</p>
 <h3>Automatic Background Updates for Security Releases</h3>
-<p>WordPress benefits from automated background updates for all minor releases<sup id="ref7"><a href="#footnote7">7</a></sup>, such as 3.7.1 and 3.7.2. The WordPress Security Team can identify, fix, and push out automated security enhancements for WordPress without the site owner needing to do anything on their end, and the security update will install automatically.</p>
+<p>WordPress benefits from automated background updates for all minor releases<sup id="ref7"><a href="#footnote7">7</a></sup>. The WordPress Security Team can identify, fix, and push out automated security enhancements for WordPress without the site owner needing to do anything on their end, and the security update will install automatically.</p>
 
-<p>When a security update is pushed for the current stable release of WordPress, the core team will also push security updates for all the releases that are capable of background updates (since WordPress 3.7), so these older but still recent versions of WordPress will receive security enhancements.</p>
+<p>When a security update is pushed for the current stable release of WordPress, the core team will also push security updates for all the releases that are capable of background updates so these older but still recent versions of WordPress will receive security enhancements.</p>
 
 <p>Individual site owners can opt to remove automatic background updates through a simple change in their configuration file, but keeping the functionality is strongly recommended by the core team, as well as running the latest stable release of WordPress.</p>
 <h3>2013 OWASP Top 10</h3>
@@ -96,7 +96,7 @@
 	<li>A range of <code>sanitize_*()</code> functions for sanitizing user input according to the context, for example <code>sanitize_email()</code> and <code>sanitize_html_class()</code>.</li>
 </ul>
 
-<p>Proactive measures are also sometimes taken to harden the software to protect against misuse. For example, the function <code>the_search_query()</code> is often misused by theme authors who do not escape the function's output for use in HTML. The function's output was proactively changed in WordPress 2.3 to be pre-escaped for security.</p>
+<p>Proactive measures are also taken to harden the software to protect against misuse. For example, the function <code>the_search_query()</code> is often misused by theme authors who do not escape the function's output for use in HTML. The function's output was proactively changed in WordPress 2.3 to be pre-escaped for security.</p>
 <h4>A4 - Insecure Direct Object Reference</h4>
 <p>WordPress often provides direct object reference, such as unique numeric identifiers of user accounts or content available in the URL or form fields. While these identifiers disclose direct system information, WordPress' rich permissions and access control system prevent unauthorized requests.</p>
 <h4>A5 - Security Misconfiguration</h4>
@@ -189,7 +189,7 @@
 
 <h3>Database API</h3>
 
-<p>The Database API<sup id="ref24"><a href="#footnote24">24</a></sup>, added in WordPress 0.71, provides the correct method for accessing data as named values which are stored in the database layer.</p>
+<p>The Database API<sup id="ref24"><a href="#footnote24">24</a></sup> provides the correct methods for safely accessing data which are stored in the database layer.</p>
 
 <h3>Filesystem API</h3>
 
@@ -216,7 +216,6 @@
 <h3>White paper content License</h3>
 <p>The text in this document (not including the WordPress logo or <a href="http://wordpressfoundation.org/trademark-policy/">trademark</a>) is licensed under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 Universal (CC0 1.0) Public Domain Dedication</a>. You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission.</p>
 
-<p><em>A special thank you to Drupal's </em><a href="http://drupalsecurityreport.org/"><em>security white paper</em></a><em>, which provided some inspiration. </em></p>
 <h3>Additional Reading</h3>
 <ul>
 	<li>WordPress News <a href="https://wordpress.org/news/">https://wordpress.org/news/</a></li>
@@ -226,17 +225,13 @@
 
 <hr />
 
-<p><em>Authored by </em>Sara Rosso </p>
-
-<p><em>Contributions from</em> Barry Abrahamson, Michael Adams, Jon Cave, Helen Hou-Sand&iacute;, Dion Hulse, Mo Jangda, Paul Maiorana</p>
-
-<p><em>Version 1.0 March 2015</em></p>
+<p><em>Last updated March 2024</em></p>
 
 <hr />
 
 <h3>Footnotes</h3>
 <ul>
-	<li id='footnote1'><a href="#ref1">[1]</a> <a href="https://w3techs.com/">https://w3techs.com/</a>, as of August 2023</li>
+	<li id='footnote1'><a href="#ref1">[1]</a> <a href="https://w3techs.com/">https://w3techs.com/</a>, as of March 2024</li>
 	<li id='footnote2'><a href="#ref2">[2]</a> <a href="https://make.wordpress.org/core/handbook/about/release-cycle/">https://make.wordpress.org/core/handbook/about/release-cycle/</a></li>
 	<li id='footnote3'><a href="#ref3">[3]</a> Andrew Nacin, WordPress lead developer, <a href="https://wpvip.com/security/">https://vip.wordpress.com/security</a></li>
 	<li id='footnote4'><a href="#ref4">[4]</a> <a href="https://wordpress.org/news/2014/08/wordpress-3-9-2/">https://wordpress.org/news/2014/08/wordpress-3-9-2/</a></li>
