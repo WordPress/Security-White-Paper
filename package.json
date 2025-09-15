@@ -1,0 +1,14 @@
+{
+	"name": "@wordpress/security-whitepaper",
+	"version": "1.0.0",
+	"description": "WordPress Security White Paper",
+	"private": true,
+	"scripts": {
+		"generate-pdf": "node scripts/generate-pdf.js",
+		"build": "npm run generate-pdf"
+	},
+	"dependencies": {
+		"puppeteer": "^24.1.0"
+	},
+	"license": "CC0-1.0"
+}
