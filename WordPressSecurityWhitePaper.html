@@ -325,7 +325,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <p>The WordPress Security Team often collaborates with other security teams to address issues in common dependencies, such as resolving the vulnerability in the PHP XML parser, used by the XML-RPC API that ships with WordPress, in WordPress 3.9.2<sup id="ref4"><a href="#footnote4">4</a></sup>. This vulnerability resolution was a result of a joint effort by both WordPress and Drupal security teams.</p>
 <h3>WordPress Security Risks, Process, and History</h3>
-<p>The WordPress Security Team believes in Responsible Disclosure by alerting the security team immediately of any potential vulnerabilities. Potential security vulnerabilities can be signaled to the Security Team via the <a href="https://hackerone.com/wordpress">WordPress HackerOne</a><sup id="ref5"><a href="#footnote5">5</a></sup>. The Security Team communicates amongst itself via a private Slack channel, and works on a walled-off, private Trac for tracking, testing, and fixing bugs and security problems.</p>
+<p>The WordPress Security Team believes in Responsible Disclosure by alerting the security team immediately of any potential vulnerabilities. Potential security vulnerabilities can be signaled to the Security Team via the WordPress HackerOne<sup id="ref5"><a href="#footnote5">5</a></sup>. The Security Team communicates amongst itself via a private Slack channel, and works on a walled-off, private Trac for tracking, testing, and fixing bugs and security problems.</p>
 
 <p>Each security report is acknowledged upon receipt, and the team works to verify the vulnerability and determine its severity. If confirmed, the security team then plans for a patch to fix the problem which can be committed to an upcoming release of the WordPress software or it can be pushed as an immediate security release, depending on the severity of the issue.</p>
 
@@ -352,10 +352,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>WordPress' range of security-related functions include:</p>
 
 <ul>
-	<li><a href="https://developer.wordpress.org/reference/functions/esc_html/"><code>esc_html()</code></a>, <a href="https://developer.wordpress.org/reference/functions/esc_attr/"><code>esc_attr()</code></a>, <a href="https://developer.wordpress.org/reference/functions/esc_url/"><code>esc_url()</code></a>, and <a href="https://developer.wordpress.org/reference/functions/esc_js/"><code>esc_js()</code></a> for escaping the output of user-supplied or untrusted content according to its context.</li>
-	<li><a href="https://developer.wordpress.org/reference/functions/wp_kses/"><code>wp_kses()</code></a>, <a href="https://developer.wordpress.org/reference/functions/wp_kses_post/"><code>wp_kses_post()</code></a>, <a href="https://developer.wordpress.org/reference/functions/wp_kses_data/"><code>wp_kses_data()</code></a> and related functions for filtering out non-whitelisted elements in HTML output.</li>
-	<li>Database driver helper functions such as <a href="https://developer.wordpress.org/reference/classes/wpdb/prepare/"><code>wpdb::prepare()</code></a>, <a href="https://developer.wordpress.org/reference/classes/wpdb/update/"><code>wpdb::update()</code></a>, and <a href="https://developer.wordpress.org/reference/classes/wpdb/insert/"><code>wpdb::insert()</code></a> which help developers write safe SQL queries that don't require manual, unsafe interpolation.</li>
-	<li>A range of <code>sanitize_*()</code> functions for sanitizing user input according to the context, for example <a href="https://developer.wordpress.org/reference/functions/sanitize_email/"><code>sanitize_email()</code></a> and <a href="https://developer.wordpress.org/reference/functions/sanitize_html_class/"><code>sanitize_html_class()</code></a>.</li>
+	<li><code>esc_html()</code><sup id="ref31"><a href="#footnote31">31</a></sup>, <code>esc_attr()</code><sup id="ref32"><a href="#footnote32">32</a></sup>, <code>esc_url()</code><sup id="ref33"><a href="#footnote33">33</a></sup>, and <code>esc_js()</code><sup id="ref34"><a href="#footnote34">34</a></sup> for escaping the output of user-supplied or untrusted content according to its context.</li>
+	<li><code>wp_kses()</code><sup id="ref35"><a href="#footnote35">35</a></sup>, <code>wp_kses_post()</code><sup id="ref36"><a href="#footnote36">36</a></sup>, <code>wp_kses_data()</code><sup id="ref37"><a href="#footnote37">37</a></sup> and related functions for filtering out non-whitelisted elements in HTML output.</li>
+	<li>Database driver helper functions such as <code>wpdb::prepare()</code><sup id="ref38"><a href="#footnote38">38</a></sup>, <code>wpdb::update()</code><sup id="ref39"><a href="#footnote39">39</a></sup>, and <code>wpdb::insert()</code><sup id="ref40"><a href="#footnote40">40</a></sup> which help developers write safe SQL queries that don't require manual, unsafe interpolation.</li>
+	<li>A range of <code>sanitize_*()</code> functions for sanitizing user input according to the context, for example <code>sanitize_email()</code><sup id="ref41"><a href="#footnote41">41</a></sup> and <code>sanitize_html_class()</code><sup id="ref42"><a href="#footnote42">42</a></sup>.</li>
 </ul>
 
 <p>Proactive measures are also taken to harden the software to protect against misuse. For example, the function <code>the_search_query()</code> is often misused by theme authors who do not escape the function's output for use in HTML. The function's output was proactively changed in WordPress 2.3 to be pre-escaped for security.</p>
@@ -422,7 +422,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	<li>Coding standards<sup id="ref30"><a href="#footnote30">30</a></sup> that aid legibility and consistency</li>
 	<li>A peer review process for every patch that makes its way into the core software</li>
 	<li>Open feeds of every commit that goes into the core software, including WordPress Trac's firehose and timeline</li>
-	<li>As mentioned above, an active <a href="https://hackerone.com/wordpress">HackerOne program</a><sup id="ref5"><a href="#footnote5">5</a></sup> for responsible disclosure of security issues</li>
+	<li>As mentioned above, an active HackerOne program<sup id="ref5b"><a href="#footnote5">5</a></sup> for responsible disclosure of security issues</li>
 </ul>
 
 <p>In addition, the open source nature of the project is an inherent advantage to its security. While closed source, proprietary software is seen by the eyes of just a few, open source software is seen by the eyes of the world. Security and performance issues are reported and fixed by developers from both within and from outside of the WordPress community, and often by people new to the project who take a keen interest in web application security.</p>
@@ -504,18 +504,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <p>From time to time, your WordPress site may send data to WordPress.org &#8212; including, but not limited to &#8212; the version you are using, and a list of installed plugins and themes.</p>
 
-<p>This data is used to provide general enhancements to WordPress, which includes helping to protect your site by finding and automatically installing new updates. It is also used to calculate statistics, such as those shown on the <a href="https://wordpress.org/about/stats/">WordPress.org stats page</a>.</p>
+<p>This data is used to provide general enhancements to WordPress, which includes helping to protect your site by finding and automatically installing new updates. It is also used to calculate statistics, such as those shown on the WordPress.org stats page<sup id="ref43"><a href="#footnote43">43</a></sup>.</p>
 
-<p>WordPress.org takes privacy and transparency very seriously. To learn more about what data is collected, and how it is used, please visit <a href="https://wordpress.org/about/privacy/">the WordPress.org Privacy Policy</a>.</p>
+<p>WordPress.org takes privacy and transparency very seriously. To learn more about what data is collected, and how it is used, please visit the WordPress.org Privacy Policy<sup id="ref44"><a href="#footnote44">44</a></sup>.</p>
 
 <h3>White paper content License</h3>
-<p>The text in this document (not including the WordPress logo or <a href="http://wordpressfoundation.org/trademark-policy/">trademark</a>) is licensed under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 Universal (CC0 1.0) Public Domain Dedication</a>. You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission.</p>
+<p>The text in this document (not including the WordPress logo or trademark<sup id="ref45"><a href="#footnote45">45</a></sup>) is licensed under CC0 1.0 Universal (CC0 1.0) Public Domain Dedication<sup id="ref46"><a href="#footnote46">46</a></sup>. You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission.</p>
 
 <h3>Additional Reading</h3>
 <ul>
-	<li>WordPress News <a href="https://wordpress.org/news/">https://wordpress.org/news/</a></li>
-	<li>WordPress Security releases <a href="https://wordpress.org/news/category/security/">https://wordpress.org/news/category/security/</a></li>
-	<li>WordPress Developer Resources <a href="https://developer.wordpress.org/">https://developer.wordpress.org/</a></li>
+	<li>WordPress News<sup id="ref47"><a href="#footnote47">47</a></sup></li>
+	<li>WordPress Security releases<sup id="ref48"><a href="#footnote48">48</a></sup></li>
+	<li>WordPress Developer Resources<sup id="ref49"><a href="#footnote49">49</a></sup></li>
 </ul>
 
 <hr />
@@ -550,6 +550,25 @@ document.addEventListener('DOMContentLoaded', function() {
 	<li id='footnote27'><a href="#ref27">[27]</a> <a href="https://developer.wordpress.org/plugins/http-api/">https://developer.wordpress.org/plugins/http-api/</a></li>
 	<li id='footnote29'><a href="#ref29">[29]</a> <a href="https://developer.wordpress.org/reference/functions/current_user_can/">https://developer.wordpress.org/reference/functions/current_user_can/</a></li>
 	<li id='footnote30'><a href="#ref30">[30]</a> <a href="https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards">https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards</a></li>
+	<li id='footnote31'><a href="#ref31">[31]</a> <a href="https://developer.wordpress.org/reference/functions/esc_html/">https://developer.wordpress.org/reference/functions/esc_html/</a></li>
+	<li id='footnote32'><a href="#ref32">[32]</a> <a href="https://developer.wordpress.org/reference/functions/esc_attr/">https://developer.wordpress.org/reference/functions/esc_attr/</a></li>
+	<li id='footnote33'><a href="#ref33">[33]</a> <a href="https://developer.wordpress.org/reference/functions/esc_url/">https://developer.wordpress.org/reference/functions/esc_url/</a></li>
+	<li id='footnote34'><a href="#ref34">[34]</a> <a href="https://developer.wordpress.org/reference/functions/esc_js/">https://developer.wordpress.org/reference/functions/esc_js/</a></li>
+	<li id='footnote35'><a href="#ref35">[35]</a> <a href="https://developer.wordpress.org/reference/functions/wp_kses/">https://developer.wordpress.org/reference/functions/wp_kses/</a></li>
+	<li id='footnote36'><a href="#ref36">[36]</a> <a href="https://developer.wordpress.org/reference/functions/wp_kses_post/">https://developer.wordpress.org/reference/functions/wp_kses_post/</a></li>
+	<li id='footnote37'><a href="#ref37">[37]</a> <a href="https://developer.wordpress.org/reference/functions/wp_kses_data/">https://developer.wordpress.org/reference/functions/wp_kses_data/</a></li>
+	<li id='footnote38'><a href="#ref38">[38]</a> <a href="https://developer.wordpress.org/reference/classes/wpdb/prepare/">https://developer.wordpress.org/reference/classes/wpdb/prepare/</a></li>
+	<li id='footnote39'><a href="#ref39">[39]</a> <a href="https://developer.wordpress.org/reference/classes/wpdb/update/">https://developer.wordpress.org/reference/classes/wpdb/update/</a></li>
+	<li id='footnote40'><a href="#ref40">[40]</a> <a href="https://developer.wordpress.org/reference/classes/wpdb/insert/">https://developer.wordpress.org/reference/classes/wpdb/insert/</a></li>
+	<li id='footnote41'><a href="#ref41">[41]</a> <a href="https://developer.wordpress.org/reference/functions/sanitize_email/">https://developer.wordpress.org/reference/functions/sanitize_email/</a></li>
+	<li id='footnote42'><a href="#ref42">[42]</a> <a href="https://developer.wordpress.org/reference/functions/sanitize_html_class/">https://developer.wordpress.org/reference/functions/sanitize_html_class/</a></li>
+	<li id='footnote43'><a href="#ref43">[43]</a> <a href="https://wordpress.org/about/stats/">https://wordpress.org/about/stats/</a></li>
+	<li id='footnote44'><a href="#ref44">[44]</a> <a href="https://wordpress.org/about/privacy/">https://wordpress.org/about/privacy/</a></li>
+	<li id='footnote45'><a href="#ref45">[45]</a> <a href="http://wordpressfoundation.org/trademark-policy/">http://wordpressfoundation.org/trademark-policy/</a></li>
+	<li id='footnote46'><a href="#ref46">[46]</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">https://creativecommons.org/publicdomain/zero/1.0/</a></li>
+	<li id='footnote47'><a href="#ref47">[47]</a> <a href="https://wordpress.org/news/">https://wordpress.org/news/</a></li>
+	<li id='footnote48'><a href="#ref48">[48]</a> <a href="https://wordpress.org/news/category/security/">https://wordpress.org/news/category/security/</a></li>
+	<li id='footnote49'><a href="#ref49">[49]</a> <a href="https://developer.wordpress.org/">https://developer.wordpress.org/</a></li>
 </ul>
 
 </body></html>
