@@ -114,6 +114,39 @@
 <h4>A10 - Unvalidated Redirects and Forwards</h4>
 <p>WordPress' internal access control and authentication system will protect against attempts to direct users to unwanted destinations or automatic redirects. This functionality is also made available to plugin developers via an API, <code>wp_safe_redirect()</code><sup id="ref16"><a href="#footnote16">16</a></sup>.</p>
 
+<h3>REST API Security</h3>
+
+<p>The WordPress REST API provides a structured way for applications to interact with sites through HTTP requests. While the REST API enables powerful integrations and modern web applications, it also includes security considerations that must be properly addressed to maintain site security.</p>
+
+<h4>Authentication Methods</h4>
+
+<p>The REST API supports multiple authentication methods, each with specific security implications:</p>
+<ul>
+	<li>Cookie Authentication: The standard authentication method included with WordPress. Requires a valid nonce to prevent CSRF attacks. This method is automatically handled for logged-in users within the WordPress admin interface.</li>
+	<li>Application Passwords: Allows users to generate application-specific passwords for REST API access. These passwords provide secure authentication without exposing the user's main login credentials, can be easily revoked if compromised, and are not valid for logging into the main admin area.</li>
+	<li>Extensible Authentication: Plugins can implement additional authentication methods such as OAuth, JWT, BasicAuth, or platform-specific tokens.</li>
+</ul>
+
+<h4>Authorization and Permissions</h4>
+
+<p>Each REST API endpoint includes permission callbacks that verify whether the current user has the necessary capabilities to perform the requested action. This ensures that:</p>
+<ul>
+	<li>Anonymous users can only access publicly available data</li>
+	<li>Authenticated users can only access data and perform actions according to their assigned role(s) and capabilities</li>
+	<li>Administrative functions remain restricted to users with appropriate permissions</li>
+	<li>By default, some REST API endpoints expose information about users, posts, and site structure. While this information is non-sensitive when queried by users who are not logged in with appropriate permissions, administrators should understand what data is accessible</li>
+	<li>Cross-Origin Resource Sharing (CORS): When accessed from web browsers, the REST API serves appropriate CORS headers to prevent unauthorized cross-domain requests</li>
+	<li>Custom endpoints must implement permission checks</li>
+</ul>
+
+<h4>Data Validation and Sanitization</h4>
+
+<p>Each REST API endpoint implements data validation and sanitization practices:</p>
+<ul>
+	<li>Input data is validated against expected formats and constraints using JSON Schema, which minimizes the amount of explicit validation that needs to be performed by each endpoint</li>
+	<li>Invalid input data is isolated from the callback functions which handle the endpoint</li>
+</ul>
+
 <h3>Threat Management</h3>
 
 <p>Threat management for the WordPress project covers two areas, the WordPress software and the WordPress.org infrastructure.</p>
