@@ -159,7 +159,7 @@
 <h4>XXE (XML eXternal Entity) processing attacks</h4>
 <p>When processing XML, WordPress disables the loading of custom XML entities to prevent both External Entity and Entity Expansion attacks. Beyond PHP's core functionality, WordPress does not provide additional secure XML processing API for plugin authors.</p>
 <h4>SSRF (Server Side Request Forgery) Attacks</h4>
-<p>HTTP requests issued by WordPress are filtered to prevent access to loopback and private IP addresses. Additionally, access is only allowed to certain standard HTTP ports.</p>
+<p>Outbound HTTP(S) requests issued by WordPress are filtered to prevent access to loopback and private IP addresses. They are also filtered to restrict requests to certain standard HTTP ports (`80`, `443`, and `8080`). This filtering is done by the `wp_http_validate_url()` function, and takes place automatically when the `wp_safe_remote_get()` and `wp_safe_remote_post()` functions are used.</p>
 <h2>WordPress Plugin and Theme Security</h2>
 <h3>The Default Theme</h3>
 <p>WordPress requires a theme to be enabled to render content visible on the front end. The default themes which ship with core WordPress have been vigorously reviewed and tested for security reasons by both the team of theme developers plus the core development team.</p>
