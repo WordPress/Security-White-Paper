@@ -1,10 +1,272 @@
 <html>
+<head>
 <title>WordPress Security White Paper</title>
+<style>
+:root {
+	--wordpress-blue: #0073aa;
+	--text-dark: #333;
+	--text-medium: #555;
+	--border-light: #ddd;
+	--border-dotted: #ccc;
+	--background-light: #f9f9f9;
+	--background-white: #fff;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	line-height: 1.4;
+	margin: 0;
+	padding: 0;
+	color: var(--text-dark);
+	background-color: var(--background-white);
+}
+
+@media screen {
+	html {
+		background-color: #e5e5e5;
+		padding: 20px 0;
+	}
+	body {
+		max-width: calc(210mm - 1in); /* A4 width minus PDF margins (0.5in × 2) */
+		margin: 0 auto;
+		padding: 60px 40px;
+		box-shadow: 0 0 10px rgba(0,0,0,0.1);
+		background-color: white;
+	}
+}
+
+.header-wrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	border-bottom: 2px solid var(--wordpress-blue);
+	padding-bottom: 10px;
+	margin-top: 50px;
+	margin-bottom: 20px;
+
+	p {
+		margin: 0;
+		font-style: italic;
+		font-size: 9pt;
+	}
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0;
+	border: none;
+	padding: 0;
+}
+
+h2 {
+	font-size: 14pt;
+	margin-top: 25px;
+	margin-bottom: 15px;
+	color: var(--wordpress-blue);
+	page-break-after: avoid;
+
+	&#section-1 {
+		margin-top: 0;
+	}
+}
+
+.header-wrapper + .table-of-contents + h2 {
+	padding-top: 15px;
+}
+
+h3 {
+	font-size: 12pt;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	color: var(--text-medium);
+	page-break-after: avoid;
+}
+
+h4 {
+	font-size: 11pt;
+	margin-top: 15px;
+	margin-bottom: 8px;
+	page-break-after: avoid;
+}
+
+h2 + p, h3 + p, h4 + p {
+	page-break-before: avoid;
+}
+
+p {
+	margin-bottom: 10px;
+	widows: 2;
+	orphans: 2;
+}
+
+ul, ol {
+	margin-bottom: 15px;
+	padding-left: 25px;
+}
+
+li {
+	margin-bottom: 5px;
+}
+
+img {
+	max-width: 150px;
+	height: auto;
+	display: block;
+	margin: 0 auto 50px auto;
+	text-align: center;
+}
+
+sup {
+	font-size: 8pt;
+}
+
+a {
+	color: var(--wordpress-blue);
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+code {
+	font-size: 0.9em;
+}
+
+hr {
+	border: none;
+	border-top: 2px solid var(--wordpress-blue);
+	margin: 30px 0 20px 0;
+}
+
+/* Footnotes section */
+h3 + ul li[id^='footnote'] {
+	font-size: 9pt;
+	line-height: 1.3;
+}
+
+.table-of-contents {
+	background-color: var(--background-light);
+	border: 1px solid var(--border-light);
+	padding: 15px;
+	margin: 0 0 25px 25px;
+	page-break-inside: avoid;
+	font-size: 9pt;
+	line-height: 1.2;
+	float: right;
+	width: 49%;
+	box-sizing: border-box;
+
+	h2 {
+		margin: 0 0 20px;
+	}
+
+	ul {
+		list-style-type: none;
+		padding-left: 0;
+		margin: 0;
+	}
+
+	li {
+		margin-bottom: 4px;
+		padding-left: 0;
+
+		&.toc-h3 {
+			margin-left: 8px;
+			margin-bottom: 2px;
+		}
+
+		&:last-child a {
+			border-bottom: none;
+		}
+	}
+
+	a {
+		display: block;
+		text-decoration: none;
+		color: var(--text-dark);
+		border-bottom: 1px dotted var(--border-dotted);
+		padding-bottom: 2px;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
+@page {
+	background: white;
+}
+
+@media print {
+	html, body {
+		background: white !important;
+		background-color: white !important;
+		-webkit-print-color-adjust: exact;
+	}
+}
+
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	// Generate table of contents with nested h2 and h3 headings
+	const headings = [];
+	let h2Index = 0;
+	let h3Index = 0;
+
+	document.querySelectorAll('h2, h3').forEach(heading => {
+		let id, level;
+
+		if (heading.tagName === 'H2') {
+			h2Index++;
+			h3Index = 0; // Reset h3 counter for each new h2
+			id = `section-${h2Index}`;
+			level = 2;
+		} else if (heading.tagName === 'H3') {
+			h3Index++;
+			id = `section-${h2Index}-${h3Index}`;
+			level = 3;
+		}
+
+		heading.id = id;
+		headings.push({
+			id: id,
+			text: heading.textContent.trim(),
+			level: level
+		});
+	});
+
+	// Create nested TOC HTML
+	let tocHTML = `
+		<div class="table-of-contents">
+			<h2>Table of Contents</h2>
+			<ul>`;
+
+	headings.forEach(heading => {
+		const className = heading.level === 3 ? ' class="toc-h3"' : '';
+		tocHTML += `<li${className}><a href="#${heading.id}">${heading.text}</a></li>`;
+	});
+
+	tocHTML += `
+			</ul>
+		</div>
+	`;
+
+	// Insert TOC after the header wrapper
+	const headerWrapper = document.querySelector('.header-wrapper');
+	headerWrapper.insertAdjacentHTML('afterend', tocHTML);
+});
+</script>
+</head>
 <body>
 
-<h1>WordPress Security White Paper</h1>
+<img src="https://s.w.org/about/images/logos/wordpress-logo-stacked-rgb.png" alt="" />
 
-<img src="//s.w.org/about/images/logos/wordpress-logo-stacked-rgb.png" class="aligncenter" />
+<div class="header-wrapper">
+	<h1>WordPress Security White Paper</h1>
+	<p><em>Last updated September 2025</em></p>
+</div>
 
 <h2>Overview</h2>
 
@@ -255,10 +517,6 @@
 	<li>WordPress Security releases <a href="https://wordpress.org/news/category/security/">https://wordpress.org/news/category/security/</a></li>
 	<li>WordPress Developer Resources <a href="https://developer.wordpress.org/">https://developer.wordpress.org/</a></li>
 </ul>
-
-<hr />
-
-<p><em>Last updated September 2025</em></p>
 
 <hr />
 
