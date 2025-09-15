@@ -90,10 +90,10 @@
 <p>WordPress' range of security-related functions include:</p>
 
 <ul>
-	<li><code>esc_html()</code>, <code>esc_attr()</code>, <code>esc_url()</code>, and <code>esc_js()</code> for escaping the output of user-supplied or untrusted content according to its context.</li>
-	<li><code>wp_kses()</code>, <code>wp_kses_post()</code>, <code>wp_kses_data()</code> and related functions for filtering out non-whitelisted elements in HTML output.</li>
-	<li>Database driver helper functions such as <code>wpdb::prepare()</code>, <code>wpdb::update()</code>, and <code>wpdb::insert()</code> which help developers write safe SQL queries that don't require manual, unsafe interpolation.</li>
-	<li>A range of <code>sanitize_*()</code> functions for sanitizing user input according to the context, for example <code>sanitize_email()</code> and <code>sanitize_html_class()</code>.</li>
+	<li><a href="https://developer.wordpress.org/reference/functions/esc_html/"><code>esc_html()</code></a>, <a href="https://developer.wordpress.org/reference/functions/esc_attr/"><code>esc_attr()</code></a>, <a href="https://developer.wordpress.org/reference/functions/esc_url/"><code>esc_url()</code></a>, and <a href="https://developer.wordpress.org/reference/functions/esc_js/"><code>esc_js()</code></a> for escaping the output of user-supplied or untrusted content according to its context.</li>
+	<li><a href="https://developer.wordpress.org/reference/functions/wp_kses/"><code>wp_kses()</code></a>, <a href="https://developer.wordpress.org/reference/functions/wp_kses_post/"><code>wp_kses_post()</code></a>, <a href="https://developer.wordpress.org/reference/functions/wp_kses_data/"><code>wp_kses_data()</code></a> and related functions for filtering out non-whitelisted elements in HTML output.</li>
+	<li>Database driver helper functions such as <a href="https://developer.wordpress.org/reference/classes/wpdb/prepare/"><code>wpdb::prepare()</code></a>, <a href="https://developer.wordpress.org/reference/classes/wpdb/update/"><code>wpdb::update()</code></a>, and <a href="https://developer.wordpress.org/reference/classes/wpdb/insert/"><code>wpdb::insert()</code></a> which help developers write safe SQL queries that don't require manual, unsafe interpolation.</li>
+	<li>A range of <code>sanitize_*()</code> functions for sanitizing user input according to the context, for example <a href="https://developer.wordpress.org/reference/functions/sanitize_email/"><code>sanitize_email()</code></a> and <a href="https://developer.wordpress.org/reference/functions/sanitize_html_class/"><code>sanitize_html_class()</code></a>.</li>
 </ul>
 
 <p>Proactive measures are also taken to harden the software to protect against misuse. For example, the function <code>the_search_query()</code> is often misused by theme authors who do not escape the function's output for use in HTML. The function's output was proactively changed in WordPress 2.3 to be pre-escaped for security.</p>
