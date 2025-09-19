@@ -365,7 +365,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>The majority of the WordPress security configuration operations are limited to a single authorized administrator. Default settings for WordPress are continually evaluated at the core team level, and the WordPress core team provides documentation and best practices to tighten security for server configuration for running a WordPress site<sup id="ref11"><a href="#footnote11">11</a></sup>.</p>
 <h4>A6 - Sensitive Data Exposure</h4>
 <p>WordPress user account passwords are salted and hashed using bcrypt<sup id="ref12"><a href="#footnote12">12</a></sup>, the industry standard approach for secure password hashing. Bcrypt includes a built-in cost factor that makes it computationally unfeasible for attackers to crack passwords through brute force attacks.</p>
-<p>To address bcrypt's 72-byte password length limitation, WordPress implements SHA-384 pre-hashing. Application passwords, password reset keys, and other security tokens use the BLAKE2b algorithm via Sodium for enhanced cryptographic security.</p>
+<p>To address bcrypt's 72-byte password length limitation, WordPress implements SHA-384 pre-hashing. Application passwords, password reset keys, and other security tokens use the BLAKE2b<sup id="ref50"><a href="#footnote50">50</a></sup> algorithm via Sodium for enhanced cryptographic security.</p>
 <p>WordPress' permission system is used to control access to private information such as registered users' PII, commenters' email addresses, privately published content, etc. A password strength meter is included in the core software providing additional information to users setting their passwords and hints on increasing strength. WordPress also has an optional configuration setting for enforcing HTTPS access for the administration area.</p>
 <h4>A7 - Missing Function Level Access Control</h4>
 <p>WordPress checks for proper authorization and permissions for any function level access requests prior to the action being executed. Access or visualization of administrative URLs, menus, and pages without proper authentication is tightly integrated with the authentication system to prevent access from unauthorized users.</p>
@@ -571,6 +571,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	<li id='footnote47'><a href="#ref47">[47]</a> <a href="https://wordpress.org/news/">https://wordpress.org/news/</a></li>
 	<li id='footnote48'><a href="#ref48">[48]</a> <a href="https://wordpress.org/news/category/security/">https://wordpress.org/news/category/security/</a></li>
 	<li id='footnote49'><a href="#ref49">[49]</a> <a href="https://developer.wordpress.org/">https://developer.wordpress.org/</a></li>
+	<li id='footnote50'><a href="#ref50">[50]</a> <a href="https://en.wikipedia.org/wiki/BLAKE_(hash_function)">https://en.wikipedia.org/wiki/BLAKE_(hash_function)</a></li>
 </ul>
 
 </body></html>
