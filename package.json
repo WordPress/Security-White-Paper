@@ -3,6 +3,9 @@
 	"version": "1.0.0",
 	"description": "WordPress Security White Paper",
 	"private": true,
+	"engines": {
+		"node": ">=24"
+	},
 	"scripts": {
 		"generate-pdf": "node scripts/generate-pdf.js",
 		"build": "npm run generate-pdf"
