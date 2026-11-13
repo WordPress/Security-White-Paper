@@ -338,45 +338,32 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>When a security update is pushed for the current stable release of WordPress, the core team will also push security updates for all releases that are supported and capable of background updates so these older but still recent versions of WordPress will receive security enhancements.</p>
 
 <p>Individual site owners can opt to remove automatic background updates through a simple change in their configuration file, but keeping the functionality is strongly recommended by the core team, as well as running the latest stable release of WordPress.</p>
-<h3>2013 OWASP Top 10</h3>
+
+<h3>2025 OWASP Top 10</h3>
 <p>The Open Web Application Security Project (OWASP) is an online community dedicated to web application security. The OWASP Top 10 list<sup id="ref8"><a href="#footnote8">8</a></sup> focuses on identifying the most serious application security risks for a broad array of organizations. The Top 10 items are selected and prioritized in combination with consensus estimates of exploitability, detectability, and impact estimates.</p>
 
 <p>The following sections discuss the APIs, resources, and policies that WordPress uses to strengthen the core software and 3rd party plugins and themes against these potential risks.</p>
-<h4>A1 - Injection</h4>
-<p>There is a set of functions and APIs available in WordPress to assist developers in making sure unauthorized code cannot be injected, and help them validate and sanitize data. Best practices and documentation are available<sup id="ref9"><a href="#footnote9">9</a></sup> on how to use these APIs to protect, validate, or sanitize input and output data in HTML, URLs, HTTP headers, and when interacting with the database and filesystem. Administrators can also further restrict the types of file which can be uploaded via filters.</p>
-<h4>A2 - Broken Authentication and Session Management</h4>
-<p>WordPress core software manages user accounts and authentication and details such as the user ID, name, and password are managed on the server-side, as well as the authentication cookies. Passwords are protected in the database using standard salting and stretching techniques. Existing sessions are destroyed upon logout.</p>
-<h4>A3 - Cross Site Scripting (XSS)</h4>
-<p>WordPress provides a range of functions which can help ensure that user-supplied data is safe<sup id="ref10"><a href="#footnote10">10</a></sup>. Trusted users, that is administrators and editors on a single WordPress installation, and network administrators only in WordPress Multisite, can post unfiltered HTML or JavaScript as they need to, such as inside a post or page. Untrusted users and user-submitted content is filtered by default to remove dangerous entities, using the KSES library through the <code>wp_kses</code> function.</p>
 
-<p>WordPress' range of security-related functions include:</p>
-
-<ul>
-	<li><code>esc_html()</code><sup id="ref31"><a href="#footnote31">31</a></sup>, <code>esc_attr()</code><sup id="ref32"><a href="#footnote32">32</a></sup>, <code>esc_url()</code><sup id="ref33"><a href="#footnote33">33</a></sup>, and <code>esc_js()</code><sup id="ref34"><a href="#footnote34">34</a></sup> for escaping the output of user-supplied or untrusted content according to its context.</li>
-	<li><code>wp_kses()</code><sup id="ref35"><a href="#footnote35">35</a></sup>, <code>wp_kses_post()</code><sup id="ref36"><a href="#footnote36">36</a></sup>, <code>wp_kses_data()</code><sup id="ref37"><a href="#footnote37">37</a></sup> and related functions for filtering out non-whitelisted elements in HTML output.</li>
-	<li>Database driver helper functions such as <code>wpdb::prepare()</code><sup id="ref38"><a href="#footnote38">38</a></sup>, <code>wpdb::update()</code><sup id="ref39"><a href="#footnote39">39</a></sup>, and <code>wpdb::insert()</code><sup id="ref40"><a href="#footnote40">40</a></sup> which help developers write safe SQL queries that don't require manual, unsafe interpolation.</li>
-	<li>A range of <code>sanitize_*()</code> functions for sanitizing user input according to the context, for example <code>sanitize_email()</code><sup id="ref41"><a href="#footnote41">41</a></sup> and <code>sanitize_html_class()</code><sup id="ref42"><a href="#footnote42">42</a></sup>.</li>
-</ul>
-
-<p>Proactive measures are also taken to harden the software to protect against misuse. For example, the function <code>the_search_query()</code> is often misused by theme authors who do not escape the function's output for use in HTML. The function's output was proactively changed in WordPress 2.3 to be pre-escaped for security.</p>
-<h4>A4 - Insecure Direct Object Reference</h4>
-<p>WordPress often provides direct object reference, such as unique numeric identifiers of user accounts or content available in the URL or form fields. While these identifiers disclose direct system information, WordPress' rich permissions and access control system prevent unauthorized requests.</p>
-<h4>A5 - Security Misconfiguration</h4>
-<p>The majority of the WordPress security configuration operations are limited to a single authorized administrator. Default settings for WordPress are continually evaluated at the core team level, and the WordPress core team provides documentation and best practices to tighten security for server configuration for running a WordPress site<sup id="ref11"><a href="#footnote11">11</a></sup>.</p>
-<h4>A6 - Sensitive Data Exposure</h4>
-<p>WordPress user account passwords are salted and hashed using bcrypt<sup id="ref12"><a href="#footnote12">12</a></sup>, the industry standard approach for secure password hashing. Bcrypt includes a built-in cost factor that makes it computationally unfeasible for attackers to crack passwords through brute force attacks.</p>
-<p>To address bcrypt's 72-byte password length limitation, WordPress implements SHA-384 pre-hashing. Application passwords, password reset keys, and other security tokens use the BLAKE2b<sup id="ref50"><a href="#footnote50">50</a></sup> algorithm via Sodium for enhanced cryptographic security.</p>
-<p>WordPress' permission system is used to control access to private information such as registered users' PII, commenters' email addresses, privately published content, etc. A password strength meter is included in the core software providing additional information to users setting their passwords and hints on increasing strength. WordPress also has an optional configuration setting for enforcing HTTPS access for the administration area.</p>
-<h4>A7 - Missing Function Level Access Control</h4>
-<p>WordPress checks for proper authorization and permissions for any function level access requests prior to the action being executed. Access or visualization of administrative URLs, menus, and pages without proper authentication is tightly integrated with the authentication system to prevent access from unauthorized users.</p>
-<h4>A8 - Cross Site Request Forgery (CSRF)</h4>
-<p>WordPress uses cryptographic tokens, called nonces<sup id="ref13"><a href="#footnote13">13</a></sup>, to validate intent of action requests from authorized users to protect against potential CSRF threats. WordPress provides an API for the generation of these tokens to create and verify unique and temporary tokens, and the token is limited to a specific user, a specific action, a specific object, and a specific time period, which can be added to forms and URLs as needed. Additionally, all nonces are invalidated upon logout.</p>
-<h4>A9 - Using Components with Known Vulnerabilities</h4>
-<p>The WordPress core team closely monitors the few included libraries and frameworks WordPress integrates with for core functionality. In the past the core team has made contributions to several third-party components to make them more secure, such as the update to fix a cross-site vulnerability in TinyMCE in WordPress 3.5.2<sup id="ref14"><a href="#footnote14">14</a></sup>.</p>
-
-<p>If necessary, the core team may decide to fork or replace critical external components, such as when the SWFUpload library was officially replaced by the Plupload library in 3.5.2, and a secure fork of SWFUpload was made available by the security team<sup id="ref15"><a href="#footnote15">15</a></sup> for those plugins who continued to use SWFUpload in the short-term.</p>
-<h4>A10 - Unvalidated Redirects and Forwards</h4>
-<p>WordPress' internal access control and authentication system will protect against attempts to direct users to unwanted destinations or automatic redirects. This functionality is also made available to plugin developers via an API, <code>wp_safe_redirect()</code><sup id="ref16"><a href="#footnote16">16</a></sup>.</p>
+<h4>A01:2025 — Broken Access Control</h4>
+<p>WordPress provides a granular roles and capabilities system. The core API enforces permission checks before executing any privileged action. Functions like <code>current_user_can()</code> verify authorization at the function level. Administrators can further customize roles and capabilities.</p>
+<h4>A02:2025 — Security Misconfiguration</h4>
+<p>WordPress provides configuration constants (in <code>wp-config.php</code>) to harden installations: <code>DISALLOW_FILE_EDIT</code>, <code>DISALLOW_FILE_MODS</code>, <code>FORCE_SSL_ADMIN</code>, and others. The core team publishes documentation and best practices for secure server configuration.</p>
+<h4>A03:2025 — Software Supply Chain Failures</h4>
+<p>The core team monitors and updates bundled libraries (jQuery, TinyMCE, PHPMailer, etc.). Automatic background updates ensure core patches reach sites promptly. The plugin/theme repository team reviews submissions and can remove or update vulnerable components. See also Section 11 (Supply Chain Security) for extended guidance on managing the WordPress extension ecosystem.</p>
+<h4>A04:2025 — Cryptographic Failures</h4>
+<p>As of WordPress 6.8, user passwords are hashed using bcrypt by default, with SHA-384 pre-hashing to address bcrypt&#39;s 72-byte input limit. Application passwords, password reset keys, and other security tokens use the BLAKE2b algorithm via Sodium. Sites with the necessary server support (PHP 7.2+ with the sodium or argon2 extension) can enable Argon2id hashing via the <code>wp_hash_password</code> core filter for even stronger resistance to brute-force and GPU-accelerated attacks. WordPress supports HTTPS enforcement through configuration constants and provides salting via security keys defined in <code>wp-config.php</code>. Sensitive data like user email addresses and private content is access-controlled through the permissions system.</p>
+<h4>A05:2025 — Injection</h4>
+<p>WordPress provides the <code>$wpdb-&gt;prepare()</code> method for parameterized database queries, preventing SQL injection. Input sanitization and output escaping functions (<code>esc_html()</code>, <code>esc_attr()</code>, <code>wp_kses()</code>, etc.) are available throughout the API. Content submitted by untrusted users is filtered through the KSES library to strip unsafe HTML and JavaScript, while trusted roles with the <code>unfiltered_html</code> capability (administrators and editors on a single site, Super Admins on Multisite) are permitted to publish raw HTML and JavaScript by design. File upload restrictions limit the types of files that can be uploaded.</p>
+<h4>A06:2025 — Insecure Design</h4>
+<p>WordPress core follows security-by-default principles. Default settings are evaluated by the core team for security implications. The REST API requires authentication for sensitive endpoints. The block editor (Gutenberg) sanitizes content at multiple levels.</p>
+<h4>A07:2025 — Authentication Failures</h4>
+<p>WordPress manages authentication server-side with salted, hashed passwords and secure session cookies. Sessions are destroyed on logout. The platform supports application passwords for REST API and XML-RPC authentication — these provide secure, scoped credentials that are revocable and not valid for Dashboard login, though they bypass 2FA and should be managed carefully (see Section 8). WordPress is compatible with two-factor authentication plugins.</p>
+<h4>A08:2025 — Software or Data Integrity Failures</h4>
+<p>WordPress verifies the integrity of updates through cryptographic signatures. The update system checks package authenticity before applying changes. Plugin and theme updates go through the official repository with hash verification.</p>
+<h4>A09:2025 — Security Logging and Alerting Failures</h4>
+<p>While WordPress core provides limited built-in logging, the ecosystem offers robust audit logging solutions (e.g., WP Activity Log). Enterprise hosting platforms typically provide comprehensive server-level logging, SIEM integration, and monitoring.</p>
+<h4>A10:2025 — Mishandling of Exceptional Conditions</h4>
+<p>WordPress core includes structured error handling through the <code>WP_Error</code> class and provides mechanisms to control error output in production environments (<code>WP_DEBUG</code>, <code>WP_DEBUG_DISPLAY</code>, <code>WP_DEBUG_LOG</code>). HTTP requests issued by WordPress are filtered to prevent access to loopback and private IP addresses, mitigating server-side request forgery (SSRF). The HTTP API restricts requests to standard ports and provides hooks for additional filtering.</p>
 
 <h3>REST API Security</h3>
 
@@ -537,7 +524,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	<li id='footnote5'><a href="#ref5">[5]</a> <a href="https://hackerone.com/wordpress">https://hackerone.com/wordpress</a></li>
 	<li id='footnote6'><a href="#ref6">[6]</a> <a href="https://wordpress.org/news/">https://wordpress.org/news/</a></li>
 	<li id='footnote7'><a href="#ref7">[7]</a> <a href="https://wordpress.org/news/2013/10/basie/">https://wordpress.org/news/2013/10/basie/</a></li>
-	<li id='footnote8'><a href="#ref8">[8]</a> <a href="https://www.owasp.org/index.php/Top_10_2013-Top_10">https://www.owasp.org/index.php/Top_10_2013-Top_10</a></li>
+	<li id='footnote8'><a href="#ref8">[8]</a> <a href="https://owasp.org/Top10/">https://owasp.org/Top10/</a></li>
 	<li id='footnote9'><a href="#ref9">[9]</a> <a href="https://developer.wordpress.org/plugins/security/">https://developer.wordpress.org/plugins/security/</a></li>
 	<li id='footnote10'><a href="#ref10">[10]</a> <a href="https://codex.wordpress.org/Data_Validation#HTML.2FXML">https://codex.wordpress.org/Data_Validation#HTML.2FXML</a></li>
 	<li id='footnote11'><a href="#ref11">[11]</a> <a href="https://wordpress.org/support/article/hardening-wordpress/">https://wordpress.org/support/article/hardening-wordpress/</a></li>
