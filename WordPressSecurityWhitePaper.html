@@ -462,7 +462,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <p>Content created by users in lower-privilege roles (Author, Contributor) is filtered through the KSES library to remove HTML elements and attributes outside a known-safe allowlist. A Contributor who submits a post containing a <code>&lt;script&gt;</code> tag will have that tag removed before the content is stored.</p>
 
-<p>Because the ability to publish arbitrary HTML and JavaScript is a privileged feature rather than a vulnerability, the regular receipt of reports describing it as such is expected. Site owners who wish to remove it from a given role can do so by unsetting the <code>unfiltered_html</code> capability via the role and capability APIs; hosts and security plugins frequently apply this restriction by default in shared or untrusted environments.</p>
+<p>Site owners who wish to remove this capability from a given role can do so by unsetting the <code>unfiltered_html</code> capability via the role and capability APIs.</p>
 <h2>WordPress Plugin and Theme Security</h2>
 <h3>The Default Theme</h3>
 <p>WordPress requires a theme to be enabled to render content visible on the front end. The default themes which ship with core WordPress have been vigorously reviewed and tested for security reasons by both the team of theme developers plus the core development team.</p>
