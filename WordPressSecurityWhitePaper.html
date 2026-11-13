@@ -411,6 +411,22 @@ document.addEventListener('DOMContentLoaded', function() {
 	<li>Invalid input data is isolated from the callback functions which handle the endpoint</li>
 </ul>
 
+<h3>Transport Security (HTTPS)</h3>
+
+<p>WordPress treats HTTPS as a baseline requirement for modern installations. Following a 2016 announcement, WordPress.org began promoting only hosting partners that offer an HTTPS certificate by default<sup id="ref51"><a href="#footnote51">51</a></sup>, and WordPress core itself communicates with WordPress.org services &mdash; including update checks, plugin and theme installation, and translation downloads &mdash; over HTTPS.</p>
+
+<p>The <code>is_ssl()</code><sup id="ref52"><a href="#footnote52">52</a></sup> helper is used throughout WordPress core to detect whether the current request was made over HTTPS so that URL generation, cookie attributes, and other HTTPS-dependent behavior adapt appropriately.</p>
+
+<h4>Secure Authentication Cookies</h4>
+
+<p>When a site is served over HTTPS, WordPress issues authentication cookies with the <code>secure</code> attribute set so that browsers will not transmit them over plaintext HTTP. The cookies used to authenticate requests to the admin area are issued separately from those used for front-end logged-in state, which means that credentials authorized for the dashboard are never exposed during any unencrypted page view.</p>
+
+<h4>Forcing HTTPS for the Admin Area</h4>
+
+<p>Site owners can require that all administrative and login requests use HTTPS by defining the <code>FORCE_SSL_ADMIN</code><sup id="ref53"><a href="#footnote53">53</a></sup> constant in <code>wp-config.php</code>. When enabled, WordPress redirects any plaintext request to <code>/wp-admin/</code> or <code>/wp-login.php</code> to its HTTPS equivalent, ensuring that credentials and session cookies are not exposed in transit. Many hosts enforce HTTPS at the platform or web-server layer; for self-managed installations, <code>FORCE_SSL_ADMIN</code> provides a WordPress-level way to require HTTPS for login and administration.</p>
+
+<p>TLS certificate provisioning and the TLS handshake itself (protocol version and cipher suite selection) happen before any PHP code runs and are therefore controlled by the web server or hosting platform, not by WordPress core. Strict Transport Security (HSTS) is an HTTP response header that WordPress could set but does not enable by default &mdash; a long-lived HSTS policy applied before HTTPS is known to work across every hostname can lock administrators out of their own site, so the decision is left to hosts and site owners.</p>
+
 <h3>Threat Management</h3>
 
 <p>Threat management for the WordPress project covers two areas, the WordPress software and the WordPress.org infrastructure.</p>
@@ -578,6 +594,9 @@ document.addEventListener('DOMContentLoaded', function() {
 	<li id='footnote48'><a href="#ref48">[48]</a> <a href="https://wordpress.org/news/category/security/">https://wordpress.org/news/category/security/</a></li>
 	<li id='footnote49'><a href="#ref49">[49]</a> <a href="https://developer.wordpress.org/">https://developer.wordpress.org/</a></li>
 	<li id='footnote50'><a href="#ref50">[50]</a> <a href="https://en.wikipedia.org/wiki/BLAKE_(hash_function)">https://en.wikipedia.org/wiki/BLAKE_(hash_function)</a></li>
+	<li id='footnote51'><a href="#ref51">[51]</a> <a href="https://wordpress.org/news/2016/12/moving-toward-ssl/">https://wordpress.org/news/2016/12/moving-toward-ssl/</a></li>
+	<li id='footnote52'><a href="#ref52">[52]</a> <a href="https://developer.wordpress.org/reference/functions/is_ssl/">https://developer.wordpress.org/reference/functions/is_ssl/</a></li>
+	<li id='footnote53'><a href="#ref53">[53]</a> <a href="https://developer.wordpress.org/advanced-administration/security/https/">https://developer.wordpress.org/advanced-administration/security/https/</a></li>
 </ul>
 
 </body></html>
